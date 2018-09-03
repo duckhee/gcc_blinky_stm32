@@ -30,11 +30,20 @@ STM32F10x_StdPeriph_Driver/src/tim.c \
 STM32F10x_StdPeriph_Driver/src/usart.c \
 STM32F10x_StdPeriph_Driver/src/wwdg.c \
 
-C_SOURCES =  $(MAIN_SOURCES) $(CORE_SOURCES) $(CMSIS_SOURCES)
+USB_SOURCES = \
+STM32_USB-FS-Device_Driver/src/usb_core.c \
+STM32_USB-FS-Device_Driver/src/usb_init.c \
+STM32_USB-FS-Device_Driver/src/usb_int.c \
+STM32_USB-FS-Device_Driver/src/usb_mem.c \
+STM32_USB-FS-Device_Driver/regs.c 
+
+
+C_SOURCES =  $(MAIN_SOURCES) $(CORE_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES)
 
 MAIN_INCLUDES = \
 -I inc \
 -I STM32F10x_StdPeriph_Driver/inc \
+-I STM32_USB-FS-Device_Driver/inc \
 -I CMSIS/Core/CM3
 
 
