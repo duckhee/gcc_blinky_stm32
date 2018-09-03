@@ -1,0 +1,109 @@
+PREFIX = arm-none-eabi-
+
+TARGET = blinky
+
+STARTUP = 
+
+OUTDIR = ./Build
+
+OPTS = -Os
+
+EXTRAINCDIRS = 
+
+SRC_HW = 
+
+SRC_HWDIVER = 
+
+SRC_AP = 
+
+SRC_MENU = 
+
+SRC = $(SRC_HW) $(SRC_HWDIRVER) $(SRC_MENU) $(SRC_AP)
+
+TUMB = -mthumb -mcpu=cortex-m3
+
+INCLUDE = -I./include -I.
+
+CREATED_FOLDER = mkdir
+
+REMOVE_CMD = rm
+
+CC = $(PREFIX)gcc
+CPP = $(PREFIX)g++
+OBJCOPY = $(PREFIX)objcopy
+AS = $(PREFIX)gcc -x assmbler-with-cpp
+SZ = $(PREFIX)size
+OBJDUMP = $(PREFIX)objdump
+OBJNM = $(PREFIX)nm
+REMOVE = $(REMOVE_CMD) -rf
+
+
+CFLAGS = -g -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD
+CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wopinter-arith -Wedundant-decls
+
+CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
+
+CONLYFLAGS += -Wnested-externs
+CONLYFLAGS += -std=gnu99
+
+LDFLAGS = -static -specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(OUTDIR)/$(TARGET).map,--cref,--gc-sections -L./ -lc -lm -lc -lgcc -T.//STM32F10x_flash.ld
+
+ELFSIZE = $(SIZE) -A %(OUTDIR)/$(TARGET).elf
+
+MSG_LOAD_FILE = Create load file :
+MSG_EXTENDED_LISTING = Creating Extended Listing/Disassembly :
+MSG_SYBOL_TABLE = Creting Symbol Table :
+MSG_LINKING = ---- Linking : 
+MSG_CLEANING = Cleaning project : 
+MSG_ASMFROMC = "Creating asm-File from C-Source :"
+
+ALL_SRC = $(SRC)
+
+ALLSRCBASE = $(notdir $(basename $(ALLSRC)))
+
+ALLOBJ = $(addsuffix .o, $(ALLSRCBASE))
+
+all: createdirs build sizeinfo gcc_version
+
+elf:$(TARGET).elf
+lss:$(TARGET).lss
+sym:$(TARGET).sym
+hex:$(TARGET).hex
+bin:$(TARGET).bin
+
+build: lef hex bin lss sym
+
+sizeinfo:
+	@echo code size $@
+	$(ELFSIZE)
+
+gcc_version:
+	@echo gvv version make $@
+	$(CC) --version
+
+createdirs:
+	$(CREATED_FOLDER) $(OUTDIR)
+
+%.hex:
+	@echo $(MSG_LOAD_FILE) $@
+	$(OBJCOPY) -O ihex $< $@
+
+%.bin:
+	@echo $(MSG_LOAD_FILE $@
+	$(OBJCOPY) -O binary $< $@
+
+%.lss: %.elf
+	@echo $(MSG_EXTENDED_LISTING) $@
+	$(OBJDUMP) -h -S -C -r $< > $@
+	
+%.sym: %.elf
+	@echo $(MSG_SYMBOL_TABLE) $@
+	$(OBJNM) -n $< > $@
+
+.SECONDARY: $(TARGET).lef
+.PRECIOUS: $(AlLOBJ)
+%.elf: $(ALLOBJ)
+	@echo $(MSG_LINKING) $@
+	$(CC) $(THUMB) $(CFLAGS) $(ALLOBJ) --output $@ $(LDFLAGS)
+
+define COMPILE_C_TEMPLATE	
