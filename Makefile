@@ -26,6 +26,9 @@ OPT = -O0
 # optimization
 #OPT = -s
 
+TOP := .
+
+include $(TOP)/inc.mk
 
 #######################################
 # paths
@@ -37,12 +40,12 @@ BUILD_DIR = build
 # source
 ######################################
 # C sources
-C_SOURCES =  \
+#C_SOURCES =  \
 Src/main.c \
 
 # ASM sources
 ASM_SOURCES =  \
-CMSIS/Core/CM3/startup/gcc/startup_stm32f10x_md.s
+CMSIS/Core/CM3/Startup/gcc/startup_stm32f10x_md.s
 
 
 #######################################
@@ -86,6 +89,8 @@ AS_DEFS =
 
 # C defines
 C_DEFS =  \
+-DUSE_STDPERIPH_DRIVER \
+-DBOARD_DEF_MANGO_M32
 
 
 
@@ -93,7 +98,7 @@ C_DEFS =  \
 AS_INCLUDES = 
 
 # C includes
-C_INCLUDES =  \
+#C_INCLUDES =  \
 
 
 
