@@ -42,7 +42,7 @@ Src/main.c \
 
 # ASM sources
 ASM_SOURCES =  \
-CMSIS/Startup/startup_stm32f10x_md.s
+CMSIS/Core/CM3/startup/gcc/startup_stm32f10x_md.s
 
 
 #######################################
