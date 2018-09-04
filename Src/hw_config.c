@@ -523,7 +523,7 @@ uint8_t USART_GetCharacter(USART_TypeDef *  usart_p)
     else                return(data);
 }
 
-
+//need to set int _write(int file, char* ch, int len)
 
 /*
  * Name   : putchar
