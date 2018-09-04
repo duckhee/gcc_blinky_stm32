@@ -13,6 +13,8 @@
 /* includes */
 
 #include "stm32f10x.h"
+//#include "stm32f10x_conf.h"
+//#include "stm32f10_it.h"
 #include "stdio.h"
 #include "debug.h"
 #include "usb_lib.h"
@@ -23,6 +25,8 @@
 #ifdef BOARD_DEF_MANGO_Z1
     #include "zigbee_test.h"
 #endif
+
+
 
 /* global variables */
 

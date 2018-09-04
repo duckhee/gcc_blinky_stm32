@@ -8,6 +8,9 @@
  */
 
 /* includes */
+/* Support files for GNU libc.  Files in the system namespace go here.
+   Files in the C namespace (ie those that do not start with an
+   underscore) go in .c.  */
 
 #include "hw_config.h"
 
@@ -15,9 +18,13 @@
 
 #ifdef __GNUC__
   #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+  //#define GETCHAR_PROTOTYPE int __io_getchar(void)
 #else
   #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
+ //#define GETCHAR_PROTOTYPE int fgetc(FILE *f)
+#endif 
+
+/* __GNUC__ */
 
 /* global variables */
 
@@ -498,28 +505,6 @@ void SPIx_Init(void)
 }
 #endif /* BOARD_DEF_MANGO_Z1 */
 
-/*
- * Name   : putchar
- * Input  : None
- * Output : None
- * Return : None
- */
-PUTCHAR_PROTOTYPE
-{
-    /* Write a character to the USART */  
-    if( ch == '\n') {
-        USART_SendData(USART1, '\r');
-        while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-        USART_SendData(USART1, '\n');
-    }else {
-        USART_SendData(USART1, (u8) ch);
-    }
-
-    /* Loop until the end of transmission */
-    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-
-    return ch;
-}
 
 uint8_t USART_GetCharacter(USART_TypeDef *  usart_p)
 {
@@ -536,5 +521,31 @@ uint8_t USART_GetCharacter(USART_TypeDef *  usart_p)
 
     if( data == '\r' )  return (int)('\n');
     else                return(data);
+}
+
+
+
+/*
+ * Name   : putchar
+ * Input  : None
+ * Output : None
+ * Return : None
+ */
+PUTCHAR_PROTOTYPE
+{
+    /* Write a character to the USART */  
+    if( ch == '\n') {
+        USART_SendData(USART1, '\r');
+        while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+        USART_SendData(USART1, '\n');
+    }else {
+        USART_SendData(USART1, (u8) ch);
+    }
+   USART_SendData(USART1, (uint8_t)ch);
+
+    /* Loop until the end of transmission */
+    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+
+    return ch;
 }
 
