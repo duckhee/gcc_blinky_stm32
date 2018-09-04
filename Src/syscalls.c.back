@@ -294,3 +294,13 @@ PUTCHAR_PROTOTYPE
 
     return ch;
 }
+
+
+
+
+
+int _write(int file, char* ch, int len)
+{
+
+}
+
