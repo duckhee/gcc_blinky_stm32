@@ -304,3 +304,19 @@ int _write(int file, char* ch, int len)
 
 }
 
+
+
+#include <stdio.h>
+#include <sys/stat.h>
+#include "stm32f10x.h"
+
+
+__attribute__ ((used)) int _write(int fd, char *ptr, int len)
+{
+    size_t i;
+    for(i = 0; i < len; i++)
+    {
+        fputc(USART1, (uint8_t *)&ch);
+    }
+    return len;
+}

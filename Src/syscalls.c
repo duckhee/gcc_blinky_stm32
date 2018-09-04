@@ -12,3 +12,18 @@ __attribute__ ((used)) int _write(int fd, char *ptr, int len)
     }
     return len;
 }
+
+
+/*
+//need to testing 
+__attribute__ ((used)) int _write(int fd, char *ptr, int len)
+{
+    size_t i;
+    for(i = 0; i < len; i++)
+    {
+        fputc(USART1, (uint8_t *)&ch);
+    }
+    return len;
+}
+
+*/
