@@ -86,10 +86,11 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
--Iinc \
+-IInc \
 -ICMSIS/Core/CM3 \
 -ISTM32F10x_StdPeriph_Driver/inc \
 -ISTM32_USB-FS-Device_Driver/inc \
+-IInc/Sensor \
 
 
 # compile gcc flags

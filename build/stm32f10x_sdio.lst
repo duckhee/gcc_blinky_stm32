@@ -1,0 +1,2598 @@
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"stm32f10x_sdio.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.SDIO_DeInit,"ax",%progbits
+  20              		.align	2
+  21              		.global	SDIO_DeInit
+  22              		.thumb
+  23              		.thumb_func
+  25              	SDIO_DeInit:
+  26              	.LFB27:
+  27              		.file 1 "STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c"
+   1:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+   2:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   ******************************************************************************
+   3:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @file    stm32f10x_sdio.c
+   4:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @author  MCD Application Team
+   5:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @version V3.1.2
+   6:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @date    09/28/2009
+   7:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief   This file provides all the SDIO firmware functions.
+   8:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   ******************************************************************************
+   9:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @copy
+  10:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *
+  11:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *
+  18:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  19:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */ 
+  20:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  21:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Includes ------------------------------------------------------------------*/
+  22:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #include "stm32f10x_sdio.h"
+  23:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #include "stm32f10x_rcc.h"
+  24:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  25:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @addtogroup STM32F10x_StdPeriph_Driver
+  26:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+  27:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+  28:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  29:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO 
+  30:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief SDIO driver modules
+  31:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 2
+
+
+  32:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */ 
+  33:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  34:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO_Private_TypesDefinitions
+  35:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+  36:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */ 
+  37:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  38:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* ------------ SDIO registers bit address in the alias region ----------- */
+  39:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define SDIO_OFFSET                (SDIO_BASE - PERIPH_BASE)
+  40:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  41:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- CLKCR Register ---*/
+  42:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  43:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of CLKEN bit */
+  44:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CLKCR_OFFSET              (SDIO_OFFSET + 0x04)
+  45:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CLKEN_BitNumber           0x08
+  46:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CLKCR_CLKEN_BB            (PERIPH_BB_BASE + (CLKCR_OFFSET * 32) + (CLKEN_BitNumber * 4))
+  47:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  48:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- CMD Register ---*/
+  49:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  50:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of SDIOSUSPEND bit */
+  51:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CMD_OFFSET                (SDIO_OFFSET + 0x0C)
+  52:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define SDIOSUSPEND_BitNumber     0x0B
+  53:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CMD_SDIOSUSPEND_BB        (PERIPH_BB_BASE + (CMD_OFFSET * 32) + (SDIOSUSPEND_BitNumber * 4)
+  54:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  55:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of ENCMDCOMPL bit */
+  56:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define ENCMDCOMPL_BitNumber      0x0C
+  57:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CMD_ENCMDCOMPL_BB         (PERIPH_BB_BASE + (CMD_OFFSET * 32) + (ENCMDCOMPL_BitNumber * 4))
+  58:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  59:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of NIEN bit */
+  60:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define NIEN_BitNumber            0x0D
+  61:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CMD_NIEN_BB               (PERIPH_BB_BASE + (CMD_OFFSET * 32) + (NIEN_BitNumber * 4))
+  62:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  63:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of ATACMD bit */
+  64:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define ATACMD_BitNumber          0x0E
+  65:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CMD_ATACMD_BB             (PERIPH_BB_BASE + (CMD_OFFSET * 32) + (ATACMD_BitNumber * 4))
+  66:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  67:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- DCTRL Register ---*/
+  68:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  69:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of DMAEN bit */
+  70:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_OFFSET              (SDIO_OFFSET + 0x2C)
+  71:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DMAEN_BitNumber           0x03
+  72:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_DMAEN_BB            (PERIPH_BB_BASE + (DCTRL_OFFSET * 32) + (DMAEN_BitNumber * 4))
+  73:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  74:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of RWSTART bit */
+  75:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define RWSTART_BitNumber         0x08
+  76:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_RWSTART_BB          (PERIPH_BB_BASE + (DCTRL_OFFSET * 32) + (RWSTART_BitNumber * 4))
+  77:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  78:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of RWSTOP bit */
+  79:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define RWSTOP_BitNumber          0x09
+  80:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_RWSTOP_BB           (PERIPH_BB_BASE + (DCTRL_OFFSET * 32) + (RWSTOP_BitNumber * 4))
+  81:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  82:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of RWMOD bit */
+  83:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define RWMOD_BitNumber           0x0A
+  84:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_RWMOD_BB            (PERIPH_BB_BASE + (DCTRL_OFFSET * 32) + (RWMOD_BitNumber * 4))
+  85:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  86:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* Alias word address of SDIOEN bit */
+  87:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define SDIOEN_BitNumber          0x0B
+  88:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_SDIOEN_BB           (PERIPH_BB_BASE + (DCTRL_OFFSET * 32) + (SDIOEN_BitNumber * 4))
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 3
+
+
+  89:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  90:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* ---------------------- SDIO registers bit mask ------------------------ */
+  91:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  92:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- CLKCR Register ---*/
+  93:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  94:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* CLKCR register clear mask */
+  95:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CLKCR_CLEAR_MASK         ((uint32_t)0xFFFF8100) 
+  96:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  97:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- PWRCTRL Register ---*/
+  98:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+  99:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* SDIO PWRCTRL Mask */
+ 100:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define PWR_PWRCTRL_MASK         ((uint32_t)0xFFFFFFFC)
+ 101:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 102:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- DCTRL Register ---*/
+ 103:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 104:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* SDIO DCTRL Clear Mask */
+ 105:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define DCTRL_CLEAR_MASK         ((uint32_t)0xFFFFFF08)
+ 106:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 107:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* --- CMD Register ---*/
+ 108:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 109:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* CMD Register clear mask */
+ 110:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define CMD_CLEAR_MASK           ((uint32_t)0xFFFFF800)
+ 111:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 112:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /* SDIO RESP Registers Address */
+ 113:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** #define SDIO_RESP_ADDR           ((uint32_t)(SDIO_BASE + 0x14))
+ 114:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 115:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 116:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @}
+ 117:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 118:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 119:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO_Private_Defines
+ 120:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+ 121:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 122:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 123:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 124:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @}
+ 125:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 126:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 127:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO_Private_Macros
+ 128:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+ 129:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 130:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 131:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 132:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @}
+ 133:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 134:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 135:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO_Private_Variables
+ 136:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+ 137:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 138:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 139:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 140:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @}
+ 141:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 142:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 143:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO_Private_FunctionPrototypes
+ 144:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+ 145:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 4
+
+
+ 146:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 147:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 148:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @}
+ 149:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 150:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 151:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /** @defgroup SDIO_Private_Functions
+ 152:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @{
+ 153:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 154:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 155:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 156:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Deinitializes the SDIO peripheral registers to their default reset values.
+ 157:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  None
+ 158:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 159:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 160:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_DeInit(void)
+ 161:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+  28              		.loc 1 161 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ 162:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->POWER = 0x00000000;
+  33              		.loc 1 162 0
+  34 0000 064B     		ldr	r3, .L2
+  35 0002 0022     		movs	r2, #0
+  36 0004 1A60     		str	r2, [r3]
+ 163:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->CLKCR = 0x00000000;
+  37              		.loc 1 163 0
+  38 0006 5A60     		str	r2, [r3, #4]
+ 164:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->ARG = 0x00000000;
+  39              		.loc 1 164 0
+  40 0008 9A60     		str	r2, [r3, #8]
+ 165:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->CMD = 0x00000000;
+  41              		.loc 1 165 0
+  42 000a DA60     		str	r2, [r3, #12]
+ 166:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->DTIMER = 0x00000000;
+  43              		.loc 1 166 0
+  44 000c 5A62     		str	r2, [r3, #36]
+ 167:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->DLEN = 0x00000000;
+  45              		.loc 1 167 0
+  46 000e 9A62     		str	r2, [r3, #40]
+ 168:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->DCTRL = 0x00000000;
+  47              		.loc 1 168 0
+  48 0010 DA62     		str	r2, [r3, #44]
+ 169:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->ICR = 0x00C007FF;
+  49              		.loc 1 169 0
+  50 0012 0349     		ldr	r1, .L2+4
+  51 0014 9963     		str	r1, [r3, #56]
+ 170:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->MASK = 0x00000000;
+  52              		.loc 1 170 0
+  53 0016 DA63     		str	r2, [r3, #60]
+  54 0018 7047     		bx	lr
+  55              	.L3:
+  56 001a 00BF     		.align	2
+  57              	.L2:
+  58 001c 00800140 		.word	1073840128
+  59 0020 FF07C000 		.word	12584959
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 5
+
+
+  60              		.cfi_endproc
+  61              	.LFE27:
+  63              		.section	.text.SDIO_Init,"ax",%progbits
+  64              		.align	2
+  65              		.global	SDIO_Init
+  66              		.thumb
+  67              		.thumb_func
+  69              	SDIO_Init:
+  70              	.LFB28:
+ 171:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 172:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 173:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 174:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Initializes the SDIO peripheral according to the specified 
+ 175:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   parameters in the SDIO_InitStruct.
+ 176:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_InitStruct : pointer to a SDIO_InitTypeDef structure 
+ 177:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   that contains the configuration information for the SDIO peripheral.
+ 178:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 179:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 180:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_Init(SDIO_InitTypeDef* SDIO_InitStruct)
+ 181:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+  71              		.loc 1 181 0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              	.LVL0:
+  76 0000 10B5     		push	{r4, lr}
+  77              	.LCFI0:
+  78              		.cfi_def_cfa_offset 8
+  79              		.cfi_offset 4, -8
+  80              		.cfi_offset 14, -4
+  81 0002 0446     		mov	r4, r0
+  82              	.LVL1:
+ 182:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   uint32_t tmpreg = 0;
+ 183:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     
+ 184:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 185:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CLOCK_EDGE(SDIO_InitStruct->SDIO_ClockEdge));
+  83              		.loc 1 185 0
+  84 0004 0368     		ldr	r3, [r0]
+  85 0006 33B1     		cbz	r3, .L5
+  86              		.loc 1 185 0 is_stmt 0 discriminator 1
+  87 0008 B3F5005F 		cmp	r3, #8192
+  88 000c 03D0     		beq	.L5
+  89              		.loc 1 185 0 discriminator 2
+  90 000e B921     		movs	r1, #185
+  91 0010 1E48     		ldr	r0, .L11
+  92              	.LVL2:
+  93 0012 FFF7FEFF 		bl	assert_failed
+  94              	.LVL3:
+  95              	.L5:
+ 186:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CLOCK_BYPASS(SDIO_InitStruct->SDIO_ClockBypass));
+  96              		.loc 1 186 0 is_stmt 1
+  97 0016 6368     		ldr	r3, [r4, #4]
+  98 0018 33B1     		cbz	r3, .L6
+  99              		.loc 1 186 0 is_stmt 0 discriminator 1
+ 100 001a B3F5806F 		cmp	r3, #1024
+ 101 001e 03D0     		beq	.L6
+ 102              		.loc 1 186 0 discriminator 2
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 6
+
+
+ 103 0020 BA21     		movs	r1, #186
+ 104 0022 1A48     		ldr	r0, .L11
+ 105 0024 FFF7FEFF 		bl	assert_failed
+ 106              	.LVL4:
+ 107              	.L6:
+ 187:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CLOCK_POWER_SAVE(SDIO_InitStruct->SDIO_ClockPowerSave));
+ 108              		.loc 1 187 0 is_stmt 1
+ 109 0028 A368     		ldr	r3, [r4, #8]
+ 110 002a 33B1     		cbz	r3, .L7
+ 111              		.loc 1 187 0 is_stmt 0 discriminator 1
+ 112 002c B3F5007F 		cmp	r3, #512
+ 113 0030 03D0     		beq	.L7
+ 114              		.loc 1 187 0 discriminator 2
+ 115 0032 BB21     		movs	r1, #187
+ 116 0034 1548     		ldr	r0, .L11
+ 117 0036 FFF7FEFF 		bl	assert_failed
+ 118              	.LVL5:
+ 119              	.L7:
+ 188:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_BUS_WIDE(SDIO_InitStruct->SDIO_BusWide));
+ 120              		.loc 1 188 0 is_stmt 1
+ 121 003a E368     		ldr	r3, [r4, #12]
+ 122 003c 4BB1     		cbz	r3, .L8
+ 123              		.loc 1 188 0 is_stmt 0 discriminator 1
+ 124 003e B3F5006F 		cmp	r3, #2048
+ 125 0042 06D0     		beq	.L8
+ 126              		.loc 1 188 0 discriminator 2
+ 127 0044 B3F5805F 		cmp	r3, #4096
+ 128 0048 03D0     		beq	.L8
+ 129              		.loc 1 188 0 discriminator 3
+ 130 004a BC21     		movs	r1, #188
+ 131 004c 0F48     		ldr	r0, .L11
+ 132 004e FFF7FEFF 		bl	assert_failed
+ 133              	.LVL6:
+ 134              	.L8:
+ 189:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_HARDWARE_FLOW_CONTROL(SDIO_InitStruct->SDIO_HardwareFlowControl)); 
+ 135              		.loc 1 189 0 is_stmt 1
+ 136 0052 2369     		ldr	r3, [r4, #16]
+ 137 0054 33B1     		cbz	r3, .L9
+ 138              		.loc 1 189 0 is_stmt 0 discriminator 1
+ 139 0056 B3F5804F 		cmp	r3, #16384
+ 140 005a 03D0     		beq	.L9
+ 141              		.loc 1 189 0 discriminator 2
+ 142 005c BD21     		movs	r1, #189
+ 143 005e 0B48     		ldr	r0, .L11
+ 144 0060 FFF7FEFF 		bl	assert_failed
+ 145              	.LVL7:
+ 146              	.L9:
+ 190:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****    
+ 191:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /*---------------------------- SDIO CLKCR Configuration ------------------------*/  
+ 192:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Get the SDIO CLKCR value */
+ 193:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg = SDIO->CLKCR;
+ 147              		.loc 1 193 0 is_stmt 1
+ 148 0064 0A48     		ldr	r0, .L11+4
+ 149 0066 4368     		ldr	r3, [r0, #4]
+ 150              	.LVL8:
+ 194:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 195:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Clear CLKDIV, PWRSAV, BYPASS, WIDBUS, NEGEDGE, HWFC_EN bits */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 7
+
+
+ 196:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg &= CLKCR_CLEAR_MASK;
+ 151              		.loc 1 196 0
+ 152 0068 23F4FD41 		bic	r1, r3, #32384
+ 153 006c 21F07F01 		bic	r1, r1, #127
+ 154              	.LVL9:
+ 197:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 198:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set CLKDIV bits according to SDIO_ClockDiv value */
+ 199:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set PWRSAV bit according to SDIO_ClockPowerSave value */
+ 200:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set BYPASS bit according to SDIO_ClockBypass value */
+ 201:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set WIDBUS bits according to SDIO_BusWide value */
+ 202:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set NEGEDGE bits according to SDIO_ClockEdge value */
+ 203:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set HWFC_EN bits according to SDIO_HardwareFlowControl value */
+ 204:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg |= (SDIO_InitStruct->SDIO_ClockDiv  | SDIO_InitStruct->SDIO_ClockPowerSave |
+ 155              		.loc 1 204 0
+ 156 0070 227D     		ldrb	r2, [r4, #20]	@ zero_extendqisi2
+ 157 0072 A368     		ldr	r3, [r4, #8]
+ 158 0074 1A43     		orrs	r2, r2, r3
+ 205:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****              SDIO_InitStruct->SDIO_ClockBypass | SDIO_InitStruct->SDIO_BusWide |
+ 159              		.loc 1 205 0
+ 160 0076 6368     		ldr	r3, [r4, #4]
+ 204:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****              SDIO_InitStruct->SDIO_ClockBypass | SDIO_InitStruct->SDIO_BusWide |
+ 161              		.loc 1 204 0
+ 162 0078 1A43     		orrs	r2, r2, r3
+ 163              		.loc 1 205 0
+ 164 007a E368     		ldr	r3, [r4, #12]
+ 165 007c 1A43     		orrs	r2, r2, r3
+ 206:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****              SDIO_InitStruct->SDIO_ClockEdge | SDIO_InitStruct->SDIO_HardwareFlowControl); 
+ 166              		.loc 1 206 0
+ 167 007e 2368     		ldr	r3, [r4]
+ 205:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****              SDIO_InitStruct->SDIO_ClockBypass | SDIO_InitStruct->SDIO_BusWide |
+ 168              		.loc 1 205 0
+ 169 0080 1343     		orrs	r3, r3, r2
+ 170              		.loc 1 206 0
+ 171 0082 2269     		ldr	r2, [r4, #16]
+ 172 0084 1343     		orrs	r3, r3, r2
+ 204:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****              SDIO_InitStruct->SDIO_ClockBypass | SDIO_InitStruct->SDIO_BusWide |
+ 173              		.loc 1 204 0
+ 174 0086 0B43     		orrs	r3, r3, r1
+ 175              	.LVL10:
+ 207:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 208:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Write to SDIO CLKCR */
+ 209:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->CLKCR = tmpreg;
+ 176              		.loc 1 209 0
+ 177 0088 4360     		str	r3, [r0, #4]
+ 178 008a 10BD     		pop	{r4, pc}
+ 179              	.LVL11:
+ 180              	.L12:
+ 181              		.align	2
+ 182              	.L11:
+ 183 008c 00000000 		.word	.LC0
+ 184 0090 00800140 		.word	1073840128
+ 185              		.cfi_endproc
+ 186              	.LFE28:
+ 188              		.section	.text.SDIO_StructInit,"ax",%progbits
+ 189              		.align	2
+ 190              		.global	SDIO_StructInit
+ 191              		.thumb
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 8
+
+
+ 192              		.thumb_func
+ 194              	SDIO_StructInit:
+ 195              	.LFB29:
+ 210:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 211:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 212:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 213:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Fills each SDIO_InitStruct member with its default value.
+ 214:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_InitStruct: pointer to an SDIO_InitTypeDef structure which 
+ 215:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   will be initialized.
+ 216:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 217:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 218:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_StructInit(SDIO_InitTypeDef* SDIO_InitStruct)
+ 219:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 196              		.loc 1 219 0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 0
+ 199              		@ frame_needed = 0, uses_anonymous_args = 0
+ 200              		@ link register save eliminated.
+ 201              	.LVL12:
+ 220:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* SDIO_InitStruct members default value */
+ 221:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_InitStruct->SDIO_ClockDiv = 0x00;
+ 202              		.loc 1 221 0
+ 203 0000 0023     		movs	r3, #0
+ 204 0002 0375     		strb	r3, [r0, #20]
+ 222:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_InitStruct->SDIO_ClockEdge = SDIO_ClockEdge_Rising;
+ 205              		.loc 1 222 0
+ 206 0004 0360     		str	r3, [r0]
+ 223:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_InitStruct->SDIO_ClockBypass = SDIO_ClockBypass_Disable;
+ 207              		.loc 1 223 0
+ 208 0006 4360     		str	r3, [r0, #4]
+ 224:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_InitStruct->SDIO_ClockPowerSave = SDIO_ClockPowerSave_Disable;
+ 209              		.loc 1 224 0
+ 210 0008 8360     		str	r3, [r0, #8]
+ 225:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_InitStruct->SDIO_BusWide = SDIO_BusWide_1b;
+ 211              		.loc 1 225 0
+ 212 000a C360     		str	r3, [r0, #12]
+ 226:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_InitStruct->SDIO_HardwareFlowControl = SDIO_HardwareFlowControl_Disable;
+ 213              		.loc 1 226 0
+ 214 000c 0361     		str	r3, [r0, #16]
+ 215 000e 7047     		bx	lr
+ 216              		.cfi_endproc
+ 217              	.LFE29:
+ 219              		.section	.text.SDIO_ClockCmd,"ax",%progbits
+ 220              		.align	2
+ 221              		.global	SDIO_ClockCmd
+ 222              		.thumb
+ 223              		.thumb_func
+ 225              	SDIO_ClockCmd:
+ 226              	.LFB30:
+ 227:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 228:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 229:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 230:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the SDIO Clock.
+ 231:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of the SDIO Clock. This parameter can be: ENABLE or DISABLE.
+ 232:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 233:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 234:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_ClockCmd(FunctionalState NewState)
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 9
+
+
+ 235:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 227              		.loc 1 235 0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 0
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              	.LVL13:
+ 232 0000 10B5     		push	{r4, lr}
+ 233              	.LCFI1:
+ 234              		.cfi_def_cfa_offset 8
+ 235              		.cfi_offset 4, -8
+ 236              		.cfi_offset 14, -4
+ 237 0002 0446     		mov	r4, r0
+ 236:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 237:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 238              		.loc 1 237 0
+ 239 0004 0128     		cmp	r0, #1
+ 240 0006 03D9     		bls	.L15
+ 241              		.loc 1 237 0 is_stmt 0 discriminator 1
+ 242 0008 ED21     		movs	r1, #237
+ 243 000a 0348     		ldr	r0, .L17
+ 244              	.LVL14:
+ 245 000c FFF7FEFF 		bl	assert_failed
+ 246              	.LVL15:
+ 247              	.L15:
+ 238:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 239:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) CLKCR_CLKEN_BB = (uint32_t)NewState;
+ 248              		.loc 1 239 0 is_stmt 1
+ 249 0010 024B     		ldr	r3, .L17+4
+ 250 0012 1C60     		str	r4, [r3]
+ 251 0014 10BD     		pop	{r4, pc}
+ 252              	.L18:
+ 253 0016 00BF     		.align	2
+ 254              	.L17:
+ 255 0018 00000000 		.word	.LC0
+ 256 001c A0003042 		.word	1110442144
+ 257              		.cfi_endproc
+ 258              	.LFE30:
+ 260              		.section	.text.SDIO_SetPowerState,"ax",%progbits
+ 261              		.align	2
+ 262              		.global	SDIO_SetPowerState
+ 263              		.thumb
+ 264              		.thumb_func
+ 266              	SDIO_SetPowerState:
+ 267              	.LFB31:
+ 240:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 241:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 242:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 243:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Sets the power status of the controller.
+ 244:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_PowerState: new state of the Power state. 
+ 245:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one of the following values:
+ 246:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_PowerState_OFF
+ 247:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_PowerState_ON
+ 248:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 249:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 250:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_SetPowerState(uint32_t SDIO_PowerState)
+ 251:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 268              		.loc 1 251 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 10
+
+
+ 269              		.cfi_startproc
+ 270              		@ args = 0, pretend = 0, frame = 0
+ 271              		@ frame_needed = 0, uses_anonymous_args = 0
+ 272              	.LVL16:
+ 273 0000 10B5     		push	{r4, lr}
+ 274              	.LCFI2:
+ 275              		.cfi_def_cfa_offset 8
+ 276              		.cfi_offset 4, -8
+ 277              		.cfi_offset 14, -4
+ 252:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 253:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_POWER_STATE(SDIO_PowerState));
+ 278              		.loc 1 253 0
+ 279 0002 0446     		mov	r4, r0
+ 280 0004 28B1     		cbz	r0, .L20
+ 281              		.loc 1 253 0 is_stmt 0 discriminator 1
+ 282 0006 0328     		cmp	r0, #3
+ 283 0008 03D0     		beq	.L20
+ 284              		.loc 1 253 0 discriminator 2
+ 285 000a FD21     		movs	r1, #253
+ 286 000c 0548     		ldr	r0, .L22
+ 287              	.LVL17:
+ 288 000e FFF7FEFF 		bl	assert_failed
+ 289              	.LVL18:
+ 290              	.L20:
+ 254:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 255:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->POWER &= PWR_PWRCTRL_MASK;
+ 291              		.loc 1 255 0 is_stmt 1
+ 292 0012 054B     		ldr	r3, .L22+4
+ 293 0014 1A68     		ldr	r2, [r3]
+ 294 0016 22F00302 		bic	r2, r2, #3
+ 295 001a 1A60     		str	r2, [r3]
+ 256:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->POWER |= SDIO_PowerState;
+ 296              		.loc 1 256 0
+ 297 001c 1868     		ldr	r0, [r3]
+ 298 001e 2043     		orrs	r0, r0, r4
+ 299 0020 1860     		str	r0, [r3]
+ 300 0022 10BD     		pop	{r4, pc}
+ 301              	.LVL19:
+ 302              	.L23:
+ 303              		.align	2
+ 304              	.L22:
+ 305 0024 00000000 		.word	.LC0
+ 306 0028 00800140 		.word	1073840128
+ 307              		.cfi_endproc
+ 308              	.LFE31:
+ 310              		.section	.text.SDIO_GetPowerState,"ax",%progbits
+ 311              		.align	2
+ 312              		.global	SDIO_GetPowerState
+ 313              		.thumb
+ 314              		.thumb_func
+ 316              	SDIO_GetPowerState:
+ 317              	.LFB32:
+ 257:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 258:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 259:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 260:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Gets the power status of the controller.
+ 261:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  None
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 11
+
+
+ 262:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval Power status of the controller. The returned value can
+ 263:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   be one of the following:
+ 264:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * - 0x00: Power OFF
+ 265:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * - 0x02: Power UP
+ 266:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * - 0x03: Power ON 
+ 267:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 268:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** uint32_t SDIO_GetPowerState(void)
+ 269:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 318              		.loc 1 269 0
+ 319              		.cfi_startproc
+ 320              		@ args = 0, pretend = 0, frame = 0
+ 321              		@ frame_needed = 0, uses_anonymous_args = 0
+ 322              		@ link register save eliminated.
+ 270:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return (SDIO->POWER & (~PWR_PWRCTRL_MASK));
+ 323              		.loc 1 270 0
+ 324 0000 024B     		ldr	r3, .L25
+ 325 0002 1868     		ldr	r0, [r3]
+ 271:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 326              		.loc 1 271 0
+ 327 0004 00F00300 		and	r0, r0, #3
+ 328 0008 7047     		bx	lr
+ 329              	.L26:
+ 330 000a 00BF     		.align	2
+ 331              	.L25:
+ 332 000c 00800140 		.word	1073840128
+ 333              		.cfi_endproc
+ 334              	.LFE32:
+ 336              		.section	.text.SDIO_ITConfig,"ax",%progbits
+ 337              		.align	2
+ 338              		.global	SDIO_ITConfig
+ 339              		.thumb
+ 340              		.thumb_func
+ 342              	SDIO_ITConfig:
+ 343              	.LFB33:
+ 272:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 273:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 274:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the SDIO interrupts.
+ 275:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_IT: specifies the SDIO interrupt sources to be enabled or disabled.
+ 276:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one or a combination of the following values:
+ 277:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CCRCFAIL: Command response received (CRC check failed) interrupt
+ 278:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DCRCFAIL: Data block sent/received (CRC check failed) interrupt
+ 279:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CTIMEOUT: Command response timeout interrupt
+ 280:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DTIMEOUT: Data timeout interrupt
+ 281:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXUNDERR: Transmit FIFO underrun error interrupt
+ 282:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXOVERR:  Received FIFO overrun error interrupt
+ 283:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDREND:  Command response received (CRC check passed) interrupt
+ 284:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDSENT:  Command sent (no response required) interrupt
+ 285:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DATAEND:  Data end (data counter, SDIDCOUNT, is zero) interrupt
+ 286:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_STBITERR: Start bit not detected on all data signals in wide 
+ 287:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *                            bus mode interrupt
+ 288:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DBCKEND:  Data block sent/received (CRC check passed) interrupt
+ 289:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDACT:   Command transfer in progress interrupt
+ 290:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXACT:    Data transmit in progress interrupt
+ 291:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXACT:    Data receive in progress interrupt
+ 292:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXFIFOHE: Transmit FIFO Half Empty interrupt
+ 293:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXFIFOHF: Receive FIFO Half Full interrupt
+ 294:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXFIFOF:  Transmit FIFO full interrupt
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 12
+
+
+ 295:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXFIFOF:  Receive FIFO full interrupt
+ 296:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXFIFOE:  Transmit FIFO empty interrupt
+ 297:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXFIFOE:  Receive FIFO empty interrupt
+ 298:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXDAVL:   Data available in transmit FIFO interrupt
+ 299:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXDAVL:   Data available in receive FIFO interrupt
+ 300:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_SDIOIT:   SD I/O interrupt received interrupt
+ 301:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CEATAEND: CE-ATA command completion signal received for CMD61 interrupt
+ 302:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of the specified SDIO interrupts.
+ 303:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 304:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None 
+ 305:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 306:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_ITConfig(uint32_t SDIO_IT, FunctionalState NewState)
+ 307:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 344              		.loc 1 307 0
+ 345              		.cfi_startproc
+ 346              		@ args = 0, pretend = 0, frame = 0
+ 347              		@ frame_needed = 0, uses_anonymous_args = 0
+ 348              	.LVL20:
+ 349 0000 38B5     		push	{r3, r4, r5, lr}
+ 350              	.LCFI3:
+ 351              		.cfi_def_cfa_offset 16
+ 352              		.cfi_offset 3, -16
+ 353              		.cfi_offset 4, -12
+ 354              		.cfi_offset 5, -8
+ 355              		.cfi_offset 14, -4
+ 356 0002 0446     		mov	r4, r0
+ 357 0004 0D46     		mov	r5, r1
+ 308:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 309:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_IT(SDIO_IT));
+ 358              		.loc 1 309 0
+ 359 0006 10F07F4F 		tst	r0, #-16777216
+ 360 000a 00D1     		bne	.L28
+ 361              		.loc 1 309 0 is_stmt 0 discriminator 2
+ 362 000c 20B9     		cbnz	r0, .L29
+ 363              	.L28:
+ 364              		.loc 1 309 0 discriminator 3
+ 365 000e 40F23511 		movw	r1, #309
+ 366              	.LVL21:
+ 367 0012 0B48     		ldr	r0, .L34
+ 368              	.LVL22:
+ 369 0014 FFF7FEFF 		bl	assert_failed
+ 370              	.LVL23:
+ 371              	.L29:
+ 310:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 372              		.loc 1 310 0 is_stmt 1
+ 373 0018 012D     		cmp	r5, #1
+ 374 001a 04D9     		bls	.L30
+ 375              		.loc 1 310 0 is_stmt 0 discriminator 1
+ 376 001c 4FF49B71 		mov	r1, #310
+ 377 0020 0748     		ldr	r0, .L34
+ 378 0022 FFF7FEFF 		bl	assert_failed
+ 379              	.LVL24:
+ 380              	.L30:
+ 311:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 312:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   if (NewState != DISABLE)
+ 381              		.loc 1 312 0 is_stmt 1
+ 382 0026 25B1     		cbz	r5, .L31
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 13
+
+
+ 313:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   {
+ 314:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     /* Enable the SDIO interrupts */
+ 315:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     SDIO->MASK |= SDIO_IT;
+ 383              		.loc 1 315 0
+ 384 0028 064A     		ldr	r2, .L34+4
+ 385 002a D36B     		ldr	r3, [r2, #60]
+ 386 002c 1C43     		orrs	r4, r4, r3
+ 387              	.LVL25:
+ 388 002e D463     		str	r4, [r2, #60]
+ 389 0030 38BD     		pop	{r3, r4, r5, pc}
+ 390              	.LVL26:
+ 391              	.L31:
+ 316:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   }
+ 317:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   else
+ 318:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   {
+ 319:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     /* Disable the SDIO interrupts */
+ 320:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     SDIO->MASK &= ~SDIO_IT;
+ 392              		.loc 1 320 0
+ 393 0032 044A     		ldr	r2, .L34+4
+ 394 0034 D36B     		ldr	r3, [r2, #60]
+ 395 0036 23EA0404 		bic	r4, r3, r4
+ 396              	.LVL27:
+ 397 003a D463     		str	r4, [r2, #60]
+ 398 003c 38BD     		pop	{r3, r4, r5, pc}
+ 399              	.L35:
+ 400 003e 00BF     		.align	2
+ 401              	.L34:
+ 402 0040 00000000 		.word	.LC0
+ 403 0044 00800140 		.word	1073840128
+ 404              		.cfi_endproc
+ 405              	.LFE33:
+ 407              		.section	.text.SDIO_DMACmd,"ax",%progbits
+ 408              		.align	2
+ 409              		.global	SDIO_DMACmd
+ 410              		.thumb
+ 411              		.thumb_func
+ 413              	SDIO_DMACmd:
+ 414              	.LFB34:
+ 321:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   } 
+ 322:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 323:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 324:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 325:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the SDIO DMA request.
+ 326:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of the selected SDIO DMA request.
+ 327:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 328:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 329:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 330:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_DMACmd(FunctionalState NewState)
+ 331:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 415              		.loc 1 331 0
+ 416              		.cfi_startproc
+ 417              		@ args = 0, pretend = 0, frame = 0
+ 418              		@ frame_needed = 0, uses_anonymous_args = 0
+ 419              	.LVL28:
+ 420 0000 10B5     		push	{r4, lr}
+ 421              	.LCFI4:
+ 422              		.cfi_def_cfa_offset 8
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 14
+
+
+ 423              		.cfi_offset 4, -8
+ 424              		.cfi_offset 14, -4
+ 425 0002 0446     		mov	r4, r0
+ 332:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 333:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 426              		.loc 1 333 0
+ 427 0004 0128     		cmp	r0, #1
+ 428 0006 04D9     		bls	.L37
+ 429              		.loc 1 333 0 is_stmt 0 discriminator 1
+ 430 0008 40F24D11 		movw	r1, #333
+ 431 000c 0248     		ldr	r0, .L39
+ 432              	.LVL29:
+ 433 000e FFF7FEFF 		bl	assert_failed
+ 434              	.LVL30:
+ 435              	.L37:
+ 334:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 335:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) DCTRL_DMAEN_BB = (uint32_t)NewState;
+ 436              		.loc 1 335 0 is_stmt 1
+ 437 0012 024B     		ldr	r3, .L39+4
+ 438 0014 1C60     		str	r4, [r3]
+ 439 0016 10BD     		pop	{r4, pc}
+ 440              	.L40:
+ 441              		.align	2
+ 442              	.L39:
+ 443 0018 00000000 		.word	.LC0
+ 444 001c 8C053042 		.word	1110443404
+ 445              		.cfi_endproc
+ 446              	.LFE34:
+ 448              		.section	.text.SDIO_SendCommand,"ax",%progbits
+ 449              		.align	2
+ 450              		.global	SDIO_SendCommand
+ 451              		.thumb
+ 452              		.thumb_func
+ 454              	SDIO_SendCommand:
+ 455              	.LFB35:
+ 336:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 337:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 338:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 339:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Initializes the SDIO Command according to the specified 
+ 340:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   parameters in the SDIO_CmdInitStruct and send the command.
+ 341:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_CmdInitStruct : pointer to a SDIO_CmdInitTypeDef 
+ 342:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   structure that contains the configuration information for the SDIO command.
+ 343:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 344:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 345:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_SendCommand(SDIO_CmdInitTypeDef *SDIO_CmdInitStruct)
+ 346:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 456              		.loc 1 346 0
+ 457              		.cfi_startproc
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460              	.LVL31:
+ 461 0000 10B5     		push	{r4, lr}
+ 462              	.LCFI5:
+ 463              		.cfi_def_cfa_offset 8
+ 464              		.cfi_offset 4, -8
+ 465              		.cfi_offset 14, -4
+ 466 0002 0446     		mov	r4, r0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 15
+
+
+ 467              	.LVL32:
+ 347:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   uint32_t tmpreg = 0;
+ 348:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 349:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 350:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CMD_INDEX(SDIO_CmdInitStruct->SDIO_CmdIndex));
+ 468              		.loc 1 350 0
+ 469 0004 4368     		ldr	r3, [r0, #4]
+ 470 0006 3F2B     		cmp	r3, #63
+ 471 0008 04D9     		bls	.L42
+ 472              		.loc 1 350 0 is_stmt 0 discriminator 1
+ 473 000a 4FF4AF71 		mov	r1, #350
+ 474 000e 1B48     		ldr	r0, .L47
+ 475              	.LVL33:
+ 476 0010 FFF7FEFF 		bl	assert_failed
+ 477              	.LVL34:
+ 478              	.L42:
+ 351:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_RESPONSE(SDIO_CmdInitStruct->SDIO_Response));
+ 479              		.loc 1 351 0 is_stmt 1
+ 480 0014 A368     		ldr	r3, [r4, #8]
+ 481 0016 43B1     		cbz	r3, .L43
+ 482              		.loc 1 351 0 is_stmt 0 discriminator 1
+ 483 0018 402B     		cmp	r3, #64
+ 484 001a 06D0     		beq	.L43
+ 485              		.loc 1 351 0 discriminator 2
+ 486 001c C02B     		cmp	r3, #192
+ 487 001e 04D0     		beq	.L43
+ 488              		.loc 1 351 0 discriminator 3
+ 489 0020 40F25F11 		movw	r1, #351
+ 490 0024 1548     		ldr	r0, .L47
+ 491 0026 FFF7FEFF 		bl	assert_failed
+ 492              	.LVL35:
+ 493              	.L43:
+ 352:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_WAIT(SDIO_CmdInitStruct->SDIO_Wait));
+ 494              		.loc 1 352 0 is_stmt 1
+ 495 002a E368     		ldr	r3, [r4, #12]
+ 496 002c 53B1     		cbz	r3, .L44
+ 497              		.loc 1 352 0 is_stmt 0 discriminator 1
+ 498 002e B3F5807F 		cmp	r3, #256
+ 499 0032 07D0     		beq	.L44
+ 500              		.loc 1 352 0 discriminator 2
+ 501 0034 B3F5007F 		cmp	r3, #512
+ 502 0038 04D0     		beq	.L44
+ 503              		.loc 1 352 0 discriminator 3
+ 504 003a 4FF4B071 		mov	r1, #352
+ 505 003e 0F48     		ldr	r0, .L47
+ 506 0040 FFF7FEFF 		bl	assert_failed
+ 507              	.LVL36:
+ 508              	.L44:
+ 353:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CPSM(SDIO_CmdInitStruct->SDIO_CPSM));
+ 509              		.loc 1 353 0 is_stmt 1
+ 510 0044 2369     		ldr	r3, [r4, #16]
+ 511 0046 B3F5806F 		cmp	r3, #1024
+ 512 004a 05D0     		beq	.L45
+ 513              		.loc 1 353 0 is_stmt 0 discriminator 1
+ 514 004c 23B1     		cbz	r3, .L45
+ 515              		.loc 1 353 0 discriminator 2
+ 516 004e 40F26111 		movw	r1, #353
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 16
+
+
+ 517 0052 0A48     		ldr	r0, .L47
+ 518 0054 FFF7FEFF 		bl	assert_failed
+ 519              	.LVL37:
+ 520              	.L45:
+ 354:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 355:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /*---------------------------- SDIO ARG Configuration ------------------------*/
+ 356:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set the SDIO Argument value */
+ 357:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->ARG = SDIO_CmdInitStruct->SDIO_Argument;
+ 521              		.loc 1 357 0 is_stmt 1
+ 522 0058 2368     		ldr	r3, [r4]
+ 523 005a 0948     		ldr	r0, .L47+4
+ 524 005c 8360     		str	r3, [r0, #8]
+ 358:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 359:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /*---------------------------- SDIO CMD Configuration ------------------------*/  
+ 360:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Get the SDIO CMD value */
+ 361:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg = SDIO->CMD;
+ 525              		.loc 1 361 0
+ 526 005e C368     		ldr	r3, [r0, #12]
+ 527              	.LVL38:
+ 362:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Clear CMDINDEX, WAITRESP, WAITINT, WAITPEND, CPSMEN bits */
+ 363:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg &= CMD_CLEAR_MASK;
+ 528              		.loc 1 363 0
+ 529 0060 23F4FF61 		bic	r1, r3, #2040
+ 530 0064 21F00701 		bic	r1, r1, #7
+ 531              	.LVL39:
+ 364:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set CMDINDEX bits according to SDIO_CmdIndex value */
+ 365:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set WAITRESP bits according to SDIO_Response value */
+ 366:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set WAITINT and WAITPEND bits according to SDIO_Wait value */
+ 367:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set CPSMEN bits according to SDIO_CPSM value */
+ 368:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg |= (uint32_t)SDIO_CmdInitStruct->SDIO_CmdIndex | SDIO_CmdInitStruct->SDIO_Response
+ 532              		.loc 1 368 0
+ 533 0068 6268     		ldr	r2, [r4, #4]
+ 534 006a A368     		ldr	r3, [r4, #8]
+ 535 006c 1A43     		orrs	r2, r2, r3
+ 369:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****            | SDIO_CmdInitStruct->SDIO_Wait | SDIO_CmdInitStruct->SDIO_CPSM;
+ 536              		.loc 1 369 0
+ 537 006e E368     		ldr	r3, [r4, #12]
+ 538 0070 1343     		orrs	r3, r3, r2
+ 539 0072 2269     		ldr	r2, [r4, #16]
+ 540 0074 1343     		orrs	r3, r3, r2
+ 368:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****            | SDIO_CmdInitStruct->SDIO_Wait | SDIO_CmdInitStruct->SDIO_CPSM;
+ 541              		.loc 1 368 0
+ 542 0076 0B43     		orrs	r3, r3, r1
+ 543              	.LVL40:
+ 370:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 371:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Write to SDIO CMD */
+ 372:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->CMD = tmpreg;
+ 544              		.loc 1 372 0
+ 545 0078 C360     		str	r3, [r0, #12]
+ 546 007a 10BD     		pop	{r4, pc}
+ 547              	.LVL41:
+ 548              	.L48:
+ 549              		.align	2
+ 550              	.L47:
+ 551 007c 00000000 		.word	.LC0
+ 552 0080 00800140 		.word	1073840128
+ 553              		.cfi_endproc
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 17
+
+
+ 554              	.LFE35:
+ 556              		.section	.text.SDIO_CmdStructInit,"ax",%progbits
+ 557              		.align	2
+ 558              		.global	SDIO_CmdStructInit
+ 559              		.thumb
+ 560              		.thumb_func
+ 562              	SDIO_CmdStructInit:
+ 563              	.LFB36:
+ 373:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 374:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 375:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 376:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Fills each SDIO_CmdInitStruct member with its default value.
+ 377:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_CmdInitStruct: pointer to an SDIO_CmdInitTypeDef 
+ 378:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   structure which will be initialized.
+ 379:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 380:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 381:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_CmdStructInit(SDIO_CmdInitTypeDef* SDIO_CmdInitStruct)
+ 382:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 564              		.loc 1 382 0
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 0, uses_anonymous_args = 0
+ 568              		@ link register save eliminated.
+ 569              	.LVL42:
+ 383:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* SDIO_CmdInitStruct members default value */
+ 384:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_CmdInitStruct->SDIO_Argument = 0x00;
+ 570              		.loc 1 384 0
+ 571 0000 0023     		movs	r3, #0
+ 572 0002 0360     		str	r3, [r0]
+ 385:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_CmdInitStruct->SDIO_CmdIndex = 0x00;
+ 573              		.loc 1 385 0
+ 574 0004 4360     		str	r3, [r0, #4]
+ 386:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_CmdInitStruct->SDIO_Response = SDIO_Response_No;
+ 575              		.loc 1 386 0
+ 576 0006 8360     		str	r3, [r0, #8]
+ 387:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_CmdInitStruct->SDIO_Wait = SDIO_Wait_No;
+ 577              		.loc 1 387 0
+ 578 0008 C360     		str	r3, [r0, #12]
+ 388:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_CmdInitStruct->SDIO_CPSM = SDIO_CPSM_Disable;
+ 579              		.loc 1 388 0
+ 580 000a 0361     		str	r3, [r0, #16]
+ 581 000c 7047     		bx	lr
+ 582              		.cfi_endproc
+ 583              	.LFE36:
+ 585 000e 00BF     		.section	.text.SDIO_GetCommandResponse,"ax",%progbits
+ 586              		.align	2
+ 587              		.global	SDIO_GetCommandResponse
+ 588              		.thumb
+ 589              		.thumb_func
+ 591              	SDIO_GetCommandResponse:
+ 592              	.LFB37:
+ 389:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 390:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 391:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 392:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Returns command index of last command for which response received.
+ 393:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  None
+ 394:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval Returns the command index of the last command response received.
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 18
+
+
+ 395:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 396:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** uint8_t SDIO_GetCommandResponse(void)
+ 397:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 593              		.loc 1 397 0
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 0
+ 596              		@ frame_needed = 0, uses_anonymous_args = 0
+ 597              		@ link register save eliminated.
+ 398:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return (uint8_t)(SDIO->RESPCMD);
+ 598              		.loc 1 398 0
+ 599 0000 014B     		ldr	r3, .L51
+ 600 0002 1869     		ldr	r0, [r3, #16]
+ 399:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 601              		.loc 1 399 0
+ 602 0004 C0B2     		uxtb	r0, r0
+ 603 0006 7047     		bx	lr
+ 604              	.L52:
+ 605              		.align	2
+ 606              	.L51:
+ 607 0008 00800140 		.word	1073840128
+ 608              		.cfi_endproc
+ 609              	.LFE37:
+ 611              		.section	.text.SDIO_GetResponse,"ax",%progbits
+ 612              		.align	2
+ 613              		.global	SDIO_GetResponse
+ 614              		.thumb
+ 615              		.thumb_func
+ 617              	SDIO_GetResponse:
+ 618              	.LFB38:
+ 400:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 401:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 402:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Returns response received from the card for the last command.
+ 403:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_RESP: Specifies the SDIO response register. 
+ 404:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one of the following values:
+ 405:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_RESP1: Response Register 1
+ 406:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_RESP2: Response Register 2
+ 407:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_RESP3: Response Register 3
+ 408:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_RESP4: Response Register 4
+ 409:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval The Corresponding response register value.
+ 410:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 411:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** uint32_t SDIO_GetResponse(uint32_t SDIO_RESP)
+ 412:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 619              		.loc 1 412 0
+ 620              		.cfi_startproc
+ 621              		@ args = 0, pretend = 0, frame = 8
+ 622              		@ frame_needed = 0, uses_anonymous_args = 0
+ 623              	.LVL43:
+ 624 0000 10B5     		push	{r4, lr}
+ 625              	.LCFI6:
+ 626              		.cfi_def_cfa_offset 8
+ 627              		.cfi_offset 4, -8
+ 628              		.cfi_offset 14, -4
+ 629 0002 82B0     		sub	sp, sp, #8
+ 630              	.LCFI7:
+ 631              		.cfi_def_cfa_offset 16
+ 413:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   __IO uint32_t tmp = 0;
+ 632              		.loc 1 413 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 19
+
+
+ 633 0004 0023     		movs	r3, #0
+ 634 0006 0193     		str	r3, [sp, #4]
+ 414:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 415:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 416:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_RESP(SDIO_RESP));
+ 635              		.loc 1 416 0
+ 636 0008 0446     		mov	r4, r0
+ 637 000a 50B1     		cbz	r0, .L54
+ 638              		.loc 1 416 0 is_stmt 0 discriminator 1
+ 639 000c 0428     		cmp	r0, #4
+ 640 000e 08D0     		beq	.L54
+ 641              		.loc 1 416 0 discriminator 2
+ 642 0010 0828     		cmp	r0, #8
+ 643 0012 06D0     		beq	.L54
+ 644              		.loc 1 416 0 discriminator 3
+ 645 0014 0C28     		cmp	r0, #12
+ 646 0016 04D0     		beq	.L54
+ 647              		.loc 1 416 0 discriminator 4
+ 648 0018 4FF4D071 		mov	r1, #416
+ 649 001c 0448     		ldr	r0, .L56
+ 650              	.LVL44:
+ 651 001e FFF7FEFF 		bl	assert_failed
+ 652              	.LVL45:
+ 653              	.L54:
+ 417:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 418:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmp = SDIO_RESP_ADDR + SDIO_RESP;
+ 654              		.loc 1 418 0 is_stmt 1
+ 655 0022 044B     		ldr	r3, .L56+4
+ 656 0024 2344     		add	r3, r3, r4
+ 657 0026 0193     		str	r3, [sp, #4]
+ 419:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 420:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return (*(__IO uint32_t *) tmp); 
+ 658              		.loc 1 420 0
+ 659 0028 019B     		ldr	r3, [sp, #4]
+ 660 002a 1868     		ldr	r0, [r3]
+ 421:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 661              		.loc 1 421 0
+ 662 002c 02B0     		add	sp, sp, #8
+ 663              	.LCFI8:
+ 664              		.cfi_def_cfa_offset 8
+ 665              		@ sp needed
+ 666 002e 10BD     		pop	{r4, pc}
+ 667              	.LVL46:
+ 668              	.L57:
+ 669              		.align	2
+ 670              	.L56:
+ 671 0030 00000000 		.word	.LC0
+ 672 0034 14800140 		.word	1073840148
+ 673              		.cfi_endproc
+ 674              	.LFE38:
+ 676              		.section	.text.SDIO_DataConfig,"ax",%progbits
+ 677              		.align	2
+ 678              		.global	SDIO_DataConfig
+ 679              		.thumb
+ 680              		.thumb_func
+ 682              	SDIO_DataConfig:
+ 683              	.LFB39:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 20
+
+
+ 422:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 423:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 424:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Initializes the SDIO data path according to the specified 
+ 425:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   parameters in the SDIO_DataInitStruct.
+ 426:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_DataInitStruct : pointer to a SDIO_DataInitTypeDef structure that
+ 427:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   contains the configuration information for the SDIO command.
+ 428:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 429:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 430:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_DataConfig(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
+ 431:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 684              		.loc 1 431 0
+ 685              		.cfi_startproc
+ 686              		@ args = 0, pretend = 0, frame = 0
+ 687              		@ frame_needed = 0, uses_anonymous_args = 0
+ 688              	.LVL47:
+ 689 0000 10B5     		push	{r4, lr}
+ 690              	.LCFI9:
+ 691              		.cfi_def_cfa_offset 8
+ 692              		.cfi_offset 4, -8
+ 693              		.cfi_offset 14, -4
+ 694 0002 0446     		mov	r4, r0
+ 695              	.LVL48:
+ 432:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   uint32_t tmpreg = 0;
+ 433:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 434:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 435:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_DATA_LENGTH(SDIO_DataInitStruct->SDIO_DataLength));
+ 696              		.loc 1 435 0
+ 697 0004 4368     		ldr	r3, [r0, #4]
+ 698 0006 B3F1007F 		cmp	r3, #33554432
+ 699 000a 04D3     		bcc	.L59
+ 700              		.loc 1 435 0 is_stmt 0 discriminator 1
+ 701 000c 40F2B311 		movw	r1, #435
+ 702 0010 2848     		ldr	r0, .L65
+ 703              	.LVL49:
+ 704 0012 FFF7FEFF 		bl	assert_failed
+ 705              	.LVL50:
+ 706              	.L59:
+ 436:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_BLOCK_SIZE(SDIO_DataInitStruct->SDIO_DataBlockSize));
+ 707              		.loc 1 436 0 is_stmt 1
+ 708 0016 A368     		ldr	r3, [r4, #8]
+ 709 0018 03B3     		cbz	r3, .L60
+ 710              		.loc 1 436 0 is_stmt 0 discriminator 1
+ 711 001a 102B     		cmp	r3, #16
+ 712 001c 1ED0     		beq	.L60
+ 713              		.loc 1 436 0 discriminator 2
+ 714 001e 202B     		cmp	r3, #32
+ 715 0020 1CD0     		beq	.L60
+ 716              		.loc 1 436 0 discriminator 3
+ 717 0022 302B     		cmp	r3, #48
+ 718 0024 1AD0     		beq	.L60
+ 719              		.loc 1 436 0 discriminator 4
+ 720 0026 402B     		cmp	r3, #64
+ 721 0028 18D0     		beq	.L60
+ 722              		.loc 1 436 0 discriminator 5
+ 723 002a 502B     		cmp	r3, #80
+ 724 002c 16D0     		beq	.L60
+ 725              		.loc 1 436 0 discriminator 6
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 21
+
+
+ 726 002e 602B     		cmp	r3, #96
+ 727 0030 14D0     		beq	.L60
+ 728              		.loc 1 436 0 discriminator 7
+ 729 0032 702B     		cmp	r3, #112
+ 730 0034 12D0     		beq	.L60
+ 731              		.loc 1 436 0 discriminator 8
+ 732 0036 802B     		cmp	r3, #128
+ 733 0038 10D0     		beq	.L60
+ 734              		.loc 1 436 0 discriminator 9
+ 735 003a 902B     		cmp	r3, #144
+ 736 003c 0ED0     		beq	.L60
+ 737              		.loc 1 436 0 discriminator 10
+ 738 003e A02B     		cmp	r3, #160
+ 739 0040 0CD0     		beq	.L60
+ 740              		.loc 1 436 0 discriminator 11
+ 741 0042 B02B     		cmp	r3, #176
+ 742 0044 0AD0     		beq	.L60
+ 743              		.loc 1 436 0 discriminator 12
+ 744 0046 C02B     		cmp	r3, #192
+ 745 0048 08D0     		beq	.L60
+ 746              		.loc 1 436 0 discriminator 13
+ 747 004a D02B     		cmp	r3, #208
+ 748 004c 06D0     		beq	.L60
+ 749              		.loc 1 436 0 discriminator 14
+ 750 004e E02B     		cmp	r3, #224
+ 751 0050 04D0     		beq	.L60
+ 752              		.loc 1 436 0 discriminator 15
+ 753 0052 4FF4DA71 		mov	r1, #436
+ 754 0056 1748     		ldr	r0, .L65
+ 755 0058 FFF7FEFF 		bl	assert_failed
+ 756              	.LVL51:
+ 757              	.L60:
+ 437:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_TRANSFER_DIR(SDIO_DataInitStruct->SDIO_TransferDir));
+ 758              		.loc 1 437 0 is_stmt 1
+ 759 005c E368     		ldr	r3, [r4, #12]
+ 760 005e 33B1     		cbz	r3, .L61
+ 761              		.loc 1 437 0 is_stmt 0 discriminator 1
+ 762 0060 022B     		cmp	r3, #2
+ 763 0062 04D0     		beq	.L61
+ 764              		.loc 1 437 0 discriminator 2
+ 765 0064 40F2B511 		movw	r1, #437
+ 766 0068 1248     		ldr	r0, .L65
+ 767 006a FFF7FEFF 		bl	assert_failed
+ 768              	.LVL52:
+ 769              	.L61:
+ 438:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_TRANSFER_MODE(SDIO_DataInitStruct->SDIO_TransferMode));
+ 770              		.loc 1 438 0 is_stmt 1
+ 771 006e 2369     		ldr	r3, [r4, #16]
+ 772 0070 042B     		cmp	r3, #4
+ 773 0072 05D0     		beq	.L62
+ 774              		.loc 1 438 0 is_stmt 0 discriminator 1
+ 775 0074 23B1     		cbz	r3, .L62
+ 776              		.loc 1 438 0 discriminator 2
+ 777 0076 4FF4DB71 		mov	r1, #438
+ 778 007a 0E48     		ldr	r0, .L65
+ 779 007c FFF7FEFF 		bl	assert_failed
+ 780              	.LVL53:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 22
+
+
+ 781              	.L62:
+ 439:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_DPSM(SDIO_DataInitStruct->SDIO_DPSM));
+ 782              		.loc 1 439 0 is_stmt 1
+ 783 0080 6369     		ldr	r3, [r4, #20]
+ 784 0082 012B     		cmp	r3, #1
+ 785 0084 04D9     		bls	.L63
+ 786              		.loc 1 439 0 is_stmt 0 discriminator 1
+ 787 0086 40F2B711 		movw	r1, #439
+ 788 008a 0A48     		ldr	r0, .L65
+ 789 008c FFF7FEFF 		bl	assert_failed
+ 790              	.LVL54:
+ 791              	.L63:
+ 440:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 441:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /*---------------------------- SDIO DTIMER Configuration ---------------------*/
+ 442:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set the SDIO Data TimeOut value */
+ 443:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->DTIMER = SDIO_DataInitStruct->SDIO_DataTimeOut;
+ 792              		.loc 1 443 0 is_stmt 1
+ 793 0090 2368     		ldr	r3, [r4]
+ 794 0092 0949     		ldr	r1, .L65+4
+ 795 0094 4B62     		str	r3, [r1, #36]
+ 444:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 445:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /*---------------------------- SDIO DLEN Configuration -----------------------*/
+ 446:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set the SDIO DataLength value */
+ 447:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->DLEN = SDIO_DataInitStruct->SDIO_DataLength;
+ 796              		.loc 1 447 0
+ 797 0096 6368     		ldr	r3, [r4, #4]
+ 798 0098 8B62     		str	r3, [r1, #40]
+ 448:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 449:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /*---------------------------- SDIO DCTRL Configuration ----------------------*/  
+ 450:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Get the SDIO DCTRL value */
+ 451:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg = SDIO->DCTRL;
+ 799              		.loc 1 451 0
+ 800 009a CB6A     		ldr	r3, [r1, #44]
+ 801              	.LVL55:
+ 452:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Clear DEN, DTMODE, DTDIR and DBCKSIZE bits */
+ 453:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg &= DCTRL_CLEAR_MASK;
+ 802              		.loc 1 453 0
+ 803 009c 23F0F700 		bic	r0, r3, #247
+ 804              	.LVL56:
+ 454:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set DEN bit according to SDIO_DPSM value */
+ 455:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set DTMODE bit according to SDIO_TransferMode value */
+ 456:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set DTDIR bit according to SDIO_TransferDir value */
+ 457:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Set DBCKSIZE bits according to SDIO_DataBlockSize value */
+ 458:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   tmpreg |= (uint32_t)SDIO_DataInitStruct->SDIO_DataBlockSize | SDIO_DataInitStruct->SDIO_TransferD
+ 805              		.loc 1 458 0
+ 806 00a0 A268     		ldr	r2, [r4, #8]
+ 807 00a2 E368     		ldr	r3, [r4, #12]
+ 808 00a4 1A43     		orrs	r2, r2, r3
+ 459:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****            | SDIO_DataInitStruct->SDIO_TransferMode | SDIO_DataInitStruct->SDIO_DPSM;
+ 809              		.loc 1 459 0
+ 810 00a6 2369     		ldr	r3, [r4, #16]
+ 811 00a8 1343     		orrs	r3, r3, r2
+ 812 00aa 6269     		ldr	r2, [r4, #20]
+ 813 00ac 1343     		orrs	r3, r3, r2
+ 458:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****            | SDIO_DataInitStruct->SDIO_TransferMode | SDIO_DataInitStruct->SDIO_DPSM;
+ 814              		.loc 1 458 0
+ 815 00ae 0343     		orrs	r3, r3, r0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 23
+
+
+ 816              	.LVL57:
+ 460:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 461:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Write to SDIO DCTRL */
+ 462:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->DCTRL = tmpreg;
+ 817              		.loc 1 462 0
+ 818 00b0 CB62     		str	r3, [r1, #44]
+ 819 00b2 10BD     		pop	{r4, pc}
+ 820              	.LVL58:
+ 821              	.L66:
+ 822              		.align	2
+ 823              	.L65:
+ 824 00b4 00000000 		.word	.LC0
+ 825 00b8 00800140 		.word	1073840128
+ 826              		.cfi_endproc
+ 827              	.LFE39:
+ 829              		.section	.text.SDIO_DataStructInit,"ax",%progbits
+ 830              		.align	2
+ 831              		.global	SDIO_DataStructInit
+ 832              		.thumb
+ 833              		.thumb_func
+ 835              	SDIO_DataStructInit:
+ 836              	.LFB40:
+ 463:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 464:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 465:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 466:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Fills each SDIO_DataInitStruct member with its default value.
+ 467:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_DataInitStruct: pointer to an SDIO_DataInitTypeDef structure which
+ 468:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   will be initialized.
+ 469:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 470:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 471:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_DataStructInit(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
+ 472:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 837              		.loc 1 472 0
+ 838              		.cfi_startproc
+ 839              		@ args = 0, pretend = 0, frame = 0
+ 840              		@ frame_needed = 0, uses_anonymous_args = 0
+ 841              		@ link register save eliminated.
+ 842              	.LVL59:
+ 473:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* SDIO_DataInitStruct members default value */
+ 474:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_DataInitStruct->SDIO_DataTimeOut = 0xFFFFFFFF;
+ 843              		.loc 1 474 0
+ 844 0000 4FF0FF33 		mov	r3, #-1
+ 845 0004 0360     		str	r3, [r0]
+ 475:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_DataInitStruct->SDIO_DataLength = 0x00;
+ 846              		.loc 1 475 0
+ 847 0006 0023     		movs	r3, #0
+ 848 0008 4360     		str	r3, [r0, #4]
+ 476:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_DataInitStruct->SDIO_DataBlockSize = SDIO_DataBlockSize_1b;
+ 849              		.loc 1 476 0
+ 850 000a 8360     		str	r3, [r0, #8]
+ 477:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_DataInitStruct->SDIO_TransferDir = SDIO_TransferDir_ToCard;
+ 851              		.loc 1 477 0
+ 852 000c C360     		str	r3, [r0, #12]
+ 478:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_DataInitStruct->SDIO_TransferMode = SDIO_TransferMode_Block;  
+ 853              		.loc 1 478 0
+ 854 000e 0361     		str	r3, [r0, #16]
+ 479:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO_DataInitStruct->SDIO_DPSM = SDIO_DPSM_Disable;
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 24
+
+
+ 855              		.loc 1 479 0
+ 856 0010 4361     		str	r3, [r0, #20]
+ 857 0012 7047     		bx	lr
+ 858              		.cfi_endproc
+ 859              	.LFE40:
+ 861              		.section	.text.SDIO_GetDataCounter,"ax",%progbits
+ 862              		.align	2
+ 863              		.global	SDIO_GetDataCounter
+ 864              		.thumb
+ 865              		.thumb_func
+ 867              	SDIO_GetDataCounter:
+ 868              	.LFB41:
+ 480:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 481:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 482:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 483:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Returns number of remaining data bytes to be transferred.
+ 484:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  None
+ 485:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval Number of remaining data bytes to be transferred
+ 486:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 487:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** uint32_t SDIO_GetDataCounter(void)
+ 488:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 869              		.loc 1 488 0
+ 870              		.cfi_startproc
+ 871              		@ args = 0, pretend = 0, frame = 0
+ 872              		@ frame_needed = 0, uses_anonymous_args = 0
+ 873              		@ link register save eliminated.
+ 489:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return SDIO->DCOUNT;
+ 874              		.loc 1 489 0
+ 875 0000 014B     		ldr	r3, .L69
+ 876 0002 186B     		ldr	r0, [r3, #48]
+ 490:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 877              		.loc 1 490 0
+ 878 0004 7047     		bx	lr
+ 879              	.L70:
+ 880 0006 00BF     		.align	2
+ 881              	.L69:
+ 882 0008 00800140 		.word	1073840128
+ 883              		.cfi_endproc
+ 884              	.LFE41:
+ 886              		.section	.text.SDIO_ReadData,"ax",%progbits
+ 887              		.align	2
+ 888              		.global	SDIO_ReadData
+ 889              		.thumb
+ 890              		.thumb_func
+ 892              	SDIO_ReadData:
+ 893              	.LFB42:
+ 491:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 492:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 493:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Read one data word from Rx FIFO.
+ 494:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  None
+ 495:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval Data received
+ 496:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 497:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** uint32_t SDIO_ReadData(void)
+ 498:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 894              		.loc 1 498 0
+ 895              		.cfi_startproc
+ 896              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 25
+
+
+ 897              		@ frame_needed = 0, uses_anonymous_args = 0
+ 898              		@ link register save eliminated.
+ 499:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return SDIO->FIFO;
+ 899              		.loc 1 499 0
+ 900 0000 014B     		ldr	r3, .L72
+ 901 0002 D3F88000 		ldr	r0, [r3, #128]
+ 500:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 902              		.loc 1 500 0
+ 903 0006 7047     		bx	lr
+ 904              	.L73:
+ 905              		.align	2
+ 906              	.L72:
+ 907 0008 00800140 		.word	1073840128
+ 908              		.cfi_endproc
+ 909              	.LFE42:
+ 911              		.section	.text.SDIO_WriteData,"ax",%progbits
+ 912              		.align	2
+ 913              		.global	SDIO_WriteData
+ 914              		.thumb
+ 915              		.thumb_func
+ 917              	SDIO_WriteData:
+ 918              	.LFB43:
+ 501:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 502:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 503:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Write one data word to Tx FIFO.
+ 504:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  Data: 32-bit data word to write.
+ 505:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 506:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 507:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_WriteData(uint32_t Data)
+ 508:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 919              		.loc 1 508 0
+ 920              		.cfi_startproc
+ 921              		@ args = 0, pretend = 0, frame = 0
+ 922              		@ frame_needed = 0, uses_anonymous_args = 0
+ 923              		@ link register save eliminated.
+ 924              	.LVL60:
+ 509:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->FIFO = Data;
+ 925              		.loc 1 509 0
+ 926 0000 014B     		ldr	r3, .L75
+ 927 0002 C3F88000 		str	r0, [r3, #128]
+ 928 0006 7047     		bx	lr
+ 929              	.L76:
+ 930              		.align	2
+ 931              	.L75:
+ 932 0008 00800140 		.word	1073840128
+ 933              		.cfi_endproc
+ 934              	.LFE43:
+ 936              		.section	.text.SDIO_GetFIFOCount,"ax",%progbits
+ 937              		.align	2
+ 938              		.global	SDIO_GetFIFOCount
+ 939              		.thumb
+ 940              		.thumb_func
+ 942              	SDIO_GetFIFOCount:
+ 943              	.LFB44:
+ 510:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 511:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 512:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 26
+
+
+ 513:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Returns the number of words left to be written to or read from FIFO.	
+ 514:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  None
+ 515:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval Remaining number of words.
+ 516:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 517:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** uint32_t SDIO_GetFIFOCount(void)
+ 518:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 944              		.loc 1 518 0
+ 945              		.cfi_startproc
+ 946              		@ args = 0, pretend = 0, frame = 0
+ 947              		@ frame_needed = 0, uses_anonymous_args = 0
+ 948              		@ link register save eliminated.
+ 519:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return SDIO->FIFOCNT;
+ 949              		.loc 1 519 0
+ 950 0000 014B     		ldr	r3, .L78
+ 951 0002 986C     		ldr	r0, [r3, #72]
+ 520:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 952              		.loc 1 520 0
+ 953 0004 7047     		bx	lr
+ 954              	.L79:
+ 955 0006 00BF     		.align	2
+ 956              	.L78:
+ 957 0008 00800140 		.word	1073840128
+ 958              		.cfi_endproc
+ 959              	.LFE44:
+ 961              		.section	.text.SDIO_StartSDIOReadWait,"ax",%progbits
+ 962              		.align	2
+ 963              		.global	SDIO_StartSDIOReadWait
+ 964              		.thumb
+ 965              		.thumb_func
+ 967              	SDIO_StartSDIOReadWait:
+ 968              	.LFB45:
+ 521:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 522:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 523:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Starts the SD I/O Read Wait operation.	
+ 524:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of the Start SDIO Read Wait operation. 
+ 525:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 526:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 527:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 528:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_StartSDIOReadWait(FunctionalState NewState)
+ 529:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 969              		.loc 1 529 0
+ 970              		.cfi_startproc
+ 971              		@ args = 0, pretend = 0, frame = 0
+ 972              		@ frame_needed = 0, uses_anonymous_args = 0
+ 973              	.LVL61:
+ 974 0000 10B5     		push	{r4, lr}
+ 975              	.LCFI10:
+ 976              		.cfi_def_cfa_offset 8
+ 977              		.cfi_offset 4, -8
+ 978              		.cfi_offset 14, -4
+ 979 0002 0446     		mov	r4, r0
+ 530:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 531:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 980              		.loc 1 531 0
+ 981 0004 0128     		cmp	r0, #1
+ 982 0006 04D9     		bls	.L81
+ 983              		.loc 1 531 0 is_stmt 0 discriminator 1
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 27
+
+
+ 984 0008 40F21321 		movw	r1, #531
+ 985 000c 0248     		ldr	r0, .L83
+ 986              	.LVL62:
+ 987 000e FFF7FEFF 		bl	assert_failed
+ 988              	.LVL63:
+ 989              	.L81:
+ 532:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 533:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) DCTRL_RWSTART_BB = (uint32_t) NewState;
+ 990              		.loc 1 533 0 is_stmt 1
+ 991 0012 024B     		ldr	r3, .L83+4
+ 992 0014 1C60     		str	r4, [r3]
+ 993 0016 10BD     		pop	{r4, pc}
+ 994              	.L84:
+ 995              		.align	2
+ 996              	.L83:
+ 997 0018 00000000 		.word	.LC0
+ 998 001c A0053042 		.word	1110443424
+ 999              		.cfi_endproc
+ 1000              	.LFE45:
+ 1002              		.section	.text.SDIO_StopSDIOReadWait,"ax",%progbits
+ 1003              		.align	2
+ 1004              		.global	SDIO_StopSDIOReadWait
+ 1005              		.thumb
+ 1006              		.thumb_func
+ 1008              	SDIO_StopSDIOReadWait:
+ 1009              	.LFB46:
+ 534:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 535:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 536:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 537:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Stops the SD I/O Read Wait operation.	
+ 538:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of the Stop SDIO Read Wait operation. 
+ 539:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 540:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 541:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 542:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_StopSDIOReadWait(FunctionalState NewState)
+ 543:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1010              		.loc 1 543 0
+ 1011              		.cfi_startproc
+ 1012              		@ args = 0, pretend = 0, frame = 0
+ 1013              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1014              	.LVL64:
+ 1015 0000 10B5     		push	{r4, lr}
+ 1016              	.LCFI11:
+ 1017              		.cfi_def_cfa_offset 8
+ 1018              		.cfi_offset 4, -8
+ 1019              		.cfi_offset 14, -4
+ 1020 0002 0446     		mov	r4, r0
+ 544:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 545:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 1021              		.loc 1 545 0
+ 1022 0004 0128     		cmp	r0, #1
+ 1023 0006 04D9     		bls	.L86
+ 1024              		.loc 1 545 0 is_stmt 0 discriminator 1
+ 1025 0008 40F22121 		movw	r1, #545
+ 1026 000c 0248     		ldr	r0, .L88
+ 1027              	.LVL65:
+ 1028 000e FFF7FEFF 		bl	assert_failed
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 28
+
+
+ 1029              	.LVL66:
+ 1030              	.L86:
+ 546:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 547:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) DCTRL_RWSTOP_BB = (uint32_t) NewState;
+ 1031              		.loc 1 547 0 is_stmt 1
+ 1032 0012 024B     		ldr	r3, .L88+4
+ 1033 0014 1C60     		str	r4, [r3]
+ 1034 0016 10BD     		pop	{r4, pc}
+ 1035              	.L89:
+ 1036              		.align	2
+ 1037              	.L88:
+ 1038 0018 00000000 		.word	.LC0
+ 1039 001c A4053042 		.word	1110443428
+ 1040              		.cfi_endproc
+ 1041              	.LFE46:
+ 1043              		.section	.text.SDIO_SetSDIOReadWaitMode,"ax",%progbits
+ 1044              		.align	2
+ 1045              		.global	SDIO_SetSDIOReadWaitMode
+ 1046              		.thumb
+ 1047              		.thumb_func
+ 1049              	SDIO_SetSDIOReadWaitMode:
+ 1050              	.LFB47:
+ 548:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 549:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 550:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 551:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Sets one of the two options of inserting read wait interval.
+ 552:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_ReadWaitMode: SD I/O Read Wait operation mode.
+ 553:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parametre can be:
+ 554:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_ReadWaitMode_CLK: Read Wait control by stopping SDIOCLK
+ 555:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_ReadWaitMode_DATA2: Read Wait control using SDIO_DATA2
+ 556:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 557:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 558:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_SetSDIOReadWaitMode(uint32_t SDIO_ReadWaitMode)
+ 559:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** {
+ 1051              		.loc 1 559 0
+ 1052              		.cfi_startproc
+ 1053              		@ args = 0, pretend = 0, frame = 0
+ 1054              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1055              	.LVL67:
+ 1056 0000 10B5     		push	{r4, lr}
+ 1057              	.LCFI12:
+ 1058              		.cfi_def_cfa_offset 8
+ 1059              		.cfi_offset 4, -8
+ 1060              		.cfi_offset 14, -4
+ 1061 0002 0446     		mov	r4, r0
+ 560:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 561:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_READWAIT_MODE(SDIO_ReadWaitMode));
+ 1062              		.loc 1 561 0
+ 1063 0004 0128     		cmp	r0, #1
+ 1064 0006 04D9     		bls	.L91
+ 1065              		.loc 1 561 0 is_stmt 0 discriminator 1
+ 1066 0008 40F23121 		movw	r1, #561
+ 1067 000c 0248     		ldr	r0, .L93
+ 1068              	.LVL68:
+ 1069 000e FFF7FEFF 		bl	assert_failed
+ 1070              	.LVL69:
+ 1071              	.L91:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 29
+
+
+ 562:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 563:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) DCTRL_RWMOD_BB = SDIO_ReadWaitMode;
+ 1072              		.loc 1 563 0 is_stmt 1
+ 1073 0012 024B     		ldr	r3, .L93+4
+ 1074 0014 1C60     		str	r4, [r3]
+ 1075 0016 10BD     		pop	{r4, pc}
+ 1076              	.LVL70:
+ 1077              	.L94:
+ 1078              		.align	2
+ 1079              	.L93:
+ 1080 0018 00000000 		.word	.LC0
+ 1081 001c A8053042 		.word	1110443432
+ 1082              		.cfi_endproc
+ 1083              	.LFE47:
+ 1085              		.section	.text.SDIO_SetSDIOOperation,"ax",%progbits
+ 1086              		.align	2
+ 1087              		.global	SDIO_SetSDIOOperation
+ 1088              		.thumb
+ 1089              		.thumb_func
+ 1091              	SDIO_SetSDIOOperation:
+ 1092              	.LFB48:
+ 564:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 565:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 566:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 567:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the SD I/O Mode Operation.
+ 568:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of SDIO specific operation. 
+ 569:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 570:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 571:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 572:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_SetSDIOOperation(FunctionalState NewState)
+ 573:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1093              		.loc 1 573 0
+ 1094              		.cfi_startproc
+ 1095              		@ args = 0, pretend = 0, frame = 0
+ 1096              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1097              	.LVL71:
+ 1098 0000 10B5     		push	{r4, lr}
+ 1099              	.LCFI13:
+ 1100              		.cfi_def_cfa_offset 8
+ 1101              		.cfi_offset 4, -8
+ 1102              		.cfi_offset 14, -4
+ 1103 0002 0446     		mov	r4, r0
+ 574:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 575:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 1104              		.loc 1 575 0
+ 1105 0004 0128     		cmp	r0, #1
+ 1106 0006 04D9     		bls	.L96
+ 1107              		.loc 1 575 0 is_stmt 0 discriminator 1
+ 1108 0008 40F23F21 		movw	r1, #575
+ 1109 000c 0248     		ldr	r0, .L98
+ 1110              	.LVL72:
+ 1111 000e FFF7FEFF 		bl	assert_failed
+ 1112              	.LVL73:
+ 1113              	.L96:
+ 576:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 577:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) DCTRL_SDIOEN_BB = (uint32_t)NewState;
+ 1114              		.loc 1 577 0 is_stmt 1
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 30
+
+
+ 1115 0012 024B     		ldr	r3, .L98+4
+ 1116 0014 1C60     		str	r4, [r3]
+ 1117 0016 10BD     		pop	{r4, pc}
+ 1118              	.L99:
+ 1119              		.align	2
+ 1120              	.L98:
+ 1121 0018 00000000 		.word	.LC0
+ 1122 001c AC053042 		.word	1110443436
+ 1123              		.cfi_endproc
+ 1124              	.LFE48:
+ 1126              		.section	.text.SDIO_SendSDIOSuspendCmd,"ax",%progbits
+ 1127              		.align	2
+ 1128              		.global	SDIO_SendSDIOSuspendCmd
+ 1129              		.thumb
+ 1130              		.thumb_func
+ 1132              	SDIO_SendSDIOSuspendCmd:
+ 1133              	.LFB49:
+ 578:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 579:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 580:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 581:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the SD I/O Mode suspend command sending.
+ 582:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of the SD I/O Mode suspend command.
+ 583:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 584:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 585:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 586:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_SendSDIOSuspendCmd(FunctionalState NewState)
+ 587:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1134              		.loc 1 587 0
+ 1135              		.cfi_startproc
+ 1136              		@ args = 0, pretend = 0, frame = 0
+ 1137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1138              	.LVL74:
+ 1139 0000 10B5     		push	{r4, lr}
+ 1140              	.LCFI14:
+ 1141              		.cfi_def_cfa_offset 8
+ 1142              		.cfi_offset 4, -8
+ 1143              		.cfi_offset 14, -4
+ 1144 0002 0446     		mov	r4, r0
+ 588:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 589:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 1145              		.loc 1 589 0
+ 1146 0004 0128     		cmp	r0, #1
+ 1147 0006 04D9     		bls	.L101
+ 1148              		.loc 1 589 0 is_stmt 0 discriminator 1
+ 1149 0008 40F24D21 		movw	r1, #589
+ 1150 000c 0248     		ldr	r0, .L103
+ 1151              	.LVL75:
+ 1152 000e FFF7FEFF 		bl	assert_failed
+ 1153              	.LVL76:
+ 1154              	.L101:
+ 590:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 591:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) CMD_SDIOSUSPEND_BB = (uint32_t)NewState;
+ 1155              		.loc 1 591 0 is_stmt 1
+ 1156 0012 024B     		ldr	r3, .L103+4
+ 1157 0014 1C60     		str	r4, [r3]
+ 1158 0016 10BD     		pop	{r4, pc}
+ 1159              	.L104:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 31
+
+
+ 1160              		.align	2
+ 1161              	.L103:
+ 1162 0018 00000000 		.word	.LC0
+ 1163 001c AC013042 		.word	1110442412
+ 1164              		.cfi_endproc
+ 1165              	.LFE49:
+ 1167              		.section	.text.SDIO_CommandCompletionCmd,"ax",%progbits
+ 1168              		.align	2
+ 1169              		.global	SDIO_CommandCompletionCmd
+ 1170              		.thumb
+ 1171              		.thumb_func
+ 1173              	SDIO_CommandCompletionCmd:
+ 1174              	.LFB50:
+ 592:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 593:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 594:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 595:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the command completion signal.
+ 596:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of command completion signal. 
+ 597:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 598:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 599:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 600:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_CommandCompletionCmd(FunctionalState NewState)
+ 601:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1175              		.loc 1 601 0
+ 1176              		.cfi_startproc
+ 1177              		@ args = 0, pretend = 0, frame = 0
+ 1178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1179              	.LVL77:
+ 1180 0000 10B5     		push	{r4, lr}
+ 1181              	.LCFI15:
+ 1182              		.cfi_def_cfa_offset 8
+ 1183              		.cfi_offset 4, -8
+ 1184              		.cfi_offset 14, -4
+ 1185 0002 0446     		mov	r4, r0
+ 602:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 603:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 1186              		.loc 1 603 0
+ 1187 0004 0128     		cmp	r0, #1
+ 1188 0006 04D9     		bls	.L106
+ 1189              		.loc 1 603 0 is_stmt 0 discriminator 1
+ 1190 0008 40F25B21 		movw	r1, #603
+ 1191 000c 0248     		ldr	r0, .L108
+ 1192              	.LVL78:
+ 1193 000e FFF7FEFF 		bl	assert_failed
+ 1194              	.LVL79:
+ 1195              	.L106:
+ 604:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 605:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) CMD_ENCMDCOMPL_BB = (uint32_t)NewState;
+ 1196              		.loc 1 605 0 is_stmt 1
+ 1197 0012 024B     		ldr	r3, .L108+4
+ 1198 0014 1C60     		str	r4, [r3]
+ 1199 0016 10BD     		pop	{r4, pc}
+ 1200              	.L109:
+ 1201              		.align	2
+ 1202              	.L108:
+ 1203 0018 00000000 		.word	.LC0
+ 1204 001c B0013042 		.word	1110442416
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 32
+
+
+ 1205              		.cfi_endproc
+ 1206              	.LFE50:
+ 1208              		.section	.text.SDIO_CEATAITCmd,"ax",%progbits
+ 1209              		.align	2
+ 1210              		.global	SDIO_CEATAITCmd
+ 1211              		.thumb
+ 1212              		.thumb_func
+ 1214              	SDIO_CEATAITCmd:
+ 1215              	.LFB51:
+ 606:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 607:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 608:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 609:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Enables or disables the CE-ATA interrupt.
+ 610:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of CE-ATA interrupt. This parameter can be: ENABLE or DISABLE.
+ 611:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 612:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 613:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_CEATAITCmd(FunctionalState NewState)
+ 614:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1216              		.loc 1 614 0
+ 1217              		.cfi_startproc
+ 1218              		@ args = 0, pretend = 0, frame = 0
+ 1219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1220              	.LVL80:
+ 1221 0000 10B5     		push	{r4, lr}
+ 1222              	.LCFI16:
+ 1223              		.cfi_def_cfa_offset 8
+ 1224              		.cfi_offset 4, -8
+ 1225              		.cfi_offset 14, -4
+ 1226 0002 0446     		mov	r4, r0
+ 615:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 616:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 1227              		.loc 1 616 0
+ 1228 0004 0128     		cmp	r0, #1
+ 1229 0006 04D9     		bls	.L111
+ 1230              		.loc 1 616 0 is_stmt 0 discriminator 1
+ 1231 0008 4FF41A71 		mov	r1, #616
+ 1232 000c 0548     		ldr	r0, .L113
+ 1233              	.LVL81:
+ 1234 000e FFF7FEFF 		bl	assert_failed
+ 1235              	.LVL82:
+ 1236              	.L111:
+ 617:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 618:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) CMD_NIEN_BB = (uint32_t)((~((uint32_t)NewState)) & ((uint32_t)0x1));
+ 1237              		.loc 1 618 0 is_stmt 1
+ 1238 0012 14F0010F 		tst	r4, #1
+ 1239 0016 0CBF     		ite	eq
+ 1240 0018 0122     		moveq	r2, #1
+ 1241 001a 0022     		movne	r2, #0
+ 1242 001c 024B     		ldr	r3, .L113+4
+ 1243 001e 1A60     		str	r2, [r3]
+ 1244 0020 10BD     		pop	{r4, pc}
+ 1245              	.L114:
+ 1246 0022 00BF     		.align	2
+ 1247              	.L113:
+ 1248 0024 00000000 		.word	.LC0
+ 1249 0028 B4013042 		.word	1110442420
+ 1250              		.cfi_endproc
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 33
+
+
+ 1251              	.LFE51:
+ 1253              		.section	.text.SDIO_SendCEATACmd,"ax",%progbits
+ 1254              		.align	2
+ 1255              		.global	SDIO_SendCEATACmd
+ 1256              		.thumb
+ 1257              		.thumb_func
+ 1259              	SDIO_SendCEATACmd:
+ 1260              	.LFB52:
+ 619:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 620:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 621:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 622:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Sends CE-ATA command (CMD61).
+ 623:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  NewState: new state of CE-ATA command. This parameter can be: ENABLE or DISABLE.
+ 624:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 625:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 626:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_SendCEATACmd(FunctionalState NewState)
+ 627:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1261              		.loc 1 627 0
+ 1262              		.cfi_startproc
+ 1263              		@ args = 0, pretend = 0, frame = 0
+ 1264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1265              	.LVL83:
+ 1266 0000 10B5     		push	{r4, lr}
+ 1267              	.LCFI17:
+ 1268              		.cfi_def_cfa_offset 8
+ 1269              		.cfi_offset 4, -8
+ 1270              		.cfi_offset 14, -4
+ 1271 0002 0446     		mov	r4, r0
+ 628:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 629:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 1272              		.loc 1 629 0
+ 1273 0004 0128     		cmp	r0, #1
+ 1274 0006 04D9     		bls	.L116
+ 1275              		.loc 1 629 0 is_stmt 0 discriminator 1
+ 1276 0008 40F27521 		movw	r1, #629
+ 1277 000c 0248     		ldr	r0, .L118
+ 1278              	.LVL84:
+ 1279 000e FFF7FEFF 		bl	assert_failed
+ 1280              	.LVL85:
+ 1281              	.L116:
+ 630:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 631:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *(__IO uint32_t *) CMD_ATACMD_BB = (uint32_t)NewState;
+ 1282              		.loc 1 631 0 is_stmt 1
+ 1283 0012 024B     		ldr	r3, .L118+4
+ 1284 0014 1C60     		str	r4, [r3]
+ 1285 0016 10BD     		pop	{r4, pc}
+ 1286              	.L119:
+ 1287              		.align	2
+ 1288              	.L118:
+ 1289 0018 00000000 		.word	.LC0
+ 1290 001c B8013042 		.word	1110442424
+ 1291              		.cfi_endproc
+ 1292              	.LFE52:
+ 1294              		.section	.text.SDIO_GetFlagStatus,"ax",%progbits
+ 1295              		.align	2
+ 1296              		.global	SDIO_GetFlagStatus
+ 1297              		.thumb
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 34
+
+
+ 1298              		.thumb_func
+ 1300              	SDIO_GetFlagStatus:
+ 1301              	.LFB53:
+ 632:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 633:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 634:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 635:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Checks whether the specified SDIO flag is set or not.
+ 636:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_FLAG: specifies the flag to check. 
+ 637:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one of the following values:
+ 638:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CCRCFAIL: Command response received (CRC check failed)
+ 639:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DCRCFAIL: Data block sent/received (CRC check failed)
+ 640:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CTIMEOUT: Command response timeout
+ 641:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DTIMEOUT: Data timeout
+ 642:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXUNDERR: Transmit FIFO underrun error
+ 643:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXOVERR:  Received FIFO overrun error
+ 644:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CMDREND:  Command response received (CRC check passed)
+ 645:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CMDSENT:  Command sent (no response required)
+ 646:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DATAEND:  Data end (data counter, SDIDCOUNT, is zero)
+ 647:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_STBITERR: Start bit not detected on all data signals in wide 
+ 648:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *                              bus mode.
+ 649:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DBCKEND:  Data block sent/received (CRC check passed)
+ 650:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CMDACT:   Command transfer in progress
+ 651:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXACT:    Data transmit in progress
+ 652:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXACT:    Data receive in progress
+ 653:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXFIFOHE: Transmit FIFO Half Empty
+ 654:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXFIFOHF: Receive FIFO Half Full
+ 655:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXFIFOF:  Transmit FIFO full
+ 656:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXFIFOF:  Receive FIFO full
+ 657:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXFIFOE:  Transmit FIFO empty
+ 658:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXFIFOE:  Receive FIFO empty
+ 659:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXDAVL:   Data available in transmit FIFO
+ 660:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXDAVL:   Data available in receive FIFO
+ 661:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_SDIOIT:   SD I/O interrupt received
+ 662:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CEATAEND: CE-ATA command completion signal received for CMD61
+ 663:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval The new state of SDIO_FLAG (SET or RESET).
+ 664:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 665:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** FlagStatus SDIO_GetFlagStatus(uint32_t SDIO_FLAG)
+ 666:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1302              		.loc 1 666 0
+ 1303              		.cfi_startproc
+ 1304              		@ args = 0, pretend = 0, frame = 0
+ 1305              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1306              	.LVL86:
+ 1307 0000 10B5     		push	{r4, lr}
+ 1308              	.LCFI18:
+ 1309              		.cfi_def_cfa_offset 8
+ 1310              		.cfi_offset 4, -8
+ 1311              		.cfi_offset 14, -4
+ 1312 0002 0446     		mov	r4, r0
+ 1313              	.LVL87:
+ 667:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   FlagStatus bitstatus = RESET;
+ 668:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 669:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 670:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_FLAG(SDIO_FLAG));
+ 1314              		.loc 1 670 0
+ 1315 0004 431E     		subs	r3, r0, #1
+ 1316 0006 012B     		cmp	r3, #1
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 35
+
+
+ 1317 0008 40D9     		bls	.L121
+ 1318              		.loc 1 670 0 is_stmt 0 discriminator 1
+ 1319 000a 0428     		cmp	r0, #4
+ 1320 000c 3ED0     		beq	.L121
+ 1321              		.loc 1 670 0 discriminator 2
+ 1322 000e 0828     		cmp	r0, #8
+ 1323 0010 3CD0     		beq	.L121
+ 1324              		.loc 1 670 0 discriminator 3
+ 1325 0012 1028     		cmp	r0, #16
+ 1326 0014 3AD0     		beq	.L121
+ 1327              		.loc 1 670 0 discriminator 4
+ 1328 0016 2028     		cmp	r0, #32
+ 1329 0018 38D0     		beq	.L121
+ 1330              		.loc 1 670 0 discriminator 5
+ 1331 001a 4028     		cmp	r0, #64
+ 1332 001c 36D0     		beq	.L121
+ 1333              		.loc 1 670 0 discriminator 6
+ 1334 001e 8028     		cmp	r0, #128
+ 1335 0020 34D0     		beq	.L121
+ 1336              		.loc 1 670 0 discriminator 7
+ 1337 0022 B0F5807F 		cmp	r0, #256
+ 1338 0026 31D0     		beq	.L121
+ 1339              		.loc 1 670 0 discriminator 8
+ 1340 0028 B0F5007F 		cmp	r0, #512
+ 1341 002c 2ED0     		beq	.L121
+ 1342              		.loc 1 670 0 discriminator 9
+ 1343 002e B0F5806F 		cmp	r0, #1024
+ 1344 0032 2BD0     		beq	.L121
+ 1345              		.loc 1 670 0 discriminator 10
+ 1346 0034 B0F5006F 		cmp	r0, #2048
+ 1347 0038 28D0     		beq	.L121
+ 1348              		.loc 1 670 0 discriminator 11
+ 1349 003a B0F5805F 		cmp	r0, #4096
+ 1350 003e 25D0     		beq	.L121
+ 1351              		.loc 1 670 0 discriminator 12
+ 1352 0040 B0F5005F 		cmp	r0, #8192
+ 1353 0044 22D0     		beq	.L121
+ 1354              		.loc 1 670 0 discriminator 13
+ 1355 0046 B0F5804F 		cmp	r0, #16384
+ 1356 004a 1FD0     		beq	.L121
+ 1357              		.loc 1 670 0 discriminator 14
+ 1358 004c B0F5004F 		cmp	r0, #32768
+ 1359 0050 1CD0     		beq	.L121
+ 1360              		.loc 1 670 0 discriminator 15
+ 1361 0052 B0F5803F 		cmp	r0, #65536
+ 1362 0056 19D0     		beq	.L121
+ 1363              		.loc 1 670 0 discriminator 16
+ 1364 0058 B0F5003F 		cmp	r0, #131072
+ 1365 005c 16D0     		beq	.L121
+ 1366              		.loc 1 670 0 discriminator 17
+ 1367 005e B0F5802F 		cmp	r0, #262144
+ 1368 0062 13D0     		beq	.L121
+ 1369              		.loc 1 670 0 discriminator 18
+ 1370 0064 B0F5002F 		cmp	r0, #524288
+ 1371 0068 10D0     		beq	.L121
+ 1372              		.loc 1 670 0 discriminator 19
+ 1373 006a B0F5801F 		cmp	r0, #1048576
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 36
+
+
+ 1374 006e 0DD0     		beq	.L121
+ 1375              		.loc 1 670 0 discriminator 20
+ 1376 0070 B0F5001F 		cmp	r0, #2097152
+ 1377 0074 0AD0     		beq	.L121
+ 1378              		.loc 1 670 0 discriminator 21
+ 1379 0076 B0F5800F 		cmp	r0, #4194304
+ 1380 007a 07D0     		beq	.L121
+ 1381              		.loc 1 670 0 discriminator 22
+ 1382 007c B0F5000F 		cmp	r0, #8388608
+ 1383 0080 04D0     		beq	.L121
+ 1384              		.loc 1 670 0 discriminator 23
+ 1385 0082 40F29E21 		movw	r1, #670
+ 1386 0086 0548     		ldr	r0, .L125
+ 1387              	.LVL88:
+ 1388 0088 FFF7FEFF 		bl	assert_failed
+ 1389              	.LVL89:
+ 1390              	.L121:
+ 671:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 672:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   if ((SDIO->STA & SDIO_FLAG) != (uint32_t)RESET)
+ 1391              		.loc 1 672 0 is_stmt 1
+ 1392 008c 044B     		ldr	r3, .L125+4
+ 1393 008e 5B6B     		ldr	r3, [r3, #52]
+ 1394 0090 1C42     		tst	r4, r3
+ 1395 0092 01D0     		beq	.L123
+ 673:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   {
+ 674:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     bitstatus = SET;
+ 1396              		.loc 1 674 0
+ 1397 0094 0120     		movs	r0, #1
+ 1398 0096 10BD     		pop	{r4, pc}
+ 1399              	.LVL90:
+ 1400              	.L123:
+ 675:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   }
+ 676:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   else
+ 677:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   {
+ 678:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     bitstatus = RESET;
+ 1401              		.loc 1 678 0
+ 1402 0098 0020     		movs	r0, #0
+ 1403              	.LVL91:
+ 679:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   }
+ 680:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return bitstatus;
+ 681:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 1404              		.loc 1 681 0
+ 1405 009a 10BD     		pop	{r4, pc}
+ 1406              	.LVL92:
+ 1407              	.L126:
+ 1408              		.align	2
+ 1409              	.L125:
+ 1410 009c 00000000 		.word	.LC0
+ 1411 00a0 00800140 		.word	1073840128
+ 1412              		.cfi_endproc
+ 1413              	.LFE53:
+ 1415              		.section	.text.SDIO_ClearFlag,"ax",%progbits
+ 1416              		.align	2
+ 1417              		.global	SDIO_ClearFlag
+ 1418              		.thumb
+ 1419              		.thumb_func
+ 1421              	SDIO_ClearFlag:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 37
+
+
+ 1422              	.LFB54:
+ 682:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 683:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 684:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Clears the SDIO's pending flags.
+ 685:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_FLAG: specifies the flag to clear.  
+ 686:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one or a combination of the following values:
+ 687:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CCRCFAIL: Command response received (CRC check failed)
+ 688:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DCRCFAIL: Data block sent/received (CRC check failed)
+ 689:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CTIMEOUT: Command response timeout
+ 690:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DTIMEOUT: Data timeout
+ 691:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_TXUNDERR: Transmit FIFO underrun error
+ 692:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_RXOVERR:  Received FIFO overrun error
+ 693:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CMDREND:  Command response received (CRC check passed)
+ 694:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CMDSENT:  Command sent (no response required)
+ 695:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DATAEND:  Data end (data counter, SDIDCOUNT, is zero)
+ 696:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_STBITERR: Start bit not detected on all data signals in wide 
+ 697:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *                              bus mode
+ 698:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_DBCKEND:  Data block sent/received (CRC check passed)
+ 699:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_SDIOIT:   SD I/O interrupt received
+ 700:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_FLAG_CEATAEND: CE-ATA command completion signal received for CMD61
+ 701:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 702:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 703:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_ClearFlag(uint32_t SDIO_FLAG)
+ 704:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1423              		.loc 1 704 0
+ 1424              		.cfi_startproc
+ 1425              		@ args = 0, pretend = 0, frame = 0
+ 1426              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1427              	.LVL93:
+ 1428 0000 10B5     		push	{r4, lr}
+ 1429              	.LCFI19:
+ 1430              		.cfi_def_cfa_offset 8
+ 1431              		.cfi_offset 4, -8
+ 1432              		.cfi_offset 14, -4
+ 1433 0002 0446     		mov	r4, r0
+ 705:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 706:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CLEAR_FLAG(SDIO_FLAG));
+ 1434              		.loc 1 706 0
+ 1435 0004 054B     		ldr	r3, .L131
+ 1436 0006 0340     		ands	r3, r3, r0
+ 1437 0008 03B9     		cbnz	r3, .L128
+ 1438              		.loc 1 706 0 is_stmt 0 discriminator 2
+ 1439 000a 20B9     		cbnz	r0, .L129
+ 1440              	.L128:
+ 1441              		.loc 1 706 0 discriminator 3
+ 1442 000c 40F2C221 		movw	r1, #706
+ 1443 0010 0348     		ldr	r0, .L131+4
+ 1444              	.LVL94:
+ 1445 0012 FFF7FEFF 		bl	assert_failed
+ 1446              	.LVL95:
+ 1447              	.L129:
+ 707:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****    
+ 708:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->ICR = SDIO_FLAG;
+ 1448              		.loc 1 708 0 is_stmt 1
+ 1449 0016 034B     		ldr	r3, .L131+8
+ 1450 0018 9C63     		str	r4, [r3, #56]
+ 1451 001a 10BD     		pop	{r4, pc}
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 38
+
+
+ 1452              	.LVL96:
+ 1453              	.L132:
+ 1454              		.align	2
+ 1455              	.L131:
+ 1456 001c 00F83FFF 		.word	-12584960
+ 1457 0020 00000000 		.word	.LC0
+ 1458 0024 00800140 		.word	1073840128
+ 1459              		.cfi_endproc
+ 1460              	.LFE54:
+ 1462              		.section	.text.SDIO_GetITStatus,"ax",%progbits
+ 1463              		.align	2
+ 1464              		.global	SDIO_GetITStatus
+ 1465              		.thumb
+ 1466              		.thumb_func
+ 1468              	SDIO_GetITStatus:
+ 1469              	.LFB55:
+ 709:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 710:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 711:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 712:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Checks whether the specified SDIO interrupt has occurred or not.
+ 713:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_IT: specifies the SDIO interrupt source to check. 
+ 714:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one of the following values:
+ 715:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CCRCFAIL: Command response received (CRC check failed) interrupt
+ 716:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DCRCFAIL: Data block sent/received (CRC check failed) interrupt
+ 717:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CTIMEOUT: Command response timeout interrupt
+ 718:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DTIMEOUT: Data timeout interrupt
+ 719:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXUNDERR: Transmit FIFO underrun error interrupt
+ 720:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXOVERR:  Received FIFO overrun error interrupt
+ 721:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDREND:  Command response received (CRC check passed) interrupt
+ 722:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDSENT:  Command sent (no response required) interrupt
+ 723:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DATAEND:  Data end (data counter, SDIDCOUNT, is zero) interrupt
+ 724:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_STBITERR: Start bit not detected on all data signals in wide 
+ 725:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *                            bus mode interrupt
+ 726:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DBCKEND:  Data block sent/received (CRC check passed) interrupt
+ 727:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDACT:   Command transfer in progress interrupt
+ 728:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXACT:    Data transmit in progress interrupt
+ 729:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXACT:    Data receive in progress interrupt
+ 730:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXFIFOHE: Transmit FIFO Half Empty interrupt
+ 731:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXFIFOHF: Receive FIFO Half Full interrupt
+ 732:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXFIFOF:  Transmit FIFO full interrupt
+ 733:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXFIFOF:  Receive FIFO full interrupt
+ 734:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXFIFOE:  Transmit FIFO empty interrupt
+ 735:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXFIFOE:  Receive FIFO empty interrupt
+ 736:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXDAVL:   Data available in transmit FIFO interrupt
+ 737:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXDAVL:   Data available in receive FIFO interrupt
+ 738:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_SDIOIT:   SD I/O interrupt received interrupt
+ 739:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CEATAEND: CE-ATA command completion signal received for CMD61 interrupt
+ 740:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval The new state of SDIO_IT (SET or RESET).
+ 741:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 742:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** ITStatus SDIO_GetITStatus(uint32_t SDIO_IT)
+ 743:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1470              		.loc 1 743 0
+ 1471              		.cfi_startproc
+ 1472              		@ args = 0, pretend = 0, frame = 0
+ 1473              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1474              	.LVL97:
+ 1475 0000 10B5     		push	{r4, lr}
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 39
+
+
+ 1476              	.LCFI20:
+ 1477              		.cfi_def_cfa_offset 8
+ 1478              		.cfi_offset 4, -8
+ 1479              		.cfi_offset 14, -4
+ 1480 0002 0446     		mov	r4, r0
+ 1481              	.LVL98:
+ 744:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   ITStatus bitstatus = RESET;
+ 745:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   
+ 746:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 747:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_GET_IT(SDIO_IT));
+ 1482              		.loc 1 747 0
+ 1483 0004 431E     		subs	r3, r0, #1
+ 1484 0006 012B     		cmp	r3, #1
+ 1485 0008 40D9     		bls	.L134
+ 1486              		.loc 1 747 0 is_stmt 0 discriminator 1
+ 1487 000a 0428     		cmp	r0, #4
+ 1488 000c 3ED0     		beq	.L134
+ 1489              		.loc 1 747 0 discriminator 2
+ 1490 000e 0828     		cmp	r0, #8
+ 1491 0010 3CD0     		beq	.L134
+ 1492              		.loc 1 747 0 discriminator 3
+ 1493 0012 1028     		cmp	r0, #16
+ 1494 0014 3AD0     		beq	.L134
+ 1495              		.loc 1 747 0 discriminator 4
+ 1496 0016 2028     		cmp	r0, #32
+ 1497 0018 38D0     		beq	.L134
+ 1498              		.loc 1 747 0 discriminator 5
+ 1499 001a 4028     		cmp	r0, #64
+ 1500 001c 36D0     		beq	.L134
+ 1501              		.loc 1 747 0 discriminator 6
+ 1502 001e 8028     		cmp	r0, #128
+ 1503 0020 34D0     		beq	.L134
+ 1504              		.loc 1 747 0 discriminator 7
+ 1505 0022 B0F5807F 		cmp	r0, #256
+ 1506 0026 31D0     		beq	.L134
+ 1507              		.loc 1 747 0 discriminator 8
+ 1508 0028 B0F5007F 		cmp	r0, #512
+ 1509 002c 2ED0     		beq	.L134
+ 1510              		.loc 1 747 0 discriminator 9
+ 1511 002e B0F5806F 		cmp	r0, #1024
+ 1512 0032 2BD0     		beq	.L134
+ 1513              		.loc 1 747 0 discriminator 10
+ 1514 0034 B0F5006F 		cmp	r0, #2048
+ 1515 0038 28D0     		beq	.L134
+ 1516              		.loc 1 747 0 discriminator 11
+ 1517 003a B0F5805F 		cmp	r0, #4096
+ 1518 003e 25D0     		beq	.L134
+ 1519              		.loc 1 747 0 discriminator 12
+ 1520 0040 B0F5005F 		cmp	r0, #8192
+ 1521 0044 22D0     		beq	.L134
+ 1522              		.loc 1 747 0 discriminator 13
+ 1523 0046 B0F5804F 		cmp	r0, #16384
+ 1524 004a 1FD0     		beq	.L134
+ 1525              		.loc 1 747 0 discriminator 14
+ 1526 004c B0F5004F 		cmp	r0, #32768
+ 1527 0050 1CD0     		beq	.L134
+ 1528              		.loc 1 747 0 discriminator 15
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 40
+
+
+ 1529 0052 B0F5803F 		cmp	r0, #65536
+ 1530 0056 19D0     		beq	.L134
+ 1531              		.loc 1 747 0 discriminator 16
+ 1532 0058 B0F5003F 		cmp	r0, #131072
+ 1533 005c 16D0     		beq	.L134
+ 1534              		.loc 1 747 0 discriminator 17
+ 1535 005e B0F5802F 		cmp	r0, #262144
+ 1536 0062 13D0     		beq	.L134
+ 1537              		.loc 1 747 0 discriminator 18
+ 1538 0064 B0F5002F 		cmp	r0, #524288
+ 1539 0068 10D0     		beq	.L134
+ 1540              		.loc 1 747 0 discriminator 19
+ 1541 006a B0F5801F 		cmp	r0, #1048576
+ 1542 006e 0DD0     		beq	.L134
+ 1543              		.loc 1 747 0 discriminator 20
+ 1544 0070 B0F5001F 		cmp	r0, #2097152
+ 1545 0074 0AD0     		beq	.L134
+ 1546              		.loc 1 747 0 discriminator 21
+ 1547 0076 B0F5800F 		cmp	r0, #4194304
+ 1548 007a 07D0     		beq	.L134
+ 1549              		.loc 1 747 0 discriminator 22
+ 1550 007c B0F5000F 		cmp	r0, #8388608
+ 1551 0080 04D0     		beq	.L134
+ 1552              		.loc 1 747 0 discriminator 23
+ 1553 0082 40F2EB21 		movw	r1, #747
+ 1554 0086 0548     		ldr	r0, .L138
+ 1555              	.LVL99:
+ 1556 0088 FFF7FEFF 		bl	assert_failed
+ 1557              	.LVL100:
+ 1558              	.L134:
+ 748:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   if ((SDIO->STA & SDIO_IT) != (uint32_t)RESET)  
+ 1559              		.loc 1 748 0 is_stmt 1
+ 1560 008c 044B     		ldr	r3, .L138+4
+ 1561 008e 5B6B     		ldr	r3, [r3, #52]
+ 1562 0090 1C42     		tst	r4, r3
+ 1563 0092 01D0     		beq	.L136
+ 749:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   {
+ 750:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     bitstatus = SET;
+ 1564              		.loc 1 750 0
+ 1565 0094 0120     		movs	r0, #1
+ 1566 0096 10BD     		pop	{r4, pc}
+ 1567              	.LVL101:
+ 1568              	.L136:
+ 751:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   }
+ 752:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   else
+ 753:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   {
+ 754:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****     bitstatus = RESET;
+ 1569              		.loc 1 754 0
+ 1570 0098 0020     		movs	r0, #0
+ 1571              	.LVL102:
+ 755:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   }
+ 756:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   return bitstatus;
+ 757:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** }
+ 1572              		.loc 1 757 0
+ 1573 009a 10BD     		pop	{r4, pc}
+ 1574              	.LVL103:
+ 1575              	.L139:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 41
+
+
+ 1576              		.align	2
+ 1577              	.L138:
+ 1578 009c 00000000 		.word	.LC0
+ 1579 00a0 00800140 		.word	1073840128
+ 1580              		.cfi_endproc
+ 1581              	.LFE55:
+ 1583              		.section	.text.SDIO_ClearITPendingBit,"ax",%progbits
+ 1584              		.align	2
+ 1585              		.global	SDIO_ClearITPendingBit
+ 1586              		.thumb
+ 1587              		.thumb_func
+ 1589              	SDIO_ClearITPendingBit:
+ 1590              	.LFB56:
+ 758:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** 
+ 759:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** /**
+ 760:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @brief  Clears the SDIO’s interrupt pending bits.
+ 761:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @param  SDIO_IT: specifies the interrupt pending bit to clear. 
+ 762:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *   This parameter can be one or a combination of the following values:
+ 763:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CCRCFAIL: Command response received (CRC check failed) interrupt
+ 764:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DCRCFAIL: Data block sent/received (CRC check failed) interrupt
+ 765:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CTIMEOUT: Command response timeout interrupt
+ 766:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DTIMEOUT: Data timeout interrupt
+ 767:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_TXUNDERR: Transmit FIFO underrun error interrupt
+ 768:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_RXOVERR:  Received FIFO overrun error interrupt
+ 769:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDREND:  Command response received (CRC check passed) interrupt
+ 770:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CMDSENT:  Command sent (no response required) interrupt
+ 771:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_DATAEND:  Data end (data counter, SDIDCOUNT, is zero) interrupt
+ 772:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_STBITERR: Start bit not detected on all data signals in wide 
+ 773:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *                            bus mode interrupt
+ 774:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_SDIOIT:   SD I/O interrupt received interrupt
+ 775:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   *     @arg SDIO_IT_CEATAEND: CE-ATA command completion signal received for CMD61
+ 776:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   * @retval None
+ 777:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   */
+ 778:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** void SDIO_ClearITPendingBit(uint32_t SDIO_IT)
+ 779:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c **** { 
+ 1591              		.loc 1 779 0
+ 1592              		.cfi_startproc
+ 1593              		@ args = 0, pretend = 0, frame = 0
+ 1594              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1595              	.LVL104:
+ 1596 0000 10B5     		push	{r4, lr}
+ 1597              	.LCFI21:
+ 1598              		.cfi_def_cfa_offset 8
+ 1599              		.cfi_offset 4, -8
+ 1600              		.cfi_offset 14, -4
+ 1601 0002 0446     		mov	r4, r0
+ 780:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   /* Check the parameters */
+ 781:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   assert_param(IS_SDIO_CLEAR_IT(SDIO_IT));
+ 1602              		.loc 1 781 0
+ 1603 0004 054B     		ldr	r3, .L144
+ 1604 0006 0340     		ands	r3, r3, r0
+ 1605 0008 03B9     		cbnz	r3, .L141
+ 1606              		.loc 1 781 0 is_stmt 0 discriminator 2
+ 1607 000a 20B9     		cbnz	r0, .L142
+ 1608              	.L141:
+ 1609              		.loc 1 781 0 discriminator 3
+ 1610 000c 40F20D31 		movw	r1, #781
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 42
+
+
+ 1611 0010 0348     		ldr	r0, .L144+4
+ 1612              	.LVL105:
+ 1613 0012 FFF7FEFF 		bl	assert_failed
+ 1614              	.LVL106:
+ 1615              	.L142:
+ 782:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****    
+ 783:STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c ****   SDIO->ICR = SDIO_IT;
+ 1616              		.loc 1 783 0 is_stmt 1
+ 1617 0016 034B     		ldr	r3, .L144+8
+ 1618 0018 9C63     		str	r4, [r3, #56]
+ 1619 001a 10BD     		pop	{r4, pc}
+ 1620              	.LVL107:
+ 1621              	.L145:
+ 1622              		.align	2
+ 1623              	.L144:
+ 1624 001c 00F83FFF 		.word	-12584960
+ 1625 0020 00000000 		.word	.LC0
+ 1626 0024 00800140 		.word	1073840128
+ 1627              		.cfi_endproc
+ 1628              	.LFE56:
+ 1630              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1631              		.align	2
+ 1632              	.LC0:
+ 1633 0000 53544D33 		.ascii	"STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c\000"
+ 1633      32463130 
+ 1633      785F5374 
+ 1633      64506572 
+ 1633      6970685F 
+ 1634              		.text
+ 1635              	.Letext0:
+ 1636              		.file 2 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/machine/_default_types
+ 1637              		.file 3 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/sys/_stdint.h"
+ 1638              		.file 4 "CMSIS/Core/CM3/stm32f10x.h"
+ 1639              		.file 5 "STM32F10x_StdPeriph_Driver/inc/stm32f10x_sdio.h"
+ 1640              		.file 6 "Inc/stm32f10x_conf.h"
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 43
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32f10x_sdio.c
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:20     .text.SDIO_DeInit:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:25     .text.SDIO_DeInit:0000000000000000 SDIO_DeInit
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:58     .text.SDIO_DeInit:000000000000001c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:64     .text.SDIO_Init:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:69     .text.SDIO_Init:0000000000000000 SDIO_Init
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:183    .text.SDIO_Init:000000000000008c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:189    .text.SDIO_StructInit:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:194    .text.SDIO_StructInit:0000000000000000 SDIO_StructInit
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:220    .text.SDIO_ClockCmd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:225    .text.SDIO_ClockCmd:0000000000000000 SDIO_ClockCmd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:255    .text.SDIO_ClockCmd:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:261    .text.SDIO_SetPowerState:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:266    .text.SDIO_SetPowerState:0000000000000000 SDIO_SetPowerState
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:305    .text.SDIO_SetPowerState:0000000000000024 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:311    .text.SDIO_GetPowerState:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:316    .text.SDIO_GetPowerState:0000000000000000 SDIO_GetPowerState
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:332    .text.SDIO_GetPowerState:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:337    .text.SDIO_ITConfig:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:342    .text.SDIO_ITConfig:0000000000000000 SDIO_ITConfig
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:402    .text.SDIO_ITConfig:0000000000000040 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:408    .text.SDIO_DMACmd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:413    .text.SDIO_DMACmd:0000000000000000 SDIO_DMACmd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:443    .text.SDIO_DMACmd:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:449    .text.SDIO_SendCommand:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:454    .text.SDIO_SendCommand:0000000000000000 SDIO_SendCommand
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:551    .text.SDIO_SendCommand:000000000000007c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:557    .text.SDIO_CmdStructInit:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:562    .text.SDIO_CmdStructInit:0000000000000000 SDIO_CmdStructInit
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:586    .text.SDIO_GetCommandResponse:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:591    .text.SDIO_GetCommandResponse:0000000000000000 SDIO_GetCommandResponse
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:607    .text.SDIO_GetCommandResponse:0000000000000008 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:612    .text.SDIO_GetResponse:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:617    .text.SDIO_GetResponse:0000000000000000 SDIO_GetResponse
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:671    .text.SDIO_GetResponse:0000000000000030 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:677    .text.SDIO_DataConfig:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:682    .text.SDIO_DataConfig:0000000000000000 SDIO_DataConfig
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:824    .text.SDIO_DataConfig:00000000000000b4 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:830    .text.SDIO_DataStructInit:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:835    .text.SDIO_DataStructInit:0000000000000000 SDIO_DataStructInit
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:862    .text.SDIO_GetDataCounter:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:867    .text.SDIO_GetDataCounter:0000000000000000 SDIO_GetDataCounter
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:882    .text.SDIO_GetDataCounter:0000000000000008 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:887    .text.SDIO_ReadData:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:892    .text.SDIO_ReadData:0000000000000000 SDIO_ReadData
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:907    .text.SDIO_ReadData:0000000000000008 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:912    .text.SDIO_WriteData:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:917    .text.SDIO_WriteData:0000000000000000 SDIO_WriteData
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:932    .text.SDIO_WriteData:0000000000000008 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:937    .text.SDIO_GetFIFOCount:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:942    .text.SDIO_GetFIFOCount:0000000000000000 SDIO_GetFIFOCount
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:957    .text.SDIO_GetFIFOCount:0000000000000008 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:962    .text.SDIO_StartSDIOReadWait:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:967    .text.SDIO_StartSDIOReadWait:0000000000000000 SDIO_StartSDIOReadWait
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:997    .text.SDIO_StartSDIOReadWait:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1003   .text.SDIO_StopSDIOReadWait:0000000000000000 $t
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s 			page 44
+
+
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1008   .text.SDIO_StopSDIOReadWait:0000000000000000 SDIO_StopSDIOReadWait
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1038   .text.SDIO_StopSDIOReadWait:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1044   .text.SDIO_SetSDIOReadWaitMode:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1049   .text.SDIO_SetSDIOReadWaitMode:0000000000000000 SDIO_SetSDIOReadWaitMode
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1080   .text.SDIO_SetSDIOReadWaitMode:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1086   .text.SDIO_SetSDIOOperation:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1091   .text.SDIO_SetSDIOOperation:0000000000000000 SDIO_SetSDIOOperation
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1121   .text.SDIO_SetSDIOOperation:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1127   .text.SDIO_SendSDIOSuspendCmd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1132   .text.SDIO_SendSDIOSuspendCmd:0000000000000000 SDIO_SendSDIOSuspendCmd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1162   .text.SDIO_SendSDIOSuspendCmd:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1168   .text.SDIO_CommandCompletionCmd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1173   .text.SDIO_CommandCompletionCmd:0000000000000000 SDIO_CommandCompletionCmd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1203   .text.SDIO_CommandCompletionCmd:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1209   .text.SDIO_CEATAITCmd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1214   .text.SDIO_CEATAITCmd:0000000000000000 SDIO_CEATAITCmd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1248   .text.SDIO_CEATAITCmd:0000000000000024 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1254   .text.SDIO_SendCEATACmd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1259   .text.SDIO_SendCEATACmd:0000000000000000 SDIO_SendCEATACmd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1289   .text.SDIO_SendCEATACmd:0000000000000018 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1295   .text.SDIO_GetFlagStatus:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1300   .text.SDIO_GetFlagStatus:0000000000000000 SDIO_GetFlagStatus
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1410   .text.SDIO_GetFlagStatus:000000000000009c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1416   .text.SDIO_ClearFlag:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1421   .text.SDIO_ClearFlag:0000000000000000 SDIO_ClearFlag
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1456   .text.SDIO_ClearFlag:000000000000001c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1463   .text.SDIO_GetITStatus:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1468   .text.SDIO_GetITStatus:0000000000000000 SDIO_GetITStatus
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1578   .text.SDIO_GetITStatus:000000000000009c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1584   .text.SDIO_ClearITPendingBit:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1589   .text.SDIO_ClearITPendingBit:0000000000000000 SDIO_ClearITPendingBit
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1624   .text.SDIO_ClearITPendingBit:000000000000001c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccIpmdo0.s:1631   .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+assert_failed

@@ -3,20 +3,20 @@
 ######################################
 # C sources
 SRC_SOURCES = \
-src/main.c \
-src/stm32f10x_it.c \
-src/hw_config.c \
-src/debug.c \
-src/key.c \
-src/led.c \
-src/seven_segment.c \
-src/usb_desc.c \
-src/usb_endp.c \
-src/usb_istr.c \
-src/usb_prop.c \
-src/usb_pwr.c \
-src/zigbee_test.c \
-src/syscalls.c \
+Src/main.c \
+Src/stm32f10x_it.c \
+Src/hw_config.c \
+Src/debug.c \
+Src/key.c \
+Src/led.c \
+Src/seven_segment.c \
+Src/usb_desc.c \
+Src/usb_endp.c \
+Src/usb_istr.c \
+Src/usb_prop.c \
+Src/usb_pwr.c \
+Src/zigbee_test.c \
+Src/syscalls.c \
 #src/support.c \
 
 CMSIS_SOURCES = \
@@ -54,7 +54,10 @@ CORE_SOURCES = \
 CMSIS/Core/CM3/system_stm32f10x.c \
 #CMSIS/Core/CM3/core_cm3.c \
 
-C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES)
+SENSOR_SORUCE = \
+Src/Sensor/I2c_Sw.c \
+
+C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES) $(SENSOR_SORUCE)
 
 # ASM sources
 ASM_SOURCES =  \

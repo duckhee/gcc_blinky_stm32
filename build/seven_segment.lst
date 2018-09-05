@@ -1,0 +1,678 @@
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"seven_segment.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.PowerOn_7_SEG,"ax",%progbits
+  20              		.align	2
+  21              		.global	PowerOn_7_SEG
+  22              		.thumb
+  23              		.thumb_func
+  25              	PowerOn_7_SEG:
+  26              	.LFB28:
+  27              		.file 1 "Src/seven_segment.c"
+   1:Src/seven_segment.c **** /*
+   2:Src/seven_segment.c ****  * (C) COPYRIGHT 2009 CRZ
+   3:Src/seven_segment.c ****  *
+   4:Src/seven_segment.c ****  * File Name : seven_segment.c
+   5:Src/seven_segment.c ****  * Author    : POOH
+   6:Src/seven_segment.c ****  * Version   : V1.0
+   7:Src/seven_segment.c ****  * Date      : 08/20/2009
+   8:Src/seven_segment.c ****  */
+   9:Src/seven_segment.c **** 
+  10:Src/seven_segment.c **** /* Includes */
+  11:Src/seven_segment.c **** 
+  12:Src/seven_segment.c **** #include "hw_config.h"
+  13:Src/seven_segment.c **** 
+  14:Src/seven_segment.c **** /* functions */
+  15:Src/seven_segment.c **** 
+  16:Src/seven_segment.c **** 
+  17:Src/seven_segment.c **** void PowerOn_7_SEG(void)
+  18:Src/seven_segment.c **** {
+  28              		.loc 1 18 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  19:Src/seven_segment.c ****     GPIO_7_SEG->BRR |= GPIO_7_SEG_POWER_PIN;
+  33              		.loc 1 19 0
+  34 0000 024A     		ldr	r2, .L2
+  35 0002 5369     		ldr	r3, [r2, #20]
+  36 0004 43F48073 		orr	r3, r3, #256
+  37 0008 5361     		str	r3, [r2, #20]
+  38 000a 7047     		bx	lr
+  39              	.L3:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 2
+
+
+  40              		.align	2
+  41              	.L2:
+  42 000c 00100140 		.word	1073811456
+  43              		.cfi_endproc
+  44              	.LFE28:
+  46              		.section	.text.PowerOff_7_SEG,"ax",%progbits
+  47              		.align	2
+  48              		.global	PowerOff_7_SEG
+  49              		.thumb
+  50              		.thumb_func
+  52              	PowerOff_7_SEG:
+  53              	.LFB29:
+  20:Src/seven_segment.c **** }
+  21:Src/seven_segment.c **** 
+  22:Src/seven_segment.c **** void PowerOff_7_SEG(void)
+  23:Src/seven_segment.c **** {
+  54              		.loc 1 23 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  24:Src/seven_segment.c ****     GPIO_7_SEG->BSRR |= GPIO_7_SEG_POWER_PIN;
+  59              		.loc 1 24 0
+  60 0000 024A     		ldr	r2, .L5
+  61 0002 1369     		ldr	r3, [r2, #16]
+  62 0004 43F48073 		orr	r3, r3, #256
+  63 0008 1361     		str	r3, [r2, #16]
+  64 000a 7047     		bx	lr
+  65              	.L6:
+  66              		.align	2
+  67              	.L5:
+  68 000c 00100140 		.word	1073811456
+  69              		.cfi_endproc
+  70              	.LFE29:
+  72              		.section	.text.On_7_SEG_OnePin,"ax",%progbits
+  73              		.align	2
+  74              		.global	On_7_SEG_OnePin
+  75              		.thumb
+  76              		.thumb_func
+  78              	On_7_SEG_OnePin:
+  79              	.LFB30:
+  25:Src/seven_segment.c **** }
+  26:Src/seven_segment.c **** 
+  27:Src/seven_segment.c **** void On_7_SEG_OnePin(uint16_t pinNum)
+  28:Src/seven_segment.c **** {
+  80              		.loc 1 28 0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+  85              	.LVL0:
+  29:Src/seven_segment.c ****     GPIO_7_SEG->BRR |= pinNum;
+  86              		.loc 1 29 0
+  87 0000 024A     		ldr	r2, .L8
+  88 0002 5369     		ldr	r3, [r2, #20]
+  89 0004 1843     		orrs	r0, r0, r3
+  90              	.LVL1:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 3
+
+
+  91 0006 5061     		str	r0, [r2, #20]
+  92 0008 7047     		bx	lr
+  93              	.L9:
+  94 000a 00BF     		.align	2
+  95              	.L8:
+  96 000c 00100140 		.word	1073811456
+  97              		.cfi_endproc
+  98              	.LFE30:
+ 100              		.section	.text.Off_7_SEG_OnePin,"ax",%progbits
+ 101              		.align	2
+ 102              		.global	Off_7_SEG_OnePin
+ 103              		.thumb
+ 104              		.thumb_func
+ 106              	Off_7_SEG_OnePin:
+ 107              	.LFB31:
+  30:Src/seven_segment.c **** }
+  31:Src/seven_segment.c **** 
+  32:Src/seven_segment.c **** void Off_7_SEG_OnePin(uint16_t pinNum)
+  33:Src/seven_segment.c **** {
+ 108              		.loc 1 33 0
+ 109              		.cfi_startproc
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112              		@ link register save eliminated.
+ 113              	.LVL2:
+  34:Src/seven_segment.c ****     GPIO_7_SEG->BSRR |= pinNum;
+ 114              		.loc 1 34 0
+ 115 0000 024A     		ldr	r2, .L11
+ 116 0002 1369     		ldr	r3, [r2, #16]
+ 117 0004 1843     		orrs	r0, r0, r3
+ 118              	.LVL3:
+ 119 0006 1061     		str	r0, [r2, #16]
+ 120 0008 7047     		bx	lr
+ 121              	.L12:
+ 122 000a 00BF     		.align	2
+ 123              	.L11:
+ 124 000c 00100140 		.word	1073811456
+ 125              		.cfi_endproc
+ 126              	.LFE31:
+ 128              		.section	.text.On_7_SEG_AllPin,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	On_7_SEG_AllPin
+ 131              		.thumb
+ 132              		.thumb_func
+ 134              	On_7_SEG_AllPin:
+ 135              	.LFB32:
+  35:Src/seven_segment.c **** }
+  36:Src/seven_segment.c **** 
+  37:Src/seven_segment.c **** void On_7_SEG_AllPin(void)
+  38:Src/seven_segment.c **** {
+ 136              		.loc 1 38 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140 0000 08B5     		push	{r3, lr}
+ 141              	.LCFI0:
+ 142              		.cfi_def_cfa_offset 8
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 4
+
+
+ 143              		.cfi_offset 3, -8
+ 144              		.cfi_offset 14, -4
+  39:Src/seven_segment.c ****     On_7_SEG_OnePin
+ 145              		.loc 1 39 0
+ 146 0002 FF20     		movs	r0, #255
+ 147 0004 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 148              	.LVL4:
+ 149 0008 08BD     		pop	{r3, pc}
+ 150              		.cfi_endproc
+ 151              	.LFE32:
+ 153 000a 00BF     		.section	.text.Off_7_SEG_AllPin,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	Off_7_SEG_AllPin
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	Off_7_SEG_AllPin:
+ 160              	.LFB33:
+  40:Src/seven_segment.c ****         (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+  41:Src/seven_segment.c ****          | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN
+  42:Src/seven_segment.c ****          | GPIO_7_SEG_G_PIN | GPIO_7_SEG_DP_PIN);
+  43:Src/seven_segment.c **** }
+  44:Src/seven_segment.c **** 
+  45:Src/seven_segment.c **** void Off_7_SEG_AllPin(void)
+  46:Src/seven_segment.c **** {
+ 161              		.loc 1 46 0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165 0000 08B5     		push	{r3, lr}
+ 166              	.LCFI1:
+ 167              		.cfi_def_cfa_offset 8
+ 168              		.cfi_offset 3, -8
+ 169              		.cfi_offset 14, -4
+  47:Src/seven_segment.c ****     Off_7_SEG_OnePin
+ 170              		.loc 1 47 0
+ 171 0002 FF20     		movs	r0, #255
+ 172 0004 FFF7FEFF 		bl	Off_7_SEG_OnePin
+ 173              	.LVL5:
+ 174 0008 08BD     		pop	{r3, pc}
+ 175              		.cfi_endproc
+ 176              	.LFE33:
+ 178 000a 00BF     		.section	.text.OutPut_7_SEG_Number,"ax",%progbits
+ 179              		.align	2
+ 180              		.global	OutPut_7_SEG_Number
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	OutPut_7_SEG_Number:
+ 185              	.LFB34:
+  48:Src/seven_segment.c ****         (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+  49:Src/seven_segment.c ****          | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN
+  50:Src/seven_segment.c ****          | GPIO_7_SEG_G_PIN | GPIO_7_SEG_DP_PIN);
+  51:Src/seven_segment.c **** }
+  52:Src/seven_segment.c **** 
+  53:Src/seven_segment.c **** void OutPut_7_SEG_Number(unsigned int num)
+  54:Src/seven_segment.c **** {
+ 186              		.loc 1 54 0
+ 187              		.cfi_startproc
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 5
+
+
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190              	.LVL6:
+ 191 0000 10B5     		push	{r4, lr}
+ 192              	.LCFI2:
+ 193              		.cfi_def_cfa_offset 8
+ 194              		.cfi_offset 4, -8
+ 195              		.cfi_offset 14, -4
+ 196 0002 0446     		mov	r4, r0
+  55:Src/seven_segment.c ****     Off_7_SEG_AllPin();
+ 197              		.loc 1 55 0
+ 198 0004 FFF7FEFF 		bl	Off_7_SEG_AllPin
+ 199              	.LVL7:
+  56:Src/seven_segment.c **** 
+  57:Src/seven_segment.c ****     switch(num)
+ 200              		.loc 1 57 0
+ 201 0008 092C     		cmp	r4, #9
+ 202 000a 2DD8     		bhi	.L17
+ 203 000c DFE804F0 		tbb	[pc, r4]
+ 204              	.L20:
+ 205 0010 05       		.byte	(.L19-.L20)/2
+ 206 0011 09       		.byte	(.L21-.L20)/2
+ 207 0012 0D       		.byte	(.L22-.L20)/2
+ 208 0013 11       		.byte	(.L23-.L20)/2
+ 209 0014 15       		.byte	(.L24-.L20)/2
+ 210 0015 19       		.byte	(.L25-.L20)/2
+ 211 0016 1D       		.byte	(.L26-.L20)/2
+ 212 0017 21       		.byte	(.L27-.L20)/2
+ 213 0018 25       		.byte	(.L28-.L20)/2
+ 214 0019 29       		.byte	(.L29-.L20)/2
+ 215              		.p2align 1
+ 216              	.L19:
+  58:Src/seven_segment.c ****     {
+  59:Src/seven_segment.c ****     case 0:
+  60:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 217              		.loc 1 60 0
+ 218 001a 3F20     		movs	r0, #63
+ 219 001c FFF7FEFF 		bl	On_7_SEG_OnePin
+ 220              	.LVL8:
+  61:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+  62:Src/seven_segment.c ****             | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN);
+  63:Src/seven_segment.c ****         break;
+ 221              		.loc 1 63 0
+ 222 0020 10BD     		pop	{r4, pc}
+ 223              	.LVL9:
+ 224              	.L21:
+  64:Src/seven_segment.c **** 
+  65:Src/seven_segment.c ****     case 1:
+  66:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 225              		.loc 1 66 0
+ 226 0022 0620     		movs	r0, #6
+ 227 0024 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 228              	.LVL10:
+  67:Src/seven_segment.c ****             (GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN);
+  68:Src/seven_segment.c ****         break;
+ 229              		.loc 1 68 0
+ 230 0028 10BD     		pop	{r4, pc}
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 6
+
+
+ 231              	.LVL11:
+ 232              	.L22:
+  69:Src/seven_segment.c **** 
+  70:Src/seven_segment.c ****     case 2:
+  71:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 233              		.loc 1 71 0
+ 234 002a 9B20     		movs	r0, #155
+ 235 002c FFF7FEFF 		bl	On_7_SEG_OnePin
+ 236              	.LVL12:
+  72:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_D_PIN
+  73:Src/seven_segment.c ****             | GPIO_7_SEG_E_PIN | GPIO_7_SEG_G_PIN);
+  74:Src/seven_segment.c ****         break;
+ 237              		.loc 1 74 0
+ 238 0030 10BD     		pop	{r4, pc}
+ 239              	.LVL13:
+ 240              	.L23:
+  75:Src/seven_segment.c **** 
+  76:Src/seven_segment.c ****     case 3:
+  77:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 241              		.loc 1 77 0
+ 242 0032 8F20     		movs	r0, #143
+ 243 0034 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 244              	.LVL14:
+  78:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+  79:Src/seven_segment.c ****             | GPIO_7_SEG_D_PIN | GPIO_7_SEG_G_PIN);
+  80:Src/seven_segment.c ****         break;
+ 245              		.loc 1 80 0
+ 246 0038 10BD     		pop	{r4, pc}
+ 247              	.LVL15:
+ 248              	.L24:
+  81:Src/seven_segment.c **** 
+  82:Src/seven_segment.c ****     case 4:
+  83:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 249              		.loc 1 83 0
+ 250 003a A620     		movs	r0, #166
+ 251 003c FFF7FEFF 		bl	On_7_SEG_OnePin
+ 252              	.LVL16:
+  84:Src/seven_segment.c ****             (GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+  85:Src/seven_segment.c ****             | GPIO_7_SEG_F_PIN | GPIO_7_SEG_G_PIN);
+  86:Src/seven_segment.c ****         break;
+ 253              		.loc 1 86 0
+ 254 0040 10BD     		pop	{r4, pc}
+ 255              	.LVL17:
+ 256              	.L25:
+  87:Src/seven_segment.c **** 
+  88:Src/seven_segment.c ****     case 5:
+  89:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 257              		.loc 1 89 0
+ 258 0042 AD20     		movs	r0, #173
+ 259 0044 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 260              	.LVL18:
+  90:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_C_PIN | GPIO_7_SEG_D_PIN
+  91:Src/seven_segment.c ****             | GPIO_7_SEG_F_PIN | GPIO_7_SEG_G_PIN);
+  92:Src/seven_segment.c ****         break;
+ 261              		.loc 1 92 0
+ 262 0048 10BD     		pop	{r4, pc}
+ 263              	.LVL19:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 7
+
+
+ 264              	.L26:
+  93:Src/seven_segment.c **** 
+  94:Src/seven_segment.c ****     case 6:
+  95:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 265              		.loc 1 95 0
+ 266 004a BD20     		movs	r0, #189
+ 267 004c FFF7FEFF 		bl	On_7_SEG_OnePin
+ 268              	.LVL20:
+  96:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_C_PIN | GPIO_7_SEG_D_PIN
+  97:Src/seven_segment.c ****             | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN | GPIO_7_SEG_G_PIN);
+  98:Src/seven_segment.c ****         break;
+ 269              		.loc 1 98 0
+ 270 0050 10BD     		pop	{r4, pc}
+ 271              	.LVL21:
+ 272              	.L27:
+  99:Src/seven_segment.c **** 
+ 100:Src/seven_segment.c ****     case 7:
+ 101:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 273              		.loc 1 101 0
+ 274 0052 2720     		movs	r0, #39
+ 275 0054 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 276              	.LVL22:
+ 102:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+ 103:Src/seven_segment.c ****             | GPIO_7_SEG_F_PIN);
+ 104:Src/seven_segment.c ****         break;
+ 277              		.loc 1 104 0
+ 278 0058 10BD     		pop	{r4, pc}
+ 279              	.LVL23:
+ 280              	.L28:
+ 105:Src/seven_segment.c **** 
+ 106:Src/seven_segment.c ****     case 8:
+ 107:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 281              		.loc 1 107 0
+ 282 005a BF20     		movs	r0, #191
+ 283 005c FFF7FEFF 		bl	On_7_SEG_OnePin
+ 284              	.LVL24:
+ 108:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+ 109:Src/seven_segment.c ****             | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN
+ 110:Src/seven_segment.c ****             | GPIO_7_SEG_G_PIN);
+ 111:Src/seven_segment.c ****         break;
+ 285              		.loc 1 111 0
+ 286 0060 10BD     		pop	{r4, pc}
+ 287              	.LVL25:
+ 288              	.L29:
+ 112:Src/seven_segment.c **** 
+ 113:Src/seven_segment.c ****     case 9:
+ 114:Src/seven_segment.c ****         On_7_SEG_OnePin
+ 289              		.loc 1 114 0
+ 290 0062 AF20     		movs	r0, #175
+ 291 0064 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 292              	.LVL26:
+ 293              	.L17:
+ 294 0068 10BD     		pop	{r4, pc}
+ 295              		.cfi_endproc
+ 296              	.LFE34:
+ 298 006a 00BF     		.section	.text.Seven_Segment_Test,"ax",%progbits
+ 299              		.align	2
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 8
+
+
+ 300              		.global	Seven_Segment_Test
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	Seven_Segment_Test:
+ 305              	.LFB35:
+ 115:Src/seven_segment.c ****             (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
+ 116:Src/seven_segment.c ****             | GPIO_7_SEG_D_PIN | GPIO_7_SEG_F_PIN | GPIO_7_SEG_G_PIN);
+ 117:Src/seven_segment.c ****         break;
+ 118:Src/seven_segment.c ****     }
+ 119:Src/seven_segment.c **** }
+ 120:Src/seven_segment.c **** 
+ 121:Src/seven_segment.c **** void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
+ 122:Src/seven_segment.c **** 
+ 123:Src/seven_segment.c **** void Seven_Segment_Test(void)
+ 124:Src/seven_segment.c **** {
+ 306              		.loc 1 124 0
+ 307              		.cfi_startproc
+ 308              		@ args = 0, pretend = 0, frame = 8
+ 309              		@ frame_needed = 0, uses_anonymous_args = 0
+ 310 0000 10B5     		push	{r4, lr}
+ 311              	.LCFI3:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 315 0002 82B0     		sub	sp, sp, #8
+ 316              	.LCFI4:
+ 317              		.cfi_def_cfa_offset 16
+ 125:Src/seven_segment.c ****     GPIO_InitTypeDef GPIO_InitStructure;
+ 126:Src/seven_segment.c ****     int i;
+ 127:Src/seven_segment.c ****     
+ 128:Src/seven_segment.c ****     printf("Seven_Segment_Test\r\n");
+ 318              		.loc 1 128 0
+ 319 0004 2748     		ldr	r0, .L35
+ 320 0006 FFF7FEFF 		bl	puts
+ 321              	.LVL27:
+ 129:Src/seven_segment.c **** 
+ 130:Src/seven_segment.c ****     RCC->APB2ENR |= RCC_APB2Periph_GPIOC;
+ 322              		.loc 1 130 0
+ 323 000a 274A     		ldr	r2, .L35+4
+ 324 000c 9369     		ldr	r3, [r2, #24]
+ 325 000e 43F01003 		orr	r3, r3, #16
+ 326 0012 9361     		str	r3, [r2, #24]
+ 131:Src/seven_segment.c **** 
+ 132:Src/seven_segment.c ****     /* Configure gpio as output : LED1, LED2, LED3 */
+ 133:Src/seven_segment.c ****     GPIO_InitStructure.GPIO_Pin
+ 134:Src/seven_segment.c ****         = GPIO_7_SEG_POWER_PIN | GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN
+ 327              		.loc 1 134 0
+ 328 0014 40F2FF13 		movw	r3, #511
+ 329 0018 ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 135:Src/seven_segment.c ****           | GPIO_7_SEG_C_PIN | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN
+ 136:Src/seven_segment.c ****           | GPIO_7_SEG_F_PIN | GPIO_7_SEG_G_PIN | GPIO_7_SEG_DP_PIN;
+ 137:Src/seven_segment.c ****     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+ 330              		.loc 1 137 0
+ 331 001c 0323     		movs	r3, #3
+ 332 001e 8DF80630 		strb	r3, [sp, #6]
+ 138:Src/seven_segment.c ****     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+ 333              		.loc 1 138 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 9
+
+
+ 334 0022 1024     		movs	r4, #16
+ 335 0024 8DF80740 		strb	r4, [sp, #7]
+ 139:Src/seven_segment.c ****     GPIO_Init(GPIO_7_SEG, &GPIO_InitStructure);
+ 336              		.loc 1 139 0
+ 337 0028 01A9     		add	r1, sp, #4
+ 338 002a 2048     		ldr	r0, .L35+8
+ 339 002c FFF7FEFF 		bl	GPIO_Init
+ 340              	.LVL28:
+ 140:Src/seven_segment.c **** 
+ 141:Src/seven_segment.c ****     PowerOn_7_SEG();
+ 341              		.loc 1 141 0
+ 342 0030 FFF7FEFF 		bl	PowerOn_7_SEG
+ 343              	.LVL29:
+ 142:Src/seven_segment.c **** 
+ 143:Src/seven_segment.c ****     delay_1_second();
+ 344              		.loc 1 143 0
+ 345 0034 FFF7FEFF 		bl	delay_1_second
+ 346              	.LVL30:
+ 144:Src/seven_segment.c ****     Off_7_SEG_AllPin();
+ 347              		.loc 1 144 0
+ 348 0038 FFF7FEFF 		bl	Off_7_SEG_AllPin
+ 349              	.LVL31:
+ 145:Src/seven_segment.c **** 
+ 146:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_A_PIN);
+ 350              		.loc 1 146 0
+ 351 003c 0120     		movs	r0, #1
+ 352 003e FFF7FEFF 		bl	On_7_SEG_OnePin
+ 353              	.LVL32:
+ 147:Src/seven_segment.c ****     delay_1_second();
+ 354              		.loc 1 147 0
+ 355 0042 FFF7FEFF 		bl	delay_1_second
+ 356              	.LVL33:
+ 148:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_B_PIN);
+ 357              		.loc 1 148 0
+ 358 0046 0220     		movs	r0, #2
+ 359 0048 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 360              	.LVL34:
+ 149:Src/seven_segment.c ****     delay_1_second();
+ 361              		.loc 1 149 0
+ 362 004c FFF7FEFF 		bl	delay_1_second
+ 363              	.LVL35:
+ 150:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_C_PIN);
+ 364              		.loc 1 150 0
+ 365 0050 0420     		movs	r0, #4
+ 366 0052 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 367              	.LVL36:
+ 151:Src/seven_segment.c ****     delay_1_second();
+ 368              		.loc 1 151 0
+ 369 0056 FFF7FEFF 		bl	delay_1_second
+ 370              	.LVL37:
+ 152:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_D_PIN);
+ 371              		.loc 1 152 0
+ 372 005a 0820     		movs	r0, #8
+ 373 005c FFF7FEFF 		bl	On_7_SEG_OnePin
+ 374              	.LVL38:
+ 153:Src/seven_segment.c ****     delay_1_second();
+ 375              		.loc 1 153 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 10
+
+
+ 376 0060 FFF7FEFF 		bl	delay_1_second
+ 377              	.LVL39:
+ 154:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_E_PIN);
+ 378              		.loc 1 154 0
+ 379 0064 2046     		mov	r0, r4
+ 380 0066 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 381              	.LVL40:
+ 155:Src/seven_segment.c ****     delay_1_second();
+ 382              		.loc 1 155 0
+ 383 006a FFF7FEFF 		bl	delay_1_second
+ 384              	.LVL41:
+ 156:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_F_PIN);
+ 385              		.loc 1 156 0
+ 386 006e 2020     		movs	r0, #32
+ 387 0070 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 388              	.LVL42:
+ 157:Src/seven_segment.c ****     delay_1_second();
+ 389              		.loc 1 157 0
+ 390 0074 FFF7FEFF 		bl	delay_1_second
+ 391              	.LVL43:
+ 158:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_G_PIN);
+ 392              		.loc 1 158 0
+ 393 0078 8020     		movs	r0, #128
+ 394 007a FFF7FEFF 		bl	On_7_SEG_OnePin
+ 395              	.LVL44:
+ 159:Src/seven_segment.c ****     delay_1_second();
+ 396              		.loc 1 159 0
+ 397 007e FFF7FEFF 		bl	delay_1_second
+ 398              	.LVL45:
+ 160:Src/seven_segment.c ****     On_7_SEG_OnePin(GPIO_7_SEG_DP_PIN);
+ 399              		.loc 1 160 0
+ 400 0082 4020     		movs	r0, #64
+ 401 0084 FFF7FEFF 		bl	On_7_SEG_OnePin
+ 402              	.LVL46:
+ 161:Src/seven_segment.c ****     delay_1_second();
+ 403              		.loc 1 161 0
+ 404 0088 FFF7FEFF 		bl	delay_1_second
+ 405              	.LVL47:
+ 162:Src/seven_segment.c **** 
+ 163:Src/seven_segment.c ****     for(i=0; i<10; i++)
+ 406              		.loc 1 163 0
+ 407 008c 0024     		movs	r4, #0
+ 408 008e 05E0     		b	.L32
+ 409              	.LVL48:
+ 410              	.L33:
+ 164:Src/seven_segment.c ****     {
+ 165:Src/seven_segment.c ****         OutPut_7_SEG_Number(i);
+ 411              		.loc 1 165 0 discriminator 3
+ 412 0090 2046     		mov	r0, r4
+ 413 0092 FFF7FEFF 		bl	OutPut_7_SEG_Number
+ 414              	.LVL49:
+ 166:Src/seven_segment.c ****         delay_1_second();
+ 415              		.loc 1 166 0 discriminator 3
+ 416 0096 FFF7FEFF 		bl	delay_1_second
+ 417              	.LVL50:
+ 163:Src/seven_segment.c ****     {
+ 418              		.loc 1 163 0 discriminator 3
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 11
+
+
+ 419 009a 0134     		adds	r4, r4, #1
+ 420              	.LVL51:
+ 421              	.L32:
+ 163:Src/seven_segment.c ****     {
+ 422              		.loc 1 163 0 is_stmt 0 discriminator 1
+ 423 009c 092C     		cmp	r4, #9
+ 424 009e F7DD     		ble	.L33
+ 167:Src/seven_segment.c ****     }
+ 168:Src/seven_segment.c **** }
+ 425              		.loc 1 168 0 is_stmt 1
+ 426 00a0 02B0     		add	sp, sp, #8
+ 427              	.LCFI5:
+ 428              		.cfi_def_cfa_offset 8
+ 429              		@ sp needed
+ 430 00a2 10BD     		pop	{r4, pc}
+ 431              	.LVL52:
+ 432              	.L36:
+ 433              		.align	2
+ 434              	.L35:
+ 435 00a4 00000000 		.word	.LC0
+ 436 00a8 00100240 		.word	1073876992
+ 437 00ac 00100140 		.word	1073811456
+ 438              		.cfi_endproc
+ 439              	.LFE35:
+ 441              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 442              		.align	2
+ 443              	.LC0:
+ 444 0000 53657665 		.ascii	"Seven_Segment_Test\015\000"
+ 444      6E5F5365 
+ 444      676D656E 
+ 444      745F5465 
+ 444      73740D00 
+ 445              		.text
+ 446              	.Letext0:
+ 447              		.file 2 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/machine/_default_types
+ 448              		.file 3 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/sys/_stdint.h"
+ 449              		.file 4 "CMSIS/Core/CM3/stm32f10x.h"
+ 450              		.file 5 "STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h"
+ 451              		.file 6 "Inc/hw_config.h"
+ 452              		.file 7 "<built-in>"
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 seven_segment.c
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:20     .text.PowerOn_7_SEG:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:25     .text.PowerOn_7_SEG:0000000000000000 PowerOn_7_SEG
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:42     .text.PowerOn_7_SEG:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:47     .text.PowerOff_7_SEG:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:52     .text.PowerOff_7_SEG:0000000000000000 PowerOff_7_SEG
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:68     .text.PowerOff_7_SEG:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:73     .text.On_7_SEG_OnePin:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:78     .text.On_7_SEG_OnePin:0000000000000000 On_7_SEG_OnePin
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:96     .text.On_7_SEG_OnePin:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:101    .text.Off_7_SEG_OnePin:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:106    .text.Off_7_SEG_OnePin:0000000000000000 Off_7_SEG_OnePin
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:124    .text.Off_7_SEG_OnePin:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:129    .text.On_7_SEG_AllPin:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:134    .text.On_7_SEG_AllPin:0000000000000000 On_7_SEG_AllPin
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:154    .text.Off_7_SEG_AllPin:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:159    .text.Off_7_SEG_AllPin:0000000000000000 Off_7_SEG_AllPin
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:179    .text.OutPut_7_SEG_Number:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:184    .text.OutPut_7_SEG_Number:0000000000000000 OutPut_7_SEG_Number
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:205    .text.OutPut_7_SEG_Number:0000000000000010 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:215    .text.OutPut_7_SEG_Number:000000000000001a $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:299    .text.Seven_Segment_Test:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:304    .text.Seven_Segment_Test:0000000000000000 Seven_Segment_Test
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:435    .text.Seven_Segment_Test:00000000000000a4 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccn9JFjF.s:442    .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+puts
+GPIO_Init
+delay_1_second

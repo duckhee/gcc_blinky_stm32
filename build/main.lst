@@ -1,0 +1,1981 @@
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.System_Information,"ax",%progbits
+  20              		.align	2
+  21              		.global	System_Information
+  22              		.thumb
+  23              		.thumb_func
+  25              	System_Information:
+  26              	.LFB28:
+  27              		.file 1 "Src/main.c"
+   1:Src/main.c    **** /*
+   2:Src/main.c    ****  * (C) COPYRIGHT 2009 CRZ
+   3:Src/main.c    ****  *
+   4:Src/main.c    ****  * File Name : main.c
+   5:Src/main.c    ****  * Author    : POOH
+   6:Src/main.c    ****  * Version   : V1.0
+   7:Src/main.c    ****  * Date      : 08/12/2009
+   8:Src/main.c    ****  */
+   9:Src/main.c    **** 
+  10:Src/main.c    **** /* includes */
+  11:Src/main.c    **** 
+  12:Src/main.c    **** #include "hw_config.h"
+  13:Src/main.c    **** 
+  14:Src/main.c    **** 
+  15:Src/main.c    **** 
+  16:Src/main.c    **** /* global variables */
+  17:Src/main.c    **** 
+  18:Src/main.c    **** RCC_ClocksTypeDef  rcc_clocks;
+  19:Src/main.c    **** 
+  20:Src/main.c    **** bool g_TestProcessState = FALSE;
+  21:Src/main.c    **** 
+  22:Src/main.c    **** /* functions */
+  23:Src/main.c    **** 
+  24:Src/main.c    **** void System_Information()
+  25:Src/main.c    **** {
+  28              		.loc 1 25 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 2
+
+
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  26:Src/main.c    ****     printf("SYSCLK_Frequency = %d\r\n",rcc_clocks.SYSCLK_Frequency );
+  37              		.loc 1 26 0
+  38 0002 0B4C     		ldr	r4, .L3
+  39 0004 2168     		ldr	r1, [r4]
+  40 0006 0B48     		ldr	r0, .L3+4
+  41 0008 FFF7FEFF 		bl	printf
+  42              	.LVL0:
+  27:Src/main.c    ****     printf("HCLK_Frequency = %d\r\n",rcc_clocks.HCLK_Frequency );
+  43              		.loc 1 27 0
+  44 000c 6168     		ldr	r1, [r4, #4]
+  45 000e 0A48     		ldr	r0, .L3+8
+  46 0010 FFF7FEFF 		bl	printf
+  47              	.LVL1:
+  28:Src/main.c    ****     printf("PCLK1_Frequency = %d\r\n",rcc_clocks.PCLK1_Frequency );
+  48              		.loc 1 28 0
+  49 0014 A168     		ldr	r1, [r4, #8]
+  50 0016 0948     		ldr	r0, .L3+12
+  51 0018 FFF7FEFF 		bl	printf
+  52              	.LVL2:
+  29:Src/main.c    ****     printf("PCLK2_Frequency = %d\r\n",rcc_clocks.PCLK2_Frequency );
+  53              		.loc 1 29 0
+  54 001c E168     		ldr	r1, [r4, #12]
+  55 001e 0848     		ldr	r0, .L3+16
+  56 0020 FFF7FEFF 		bl	printf
+  57              	.LVL3:
+  30:Src/main.c    ****     printf("ADCCLK_Frequency = %d\r\n",rcc_clocks.ADCCLK_Frequency );
+  58              		.loc 1 30 0
+  59 0024 2169     		ldr	r1, [r4, #16]
+  60 0026 0748     		ldr	r0, .L3+20
+  61 0028 FFF7FEFF 		bl	printf
+  62              	.LVL4:
+  63 002c 10BD     		pop	{r4, pc}
+  64              	.L4:
+  65 002e 00BF     		.align	2
+  66              	.L3:
+  67 0030 00000000 		.word	rcc_clocks
+  68 0034 00000000 		.word	.LC0
+  69 0038 18000000 		.word	.LC1
+  70 003c 30000000 		.word	.LC2
+  71 0040 48000000 		.word	.LC3
+  72 0044 60000000 		.word	.LC4
+  73              		.cfi_endproc
+  74              	.LFE28:
+  76              		.section	.text.main,"ax",%progbits
+  77              		.align	2
+  78              		.global	main
+  79              		.thumb
+  80              		.thumb_func
+  82              	main:
+  83              	.LFB29:
+  31:Src/main.c    **** }
+  32:Src/main.c    **** /*
+  33:Src/main.c    ****  * Name   : main
+  34:Src/main.c    ****  * Input  : None
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 3
+
+
+  35:Src/main.c    ****  * Output : None
+  36:Src/main.c    ****  * Return : None
+  37:Src/main.c    ****  */
+  38:Src/main.c    **** int main(void)
+  39:Src/main.c    **** {
+  84              		.loc 1 39 0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88 0000 10B5     		push	{r4, lr}
+  89              	.LCFI1:
+  90              		.cfi_def_cfa_offset 8
+  91              		.cfi_offset 4, -8
+  92              		.cfi_offset 14, -4
+  40:Src/main.c    ****     uint8_t ch;
+  41:Src/main.c    **** 
+  42:Src/main.c    ****     /* System Clocks Configuration */
+  43:Src/main.c    ****     RCC_Configuration();
+  93              		.loc 1 43 0
+  94 0002 FFF7FEFF 		bl	RCC_Configuration
+  95              	.LVL5:
+  44:Src/main.c    **** 
+  45:Src/main.c    ****     RCC_GetClocksFreq(&rcc_clocks);
+  96              		.loc 1 45 0
+  97 0006 384C     		ldr	r4, .L14
+  98 0008 2046     		mov	r0, r4
+  99 000a FFF7FEFF 		bl	RCC_GetClocksFreq
+ 100              	.LVL6:
+  46:Src/main.c    **** 
+  47:Src/main.c    ****     /* NVIC configuration */
+  48:Src/main.c    ****     NVIC_Configuration();
+ 101              		.loc 1 48 0
+ 102 000e FFF7FEFF 		bl	NVIC_Configuration
+ 103              	.LVL7:
+  49:Src/main.c    **** 
+  50:Src/main.c    ****     /* Configure the GPIO ports */
+  51:Src/main.c    ****     GPIO_Configuration();
+ 104              		.loc 1 51 0
+ 105 0012 FFF7FEFF 		bl	GPIO_Configuration
+ 106              	.LVL8:
+  52:Src/main.c    **** 
+  53:Src/main.c    ****     /* EXTI configuration */
+  54:Src/main.c    ****     EXTI_Configuration();
+ 107              		.loc 1 54 0
+ 108 0016 FFF7FEFF 		bl	EXTI_Configuration
+ 109              	.LVL9:
+  55:Src/main.c    **** 
+  56:Src/main.c    ****     /* UART initialization */
+  57:Src/main.c    ****     USART1_Init();
+ 110              		.loc 1 57 0
+ 111 001a FFF7FEFF 		bl	USART1_Init
+ 112              	.LVL10:
+  58:Src/main.c    **** 
+  59:Src/main.c    ****     /* Setup SysTick Timer for 1 msec interrupts  */
+  60:Src/main.c    ****     if (SysTick_Config(rcc_clocks.SYSCLK_Frequency / 1000))
+ 113              		.loc 1 60 0
+ 114 001e 2368     		ldr	r3, [r4]
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 4
+
+
+ 115 0020 324A     		ldr	r2, .L14+4
+ 116 0022 A2FB0323 		umull	r2, r3, r2, r3
+ 117              	.LVL11:
+ 118              	.LBB8:
+ 119              	.LBB9:
+ 120              		.file 2 "CMSIS/Core/CM3/core_cm3.h"
+   1:CMSIS/Core/CM3/core_cm3.h **** /******************************************************************************
+   2:CMSIS/Core/CM3/core_cm3.h ****  * @file:    core_cm3.h
+   3:CMSIS/Core/CM3/core_cm3.h ****  * @purpose: CMSIS Cortex-M3 Core Peripheral Access Layer Header File
+   4:CMSIS/Core/CM3/core_cm3.h ****  * @version: V1.20
+   5:CMSIS/Core/CM3/core_cm3.h ****  * @date:    22. May 2009
+   6:CMSIS/Core/CM3/core_cm3.h ****  *----------------------------------------------------------------------------
+   7:CMSIS/Core/CM3/core_cm3.h ****  *
+   8:CMSIS/Core/CM3/core_cm3.h ****  * Copyright (C) 2009 ARM Limited. All rights reserved.
+   9:CMSIS/Core/CM3/core_cm3.h ****  *
+  10:CMSIS/Core/CM3/core_cm3.h ****  * ARM Limited (ARM) is supplying this software for use with Cortex-Mx 
+  11:CMSIS/Core/CM3/core_cm3.h ****  * processor based microcontrollers.  This file can be freely distributed 
+  12:CMSIS/Core/CM3/core_cm3.h ****  * within development tools that are supporting such ARM based processors. 
+  13:CMSIS/Core/CM3/core_cm3.h ****  *
+  14:CMSIS/Core/CM3/core_cm3.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  15:CMSIS/Core/CM3/core_cm3.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  16:CMSIS/Core/CM3/core_cm3.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  17:CMSIS/Core/CM3/core_cm3.h ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  18:CMSIS/Core/CM3/core_cm3.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  19:CMSIS/Core/CM3/core_cm3.h ****  *
+  20:CMSIS/Core/CM3/core_cm3.h ****  ******************************************************************************/
+  21:CMSIS/Core/CM3/core_cm3.h **** 
+  22:CMSIS/Core/CM3/core_cm3.h **** #ifndef __CM3_CORE_H__
+  23:CMSIS/Core/CM3/core_cm3.h **** #define __CM3_CORE_H__
+  24:CMSIS/Core/CM3/core_cm3.h **** 
+  25:CMSIS/Core/CM3/core_cm3.h **** #ifdef __cplusplus
+  26:CMSIS/Core/CM3/core_cm3.h ****  extern "C" {
+  27:CMSIS/Core/CM3/core_cm3.h **** #endif 
+  28:CMSIS/Core/CM3/core_cm3.h **** 
+  29:CMSIS/Core/CM3/core_cm3.h **** #define __CM3_CMSIS_VERSION_MAIN  (0x01)                                                       /*!<
+  30:CMSIS/Core/CM3/core_cm3.h **** #define __CM3_CMSIS_VERSION_SUB   (0x20)                                                       /*!<
+  31:CMSIS/Core/CM3/core_cm3.h **** #define __CM3_CMSIS_VERSION       ((__CM3_CMSIS_VERSION_MAIN << 16) | __CM3_CMSIS_VERSION_SUB) /*!<
+  32:CMSIS/Core/CM3/core_cm3.h **** 
+  33:CMSIS/Core/CM3/core_cm3.h **** #define __CORTEX_M                (0x03)                                                       /*!<
+  34:CMSIS/Core/CM3/core_cm3.h **** 
+  35:CMSIS/Core/CM3/core_cm3.h **** /**
+  36:CMSIS/Core/CM3/core_cm3.h ****  *  Lint configuration \n
+  37:CMSIS/Core/CM3/core_cm3.h ****  *  ----------------------- \n
+  38:CMSIS/Core/CM3/core_cm3.h ****  *
+  39:CMSIS/Core/CM3/core_cm3.h ****  *  The following Lint messages will be suppressed and not shown: \n
+  40:CMSIS/Core/CM3/core_cm3.h ****  *  \n
+  41:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 10: --- \n
+  42:CMSIS/Core/CM3/core_cm3.h ****  *    register uint32_t __regBasePri         __asm("basepri"); \n
+  43:CMSIS/Core/CM3/core_cm3.h ****  *    Error 10: Expecting ';' \n
+  44:CMSIS/Core/CM3/core_cm3.h ****  *     \n
+  45:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 530: --- \n
+  46:CMSIS/Core/CM3/core_cm3.h ****  *    return(__regBasePri); \n
+  47:CMSIS/Core/CM3/core_cm3.h ****  *    Warning 530: Symbol '__regBasePri' (line 264) not initialized \n
+  48:CMSIS/Core/CM3/core_cm3.h ****  *     \n
+  49:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 550: --- \n
+  50:CMSIS/Core/CM3/core_cm3.h ****  *      __regBasePri = (basePri & 0x1ff); \n
+  51:CMSIS/Core/CM3/core_cm3.h ****  *    } \n
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 5
+
+
+  52:CMSIS/Core/CM3/core_cm3.h ****  *    Warning 550: Symbol '__regBasePri' (line 271) not accessed \n
+  53:CMSIS/Core/CM3/core_cm3.h ****  *     \n
+  54:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 754: --- \n
+  55:CMSIS/Core/CM3/core_cm3.h ****  *    uint32_t RESERVED0[24]; \n
+  56:CMSIS/Core/CM3/core_cm3.h ****  *    Info 754: local structure member '<some, not used in the HAL>' (line 109, file ./cm3_core.h) 
+  57:CMSIS/Core/CM3/core_cm3.h ****  *     \n
+  58:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 750: --- \n
+  59:CMSIS/Core/CM3/core_cm3.h ****  *    #define __CM3_CORE_H__ \n
+  60:CMSIS/Core/CM3/core_cm3.h ****  *    Info 750: local macro '__CM3_CORE_H__' (line 43, file./cm3_core.h) not referenced \n
+  61:CMSIS/Core/CM3/core_cm3.h ****  *     \n
+  62:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 528: --- \n
+  63:CMSIS/Core/CM3/core_cm3.h ****  *    static __INLINE void NVIC_DisableIRQ(uint32_t IRQn) \n
+  64:CMSIS/Core/CM3/core_cm3.h ****  *    Warning 528: Symbol 'NVIC_DisableIRQ(unsigned int)' (line 419, file ./cm3_core.h) not referen
+  65:CMSIS/Core/CM3/core_cm3.h ****  *     \n
+  66:CMSIS/Core/CM3/core_cm3.h ****  *    --- Error 751: --- \n
+  67:CMSIS/Core/CM3/core_cm3.h ****  *    } InterruptType_Type; \n
+  68:CMSIS/Core/CM3/core_cm3.h ****  *    Info 751: local typedef 'InterruptType_Type' (line 170, file ./cm3_core.h) not referenced \n
+  69:CMSIS/Core/CM3/core_cm3.h ****  * \n
+  70:CMSIS/Core/CM3/core_cm3.h ****  * \n
+  71:CMSIS/Core/CM3/core_cm3.h ****  *    Note:  To re-enable a Message, insert a space before 'lint' * \n
+  72:CMSIS/Core/CM3/core_cm3.h ****  *
+  73:CMSIS/Core/CM3/core_cm3.h ****  */
+  74:CMSIS/Core/CM3/core_cm3.h **** 
+  75:CMSIS/Core/CM3/core_cm3.h **** /*lint -save */
+  76:CMSIS/Core/CM3/core_cm3.h **** /*lint -e10  */
+  77:CMSIS/Core/CM3/core_cm3.h **** /*lint -e530 */
+  78:CMSIS/Core/CM3/core_cm3.h **** /*lint -e550 */
+  79:CMSIS/Core/CM3/core_cm3.h **** /*lint -e754 */
+  80:CMSIS/Core/CM3/core_cm3.h **** /*lint -e750 */
+  81:CMSIS/Core/CM3/core_cm3.h **** /*lint -e528 */
+  82:CMSIS/Core/CM3/core_cm3.h **** /*lint -e751 */
+  83:CMSIS/Core/CM3/core_cm3.h **** 
+  84:CMSIS/Core/CM3/core_cm3.h **** 
+  85:CMSIS/Core/CM3/core_cm3.h **** #include <stdint.h>                           /* Include standard types */
+  86:CMSIS/Core/CM3/core_cm3.h **** 
+  87:CMSIS/Core/CM3/core_cm3.h **** #if defined (__ICCARM__)
+  88:CMSIS/Core/CM3/core_cm3.h ****   #include <intrinsics.h>                     /* IAR Intrinsics   */
+  89:CMSIS/Core/CM3/core_cm3.h **** #endif
+  90:CMSIS/Core/CM3/core_cm3.h **** 
+  91:CMSIS/Core/CM3/core_cm3.h **** 
+  92:CMSIS/Core/CM3/core_cm3.h **** #ifndef __NVIC_PRIO_BITS
+  93:CMSIS/Core/CM3/core_cm3.h ****   #define __NVIC_PRIO_BITS    4               /*!< standard definition for NVIC Priority Bits */
+  94:CMSIS/Core/CM3/core_cm3.h **** #endif
+  95:CMSIS/Core/CM3/core_cm3.h **** 
+  96:CMSIS/Core/CM3/core_cm3.h **** 
+  97:CMSIS/Core/CM3/core_cm3.h **** 
+  98:CMSIS/Core/CM3/core_cm3.h **** 
+  99:CMSIS/Core/CM3/core_cm3.h **** /**
+ 100:CMSIS/Core/CM3/core_cm3.h ****  * IO definitions
+ 101:CMSIS/Core/CM3/core_cm3.h ****  *
+ 102:CMSIS/Core/CM3/core_cm3.h ****  * define access restrictions to peripheral registers
+ 103:CMSIS/Core/CM3/core_cm3.h ****  */
+ 104:CMSIS/Core/CM3/core_cm3.h **** 
+ 105:CMSIS/Core/CM3/core_cm3.h **** #ifdef __cplusplus
+ 106:CMSIS/Core/CM3/core_cm3.h **** #define     __I     volatile                  /*!< defines 'read only' permissions      */
+ 107:CMSIS/Core/CM3/core_cm3.h **** #else
+ 108:CMSIS/Core/CM3/core_cm3.h **** #define     __I     volatile const            /*!< defines 'read only' permissions      */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 6
+
+
+ 109:CMSIS/Core/CM3/core_cm3.h **** #endif
+ 110:CMSIS/Core/CM3/core_cm3.h **** #define     __O     volatile                  /*!< defines 'write only' permissions     */
+ 111:CMSIS/Core/CM3/core_cm3.h **** #define     __IO    volatile                  /*!< defines 'read / write' permissions   */
+ 112:CMSIS/Core/CM3/core_cm3.h **** 
+ 113:CMSIS/Core/CM3/core_cm3.h **** 
+ 114:CMSIS/Core/CM3/core_cm3.h **** 
+ 115:CMSIS/Core/CM3/core_cm3.h **** /*******************************************************************************
+ 116:CMSIS/Core/CM3/core_cm3.h ****  *                 Register Abstraction
+ 117:CMSIS/Core/CM3/core_cm3.h ****  ******************************************************************************/
+ 118:CMSIS/Core/CM3/core_cm3.h **** 
+ 119:CMSIS/Core/CM3/core_cm3.h **** 
+ 120:CMSIS/Core/CM3/core_cm3.h **** /* System Reset */
+ 121:CMSIS/Core/CM3/core_cm3.h **** #define NVIC_VECTRESET              0         /*!< Vector Reset Bit             */
+ 122:CMSIS/Core/CM3/core_cm3.h **** #define NVIC_SYSRESETREQ            2         /*!< System Reset Request         */
+ 123:CMSIS/Core/CM3/core_cm3.h **** #define NVIC_AIRCR_VECTKEY    (0x5FA << 16)   /*!< AIRCR Key for write access   */
+ 124:CMSIS/Core/CM3/core_cm3.h **** #define NVIC_AIRCR_ENDIANESS        15        /*!< Endianess                    */
+ 125:CMSIS/Core/CM3/core_cm3.h **** 
+ 126:CMSIS/Core/CM3/core_cm3.h **** /* Core Debug */
+ 127:CMSIS/Core/CM3/core_cm3.h **** #define CoreDebug_DEMCR_TRCENA (1 << 24)      /*!< DEMCR TRCENA enable          */
+ 128:CMSIS/Core/CM3/core_cm3.h **** #define ITM_TCR_ITMENA              1         /*!< ITM enable                   */
+ 129:CMSIS/Core/CM3/core_cm3.h **** 
+ 130:CMSIS/Core/CM3/core_cm3.h **** 
+ 131:CMSIS/Core/CM3/core_cm3.h **** 
+ 132:CMSIS/Core/CM3/core_cm3.h **** 
+ 133:CMSIS/Core/CM3/core_cm3.h **** /* memory mapping struct for Nested Vectored Interrupt Controller (NVIC) */
+ 134:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 135:CMSIS/Core/CM3/core_cm3.h **** {
+ 136:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t ISER[8];                      /*!< Interrupt Set Enable Register            */
+ 137:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED0[24];
+ 138:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t ICER[8];                      /*!< Interrupt Clear Enable Register          */
+ 139:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RSERVED1[24];
+ 140:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t ISPR[8];                      /*!< Interrupt Set Pending Register           */
+ 141:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED2[24];
+ 142:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t ICPR[8];                      /*!< Interrupt Clear Pending Register         */
+ 143:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED3[24];
+ 144:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t IABR[8];                      /*!< Interrupt Active bit Register            */
+ 145:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED4[56];
+ 146:CMSIS/Core/CM3/core_cm3.h ****   __IO uint8_t  IP[240];                      /*!< Interrupt Priority Register, 8Bit wide   */
+ 147:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED5[644];
+ 148:CMSIS/Core/CM3/core_cm3.h ****   __O  uint32_t STIR;                         /*!< Software Trigger Interrupt Register      */
+ 149:CMSIS/Core/CM3/core_cm3.h **** }  NVIC_Type;
+ 150:CMSIS/Core/CM3/core_cm3.h **** 
+ 151:CMSIS/Core/CM3/core_cm3.h **** 
+ 152:CMSIS/Core/CM3/core_cm3.h **** /* memory mapping struct for System Control Block */
+ 153:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 154:CMSIS/Core/CM3/core_cm3.h **** {
+ 155:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t CPUID;                        /*!< CPU ID Base Register                            
+ 156:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t ICSR;                         /*!< Interrupt Control State Register                
+ 157:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t VTOR;                         /*!< Vector Table Offset Register                    
+ 158:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t AIRCR;                        /*!< Application Interrupt / Reset Control Register  
+ 159:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t SCR;                          /*!< System Control Register                         
+ 160:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t CCR;                          /*!< Configuration Control Register                  
+ 161:CMSIS/Core/CM3/core_cm3.h ****   __IO uint8_t  SHP[12];                      /*!< System Handlers Priority Registers (4-7, 8-11, 1
+ 162:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t SHCSR;                        /*!< System Handler Control and State Register       
+ 163:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t CFSR;                         /*!< Configurable Fault Status Register              
+ 164:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t HFSR;                         /*!< Hard Fault Status Register                      
+ 165:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t DFSR;                         /*!< Debug Fault Status Register                     
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 7
+
+
+ 166:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t MMFAR;                        /*!< Mem Manage Address Register                     
+ 167:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t BFAR;                         /*!< Bus Fault Address Register                      
+ 168:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t AFSR;                         /*!< Auxiliary Fault Status Register                 
+ 169:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PFR[2];                       /*!< Processor Feature Register                      
+ 170:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t DFR;                          /*!< Debug Feature Register                          
+ 171:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t ADR;                          /*!< Auxiliary Feature Register                      
+ 172:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t MMFR[4];                      /*!< Memory Model Feature Register                   
+ 173:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t ISAR[5];                      /*!< ISA Feature Register                            
+ 174:CMSIS/Core/CM3/core_cm3.h **** } SCB_Type;
+ 175:CMSIS/Core/CM3/core_cm3.h **** 
+ 176:CMSIS/Core/CM3/core_cm3.h **** 
+ 177:CMSIS/Core/CM3/core_cm3.h **** /* memory mapping struct for SysTick */
+ 178:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 179:CMSIS/Core/CM3/core_cm3.h **** {
+ 180:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t CTRL;                         /*!< SysTick Control and Status Register */
+ 181:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t LOAD;                         /*!< SysTick Reload Value Register       */
+ 182:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t VAL;                          /*!< SysTick Current Value Register      */
+ 183:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t CALIB;                        /*!< SysTick Calibration Register        */
+ 184:CMSIS/Core/CM3/core_cm3.h **** } SysTick_Type;
+ 185:CMSIS/Core/CM3/core_cm3.h **** 
+ 186:CMSIS/Core/CM3/core_cm3.h **** 
+ 187:CMSIS/Core/CM3/core_cm3.h **** /* memory mapping structur for ITM */
+ 188:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 189:CMSIS/Core/CM3/core_cm3.h **** {
+ 190:CMSIS/Core/CM3/core_cm3.h ****   __O  union  
+ 191:CMSIS/Core/CM3/core_cm3.h ****   {
+ 192:CMSIS/Core/CM3/core_cm3.h ****     __O  uint8_t    u8;                       /*!< ITM Stimulus Port 8-bit               */
+ 193:CMSIS/Core/CM3/core_cm3.h ****     __O  uint16_t   u16;                      /*!< ITM Stimulus Port 16-bit              */
+ 194:CMSIS/Core/CM3/core_cm3.h ****     __O  uint32_t   u32;                      /*!< ITM Stimulus Port 32-bit              */
+ 195:CMSIS/Core/CM3/core_cm3.h ****   }  PORT [32];                               /*!< ITM Stimulus Port Registers           */
+ 196:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED0[864];
+ 197:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t TER;                          /*!< ITM Trace Enable Register             */
+ 198:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED1[15];
+ 199:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t TPR;                          /*!< ITM Trace Privilege Register          */
+ 200:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED2[15];
+ 201:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t TCR;                          /*!< ITM Trace Control Register            */
+ 202:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED3[29];
+ 203:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t IWR;                          /*!< ITM Integration Write Register        */
+ 204:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t IRR;                          /*!< ITM Integration Read Register         */
+ 205:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t IMCR;                         /*!< ITM Integration Mode Control Register */
+ 206:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED4[43];
+ 207:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t LAR;                          /*!< ITM Lock Access Register              */
+ 208:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t LSR;                          /*!< ITM Lock Status Register              */
+ 209:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED5[6];
+ 210:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID4;                         /*!< ITM Product ID Registers              */
+ 211:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID5;
+ 212:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID6;
+ 213:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID7;
+ 214:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID0;
+ 215:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID1;
+ 216:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID2;
+ 217:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t PID3;
+ 218:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t CID0;
+ 219:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t CID1;
+ 220:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t CID2;
+ 221:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t CID3;
+ 222:CMSIS/Core/CM3/core_cm3.h **** } ITM_Type;
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 8
+
+
+ 223:CMSIS/Core/CM3/core_cm3.h **** 
+ 224:CMSIS/Core/CM3/core_cm3.h **** 
+ 225:CMSIS/Core/CM3/core_cm3.h **** /* memory mapped struct for Interrupt Type */
+ 226:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 227:CMSIS/Core/CM3/core_cm3.h **** {
+ 228:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED0;
+ 229:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t ICTR;                         /*!< Interrupt Control Type Register  */
+ 230:CMSIS/Core/CM3/core_cm3.h **** #if ((defined __CM3_REV) && (__CM3_REV >= 0x200))
+ 231:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t ACTLR;                        /*!< Auxiliary Control Register       */
+ 232:CMSIS/Core/CM3/core_cm3.h **** #else
+ 233:CMSIS/Core/CM3/core_cm3.h ****        uint32_t RESERVED1;
+ 234:CMSIS/Core/CM3/core_cm3.h **** #endif
+ 235:CMSIS/Core/CM3/core_cm3.h **** } InterruptType_Type;
+ 236:CMSIS/Core/CM3/core_cm3.h **** 
+ 237:CMSIS/Core/CM3/core_cm3.h **** 
+ 238:CMSIS/Core/CM3/core_cm3.h **** /* Memory Protection Unit */
+ 239:CMSIS/Core/CM3/core_cm3.h **** #if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1)
+ 240:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 241:CMSIS/Core/CM3/core_cm3.h **** {
+ 242:CMSIS/Core/CM3/core_cm3.h ****   __I  uint32_t TYPE;                         /*!< MPU Type Register                               
+ 243:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t CTRL;                         /*!< MPU Control Register                            
+ 244:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RNR;                          /*!< MPU Region RNRber Register                      
+ 245:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RBAR;                         /*!< MPU Region Base Address Register                
+ 246:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RASR;                         /*!< MPU Region Attribute and Size Register          
+ 247:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RBAR_A1;                      /*!< MPU Alias 1 Region Base Address Register        
+ 248:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RASR_A1;                      /*!< MPU Alias 1 Region Attribute and Size Register  
+ 249:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RBAR_A2;                      /*!< MPU Alias 2 Region Base Address Register        
+ 250:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RASR_A2;                      /*!< MPU Alias 2 Region Attribute and Size Register  
+ 251:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RBAR_A3;                      /*!< MPU Alias 3 Region Base Address Register        
+ 252:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t RASR_A3;                      /*!< MPU Alias 3 Region Attribute and Size Register  
+ 253:CMSIS/Core/CM3/core_cm3.h **** } MPU_Type;
+ 254:CMSIS/Core/CM3/core_cm3.h **** #endif
+ 255:CMSIS/Core/CM3/core_cm3.h **** 
+ 256:CMSIS/Core/CM3/core_cm3.h **** 
+ 257:CMSIS/Core/CM3/core_cm3.h **** /* Core Debug Register */
+ 258:CMSIS/Core/CM3/core_cm3.h **** typedef struct
+ 259:CMSIS/Core/CM3/core_cm3.h **** {
+ 260:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t DHCSR;                        /*!< Debug Halting Control and Status Register       
+ 261:CMSIS/Core/CM3/core_cm3.h ****   __O  uint32_t DCRSR;                        /*!< Debug Core Register Selector Register           
+ 262:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t DCRDR;                        /*!< Debug Core Register Data Register               
+ 263:CMSIS/Core/CM3/core_cm3.h ****   __IO uint32_t DEMCR;                        /*!< Debug Exception and Monitor Control Register    
+ 264:CMSIS/Core/CM3/core_cm3.h **** } CoreDebug_Type;
+ 265:CMSIS/Core/CM3/core_cm3.h **** 
+ 266:CMSIS/Core/CM3/core_cm3.h **** 
+ 267:CMSIS/Core/CM3/core_cm3.h **** /* Memory mapping of Cortex-M3 Hardware */
+ 268:CMSIS/Core/CM3/core_cm3.h **** #define SCS_BASE            (0xE000E000)                              /*!< System Control Space Bas
+ 269:CMSIS/Core/CM3/core_cm3.h **** #define ITM_BASE            (0xE0000000)                              /*!< ITM Base Address        
+ 270:CMSIS/Core/CM3/core_cm3.h **** #define CoreDebug_BASE      (0xE000EDF0)                              /*!< Core Debug Base Address 
+ 271:CMSIS/Core/CM3/core_cm3.h **** #define SysTick_BASE        (SCS_BASE +  0x0010)                      /*!< SysTick Base Address    
+ 272:CMSIS/Core/CM3/core_cm3.h **** #define NVIC_BASE           (SCS_BASE +  0x0100)                      /*!< NVIC Base Address       
+ 273:CMSIS/Core/CM3/core_cm3.h **** #define SCB_BASE            (SCS_BASE +  0x0D00)                      /*!< System Control Block Bas
+ 274:CMSIS/Core/CM3/core_cm3.h **** 
+ 275:CMSIS/Core/CM3/core_cm3.h **** #define InterruptType       ((InterruptType_Type *) SCS_BASE)         /*!< Interrupt Type Register 
+ 276:CMSIS/Core/CM3/core_cm3.h **** #define SCB                 ((SCB_Type *)           SCB_BASE)         /*!< SCB configuration struct
+ 277:CMSIS/Core/CM3/core_cm3.h **** #define SysTick             ((SysTick_Type *)       SysTick_BASE)     /*!< SysTick configuration st
+ 278:CMSIS/Core/CM3/core_cm3.h **** #define NVIC                ((NVIC_Type *)          NVIC_BASE)        /*!< NVIC configuration struc
+ 279:CMSIS/Core/CM3/core_cm3.h **** #define ITM                 ((ITM_Type *)           ITM_BASE)         /*!< ITM configuration struct
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 9
+
+
+ 280:CMSIS/Core/CM3/core_cm3.h **** #define CoreDebug           ((CoreDebug_Type *)     CoreDebug_BASE)   /*!< Core Debug configuration
+ 281:CMSIS/Core/CM3/core_cm3.h **** 
+ 282:CMSIS/Core/CM3/core_cm3.h **** #if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1)
+ 283:CMSIS/Core/CM3/core_cm3.h ****   #define MPU_BASE          (SCS_BASE +  0x0D90)                      /*!< Memory Protection Unit  
+ 284:CMSIS/Core/CM3/core_cm3.h ****   #define MPU               ((MPU_Type*)            MPU_BASE)         /*!< Memory Protection Unit  
+ 285:CMSIS/Core/CM3/core_cm3.h **** #endif
+ 286:CMSIS/Core/CM3/core_cm3.h **** 
+ 287:CMSIS/Core/CM3/core_cm3.h **** 
+ 288:CMSIS/Core/CM3/core_cm3.h **** 
+ 289:CMSIS/Core/CM3/core_cm3.h **** /*******************************************************************************
+ 290:CMSIS/Core/CM3/core_cm3.h ****  *                Hardware Abstraction Layer
+ 291:CMSIS/Core/CM3/core_cm3.h ****  ******************************************************************************/
+ 292:CMSIS/Core/CM3/core_cm3.h **** 
+ 293:CMSIS/Core/CM3/core_cm3.h **** 
+ 294:CMSIS/Core/CM3/core_cm3.h **** #if defined ( __CC_ARM   )
+ 295:CMSIS/Core/CM3/core_cm3.h ****   #define __ASM            __asm                                      /*!< asm keyword for ARM Comp
+ 296:CMSIS/Core/CM3/core_cm3.h ****   #define __INLINE         __inline                                   /*!< inline keyword for ARM C
+ 297:CMSIS/Core/CM3/core_cm3.h **** 
+ 298:CMSIS/Core/CM3/core_cm3.h **** #elif defined ( __ICCARM__ )
+ 299:CMSIS/Core/CM3/core_cm3.h ****   #define __ASM           __asm                                       /*!< asm keyword for IAR Comp
+ 300:CMSIS/Core/CM3/core_cm3.h ****   #define __INLINE        inline                                      /*!< inline keyword for IAR C
+ 301:CMSIS/Core/CM3/core_cm3.h **** 
+ 302:CMSIS/Core/CM3/core_cm3.h **** #elif defined   (  __GNUC__  )
+ 303:CMSIS/Core/CM3/core_cm3.h ****   #define __ASM            __asm                                      /*!< asm keyword for GNU Comp
+ 304:CMSIS/Core/CM3/core_cm3.h ****   #define __INLINE         inline                                     /*!< inline keyword for GNU C
+ 305:CMSIS/Core/CM3/core_cm3.h **** 
+ 306:CMSIS/Core/CM3/core_cm3.h **** #elif defined   (  __TASKING__  )
+ 307:CMSIS/Core/CM3/core_cm3.h ****   #define __ASM            __asm                                      /*!< asm keyword for TASKING 
+ 308:CMSIS/Core/CM3/core_cm3.h ****   #define __INLINE         inline                                     /*!< inline keyword for TASKI
+ 309:CMSIS/Core/CM3/core_cm3.h **** 
+ 310:CMSIS/Core/CM3/core_cm3.h **** #endif
+ 311:CMSIS/Core/CM3/core_cm3.h **** 
+ 312:CMSIS/Core/CM3/core_cm3.h **** 
+ 313:CMSIS/Core/CM3/core_cm3.h **** /* ###################  Compiler specific Intrinsics  ########################### */
+ 314:CMSIS/Core/CM3/core_cm3.h **** 
+ 315:CMSIS/Core/CM3/core_cm3.h **** #if defined ( __CC_ARM   ) /*------------------RealView Compiler -----------------*/
+ 316:CMSIS/Core/CM3/core_cm3.h **** /* ARM armcc specific functions */
+ 317:CMSIS/Core/CM3/core_cm3.h **** 
+ 318:CMSIS/Core/CM3/core_cm3.h **** #define __enable_fault_irq                __enable_fiq
+ 319:CMSIS/Core/CM3/core_cm3.h **** #define __disable_fault_irq               __disable_fiq
+ 320:CMSIS/Core/CM3/core_cm3.h **** 
+ 321:CMSIS/Core/CM3/core_cm3.h **** #define __NOP                             __nop
+ 322:CMSIS/Core/CM3/core_cm3.h **** #define __WFI                             __wfi
+ 323:CMSIS/Core/CM3/core_cm3.h **** #define __WFE                             __wfe
+ 324:CMSIS/Core/CM3/core_cm3.h **** #define __SEV                             __sev
+ 325:CMSIS/Core/CM3/core_cm3.h **** #define __ISB()                           __isb(0)
+ 326:CMSIS/Core/CM3/core_cm3.h **** #define __DSB()                           __dsb(0)
+ 327:CMSIS/Core/CM3/core_cm3.h **** #define __DMB()                           __dmb(0)
+ 328:CMSIS/Core/CM3/core_cm3.h **** #define __REV                             __rev
+ 329:CMSIS/Core/CM3/core_cm3.h **** #define __RBIT                            __rbit
+ 330:CMSIS/Core/CM3/core_cm3.h **** #define __LDREXB(ptr)                     ((unsigned char ) __ldrex(ptr))
+ 331:CMSIS/Core/CM3/core_cm3.h **** #define __LDREXH(ptr)                     ((unsigned short) __ldrex(ptr))
+ 332:CMSIS/Core/CM3/core_cm3.h **** #define __LDREXW(ptr)                     ((unsigned int  ) __ldrex(ptr))
+ 333:CMSIS/Core/CM3/core_cm3.h **** #define __STREXB(value, ptr)              __strex(value, ptr)
+ 334:CMSIS/Core/CM3/core_cm3.h **** #define __STREXH(value, ptr)              __strex(value, ptr)
+ 335:CMSIS/Core/CM3/core_cm3.h **** #define __STREXW(value, ptr)              __strex(value, ptr)
+ 336:CMSIS/Core/CM3/core_cm3.h **** 
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 10
+
+
+ 337:CMSIS/Core/CM3/core_cm3.h **** 
+ 338:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic unsigned long long __ldrexd(volatile void *ptr) */
+ 339:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic int __strexd(unsigned long long val, volatile void *ptr) */
+ 340:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __enable_irq();     */
+ 341:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __disable_irq();    */
+ 342:CMSIS/Core/CM3/core_cm3.h **** 
+ 343:CMSIS/Core/CM3/core_cm3.h **** 
+ 344:CMSIS/Core/CM3/core_cm3.h **** /**
+ 345:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Process Stack Pointer
+ 346:CMSIS/Core/CM3/core_cm3.h ****  *
+ 347:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 348:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t ProcessStackPointer
+ 349:CMSIS/Core/CM3/core_cm3.h ****  *
+ 350:CMSIS/Core/CM3/core_cm3.h ****  * Return the actual process stack pointer
+ 351:CMSIS/Core/CM3/core_cm3.h ****  */
+ 352:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_PSP(void);
+ 353:CMSIS/Core/CM3/core_cm3.h **** 
+ 354:CMSIS/Core/CM3/core_cm3.h **** /**
+ 355:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Process Stack Pointer
+ 356:CMSIS/Core/CM3/core_cm3.h ****  *
+ 357:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Process Stack Pointer
+ 358:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 359:CMSIS/Core/CM3/core_cm3.h ****  *
+ 360:CMSIS/Core/CM3/core_cm3.h ****  * Assign the value ProcessStackPointer to the MSP 
+ 361:CMSIS/Core/CM3/core_cm3.h ****  * (process stack pointer) Cortex processor register
+ 362:CMSIS/Core/CM3/core_cm3.h ****  */
+ 363:CMSIS/Core/CM3/core_cm3.h **** extern void __set_PSP(uint32_t topOfProcStack);
+ 364:CMSIS/Core/CM3/core_cm3.h **** 
+ 365:CMSIS/Core/CM3/core_cm3.h **** /**
+ 366:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Main Stack Pointer
+ 367:CMSIS/Core/CM3/core_cm3.h ****  *
+ 368:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 369:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t Main Stack Pointer
+ 370:CMSIS/Core/CM3/core_cm3.h ****  *
+ 371:CMSIS/Core/CM3/core_cm3.h ****  * Return the current value of the MSP (main stack pointer)
+ 372:CMSIS/Core/CM3/core_cm3.h ****  * Cortex processor register
+ 373:CMSIS/Core/CM3/core_cm3.h ****  */
+ 374:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_MSP(void);
+ 375:CMSIS/Core/CM3/core_cm3.h **** 
+ 376:CMSIS/Core/CM3/core_cm3.h **** /**
+ 377:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Main Stack Pointer
+ 378:CMSIS/Core/CM3/core_cm3.h ****  *
+ 379:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Main Stack Pointer
+ 380:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 381:CMSIS/Core/CM3/core_cm3.h ****  *
+ 382:CMSIS/Core/CM3/core_cm3.h ****  * Assign the value mainStackPointer to the MSP 
+ 383:CMSIS/Core/CM3/core_cm3.h ****  * (main stack pointer) Cortex processor register
+ 384:CMSIS/Core/CM3/core_cm3.h ****  */
+ 385:CMSIS/Core/CM3/core_cm3.h **** extern void __set_MSP(uint32_t topOfMainStack);
+ 386:CMSIS/Core/CM3/core_cm3.h **** 
+ 387:CMSIS/Core/CM3/core_cm3.h **** /**
+ 388:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse byte order in unsigned short value
+ 389:CMSIS/Core/CM3/core_cm3.h ****  *
+ 390:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t value to reverse
+ 391:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t reversed value
+ 392:CMSIS/Core/CM3/core_cm3.h ****  *
+ 393:CMSIS/Core/CM3/core_cm3.h ****  * Reverse byte order in unsigned short value
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 11
+
+
+ 394:CMSIS/Core/CM3/core_cm3.h ****  */
+ 395:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __REV16(uint16_t value);
+ 396:CMSIS/Core/CM3/core_cm3.h **** 
+ 397:CMSIS/Core/CM3/core_cm3.h **** /*
+ 398:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse byte order in signed short value with sign extension to integer
+ 399:CMSIS/Core/CM3/core_cm3.h ****  *
+ 400:CMSIS/Core/CM3/core_cm3.h ****  * @param  int16_t value to reverse
+ 401:CMSIS/Core/CM3/core_cm3.h ****  * @return int32_t reversed value
+ 402:CMSIS/Core/CM3/core_cm3.h ****  *
+ 403:CMSIS/Core/CM3/core_cm3.h ****  * Reverse byte order in signed short value with sign extension to integer
+ 404:CMSIS/Core/CM3/core_cm3.h ****  */
+ 405:CMSIS/Core/CM3/core_cm3.h **** extern int32_t __REVSH(int16_t value);
+ 406:CMSIS/Core/CM3/core_cm3.h **** 
+ 407:CMSIS/Core/CM3/core_cm3.h **** 
+ 408:CMSIS/Core/CM3/core_cm3.h **** #if (__ARMCC_VERSION < 400000)
+ 409:CMSIS/Core/CM3/core_cm3.h **** 
+ 410:CMSIS/Core/CM3/core_cm3.h **** /**
+ 411:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Remove the exclusive lock created by ldrex
+ 412:CMSIS/Core/CM3/core_cm3.h ****  *
+ 413:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 414:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 415:CMSIS/Core/CM3/core_cm3.h ****  *
+ 416:CMSIS/Core/CM3/core_cm3.h ****  * Removes the exclusive lock which is created by ldrex.
+ 417:CMSIS/Core/CM3/core_cm3.h ****  */
+ 418:CMSIS/Core/CM3/core_cm3.h **** extern void __CLREX(void);
+ 419:CMSIS/Core/CM3/core_cm3.h **** 
+ 420:CMSIS/Core/CM3/core_cm3.h **** /**
+ 421:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Base Priority value
+ 422:CMSIS/Core/CM3/core_cm3.h ****  *
+ 423:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 424:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t BasePriority
+ 425:CMSIS/Core/CM3/core_cm3.h ****  *
+ 426:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the base priority register
+ 427:CMSIS/Core/CM3/core_cm3.h ****  */
+ 428:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_BASEPRI(void);
+ 429:CMSIS/Core/CM3/core_cm3.h **** 
+ 430:CMSIS/Core/CM3/core_cm3.h **** /**
+ 431:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Base Priority value
+ 432:CMSIS/Core/CM3/core_cm3.h ****  *
+ 433:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t BasePriority
+ 434:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 435:CMSIS/Core/CM3/core_cm3.h ****  *
+ 436:CMSIS/Core/CM3/core_cm3.h ****  * Set the base priority register
+ 437:CMSIS/Core/CM3/core_cm3.h ****  */
+ 438:CMSIS/Core/CM3/core_cm3.h **** extern void __set_BASEPRI(uint32_t basePri);
+ 439:CMSIS/Core/CM3/core_cm3.h **** 
+ 440:CMSIS/Core/CM3/core_cm3.h **** /**
+ 441:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Priority Mask value
+ 442:CMSIS/Core/CM3/core_cm3.h ****  *
+ 443:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 444:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t PriMask
+ 445:CMSIS/Core/CM3/core_cm3.h ****  *
+ 446:CMSIS/Core/CM3/core_cm3.h ****  * Return the state of the priority mask bit from the priority mask
+ 447:CMSIS/Core/CM3/core_cm3.h ****  * register
+ 448:CMSIS/Core/CM3/core_cm3.h ****  */
+ 449:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_PRIMASK(void);
+ 450:CMSIS/Core/CM3/core_cm3.h **** 
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 12
+
+
+ 451:CMSIS/Core/CM3/core_cm3.h **** /**
+ 452:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Priority Mask value
+ 453:CMSIS/Core/CM3/core_cm3.h ****  *
+ 454:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t PriMask
+ 455:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 456:CMSIS/Core/CM3/core_cm3.h ****  *
+ 457:CMSIS/Core/CM3/core_cm3.h ****  * Set the priority mask bit in the priority mask register
+ 458:CMSIS/Core/CM3/core_cm3.h ****  */
+ 459:CMSIS/Core/CM3/core_cm3.h **** extern void __set_PRIMASK(uint32_t priMask);
+ 460:CMSIS/Core/CM3/core_cm3.h **** 
+ 461:CMSIS/Core/CM3/core_cm3.h **** /**
+ 462:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Fault Mask value
+ 463:CMSIS/Core/CM3/core_cm3.h ****  *
+ 464:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 465:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t FaultMask
+ 466:CMSIS/Core/CM3/core_cm3.h ****  *
+ 467:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the fault mask register
+ 468:CMSIS/Core/CM3/core_cm3.h ****  */
+ 469:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_FAULTMASK(void);
+ 470:CMSIS/Core/CM3/core_cm3.h **** 
+ 471:CMSIS/Core/CM3/core_cm3.h **** /**
+ 472:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Fault Mask value
+ 473:CMSIS/Core/CM3/core_cm3.h ****  *
+ 474:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t faultMask value
+ 475:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 476:CMSIS/Core/CM3/core_cm3.h ****  *
+ 477:CMSIS/Core/CM3/core_cm3.h ****  * Set the fault mask register
+ 478:CMSIS/Core/CM3/core_cm3.h ****  */
+ 479:CMSIS/Core/CM3/core_cm3.h **** extern void __set_FAULTMASK(uint32_t faultMask);
+ 480:CMSIS/Core/CM3/core_cm3.h **** 
+ 481:CMSIS/Core/CM3/core_cm3.h **** /**
+ 482:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Control Register value
+ 483:CMSIS/Core/CM3/core_cm3.h ****  * 
+ 484:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 485:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t Control value
+ 486:CMSIS/Core/CM3/core_cm3.h ****  *
+ 487:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the control register
+ 488:CMSIS/Core/CM3/core_cm3.h ****  */
+ 489:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_CONTROL(void);
+ 490:CMSIS/Core/CM3/core_cm3.h **** 
+ 491:CMSIS/Core/CM3/core_cm3.h **** /**
+ 492:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Control Register value
+ 493:CMSIS/Core/CM3/core_cm3.h ****  *
+ 494:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Control value
+ 495:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 496:CMSIS/Core/CM3/core_cm3.h ****  *
+ 497:CMSIS/Core/CM3/core_cm3.h ****  * Set the control register
+ 498:CMSIS/Core/CM3/core_cm3.h ****  */
+ 499:CMSIS/Core/CM3/core_cm3.h **** extern void __set_CONTROL(uint32_t control);
+ 500:CMSIS/Core/CM3/core_cm3.h **** 
+ 501:CMSIS/Core/CM3/core_cm3.h **** #else  /* (__ARMCC_VERSION >= 400000)  */
+ 502:CMSIS/Core/CM3/core_cm3.h **** 
+ 503:CMSIS/Core/CM3/core_cm3.h **** 
+ 504:CMSIS/Core/CM3/core_cm3.h **** /**
+ 505:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Remove the exclusive lock created by ldrex
+ 506:CMSIS/Core/CM3/core_cm3.h ****  *
+ 507:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 13
+
+
+ 508:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 509:CMSIS/Core/CM3/core_cm3.h ****  *
+ 510:CMSIS/Core/CM3/core_cm3.h ****  * Removes the exclusive lock which is created by ldrex.
+ 511:CMSIS/Core/CM3/core_cm3.h ****  */
+ 512:CMSIS/Core/CM3/core_cm3.h **** #define __CLREX                           __clrex
+ 513:CMSIS/Core/CM3/core_cm3.h **** 
+ 514:CMSIS/Core/CM3/core_cm3.h **** /**
+ 515:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Base Priority value
+ 516:CMSIS/Core/CM3/core_cm3.h ****  *
+ 517:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 518:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t BasePriority
+ 519:CMSIS/Core/CM3/core_cm3.h ****  *
+ 520:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the base priority register
+ 521:CMSIS/Core/CM3/core_cm3.h ****  */
+ 522:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t  __get_BASEPRI(void)
+ 523:CMSIS/Core/CM3/core_cm3.h **** {
+ 524:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 525:CMSIS/Core/CM3/core_cm3.h ****   return(__regBasePri);
+ 526:CMSIS/Core/CM3/core_cm3.h **** }
+ 527:CMSIS/Core/CM3/core_cm3.h **** 
+ 528:CMSIS/Core/CM3/core_cm3.h **** /**
+ 529:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Base Priority value
+ 530:CMSIS/Core/CM3/core_cm3.h ****  *
+ 531:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t BasePriority
+ 532:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 533:CMSIS/Core/CM3/core_cm3.h ****  *
+ 534:CMSIS/Core/CM3/core_cm3.h ****  * Set the base priority register
+ 535:CMSIS/Core/CM3/core_cm3.h ****  */
+ 536:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __set_BASEPRI(uint32_t basePri)
+ 537:CMSIS/Core/CM3/core_cm3.h **** {
+ 538:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 539:CMSIS/Core/CM3/core_cm3.h ****   __regBasePri = (basePri & 0x1ff);
+ 540:CMSIS/Core/CM3/core_cm3.h **** }
+ 541:CMSIS/Core/CM3/core_cm3.h **** 
+ 542:CMSIS/Core/CM3/core_cm3.h **** /**
+ 543:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Priority Mask value
+ 544:CMSIS/Core/CM3/core_cm3.h ****  *
+ 545:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 546:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t PriMask
+ 547:CMSIS/Core/CM3/core_cm3.h ****  *
+ 548:CMSIS/Core/CM3/core_cm3.h ****  * Return the state of the priority mask bit from the priority mask
+ 549:CMSIS/Core/CM3/core_cm3.h ****  * register
+ 550:CMSIS/Core/CM3/core_cm3.h ****  */
+ 551:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t __get_PRIMASK(void)
+ 552:CMSIS/Core/CM3/core_cm3.h **** {
+ 553:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 554:CMSIS/Core/CM3/core_cm3.h ****   return(__regPriMask);
+ 555:CMSIS/Core/CM3/core_cm3.h **** }
+ 556:CMSIS/Core/CM3/core_cm3.h **** 
+ 557:CMSIS/Core/CM3/core_cm3.h **** /**
+ 558:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Priority Mask value
+ 559:CMSIS/Core/CM3/core_cm3.h ****  *
+ 560:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t PriMask
+ 561:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 562:CMSIS/Core/CM3/core_cm3.h ****  *
+ 563:CMSIS/Core/CM3/core_cm3.h ****  * Set the priority mask bit in the priority mask register
+ 564:CMSIS/Core/CM3/core_cm3.h ****  */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 14
+
+
+ 565:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __set_PRIMASK(uint32_t priMask)
+ 566:CMSIS/Core/CM3/core_cm3.h **** {
+ 567:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 568:CMSIS/Core/CM3/core_cm3.h ****   __regPriMask = (priMask);
+ 569:CMSIS/Core/CM3/core_cm3.h **** }
+ 570:CMSIS/Core/CM3/core_cm3.h **** 
+ 571:CMSIS/Core/CM3/core_cm3.h **** /**
+ 572:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Fault Mask value
+ 573:CMSIS/Core/CM3/core_cm3.h ****  *
+ 574:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 575:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t FaultMask
+ 576:CMSIS/Core/CM3/core_cm3.h ****  *
+ 577:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the fault mask register
+ 578:CMSIS/Core/CM3/core_cm3.h ****  */
+ 579:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t __get_FAULTMASK(void)
+ 580:CMSIS/Core/CM3/core_cm3.h **** {
+ 581:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 582:CMSIS/Core/CM3/core_cm3.h ****   return(__regFaultMask);
+ 583:CMSIS/Core/CM3/core_cm3.h **** }
+ 584:CMSIS/Core/CM3/core_cm3.h **** 
+ 585:CMSIS/Core/CM3/core_cm3.h **** /**
+ 586:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Fault Mask value
+ 587:CMSIS/Core/CM3/core_cm3.h ****  *
+ 588:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t faultMask value
+ 589:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 590:CMSIS/Core/CM3/core_cm3.h ****  *
+ 591:CMSIS/Core/CM3/core_cm3.h ****  * Set the fault mask register
+ 592:CMSIS/Core/CM3/core_cm3.h ****  */
+ 593:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __set_FAULTMASK(uint32_t faultMask)
+ 594:CMSIS/Core/CM3/core_cm3.h **** {
+ 595:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 596:CMSIS/Core/CM3/core_cm3.h ****   __regFaultMask = (faultMask & 1);
+ 597:CMSIS/Core/CM3/core_cm3.h **** }
+ 598:CMSIS/Core/CM3/core_cm3.h **** 
+ 599:CMSIS/Core/CM3/core_cm3.h **** /**
+ 600:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Control Register value
+ 601:CMSIS/Core/CM3/core_cm3.h ****  * 
+ 602:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 603:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t Control value
+ 604:CMSIS/Core/CM3/core_cm3.h ****  *
+ 605:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the control register
+ 606:CMSIS/Core/CM3/core_cm3.h ****  */
+ 607:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t __get_CONTROL(void)
+ 608:CMSIS/Core/CM3/core_cm3.h **** {
+ 609:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regControl         __ASM("control");
+ 610:CMSIS/Core/CM3/core_cm3.h ****   return(__regControl);
+ 611:CMSIS/Core/CM3/core_cm3.h **** }
+ 612:CMSIS/Core/CM3/core_cm3.h **** 
+ 613:CMSIS/Core/CM3/core_cm3.h **** /**
+ 614:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Control Register value
+ 615:CMSIS/Core/CM3/core_cm3.h ****  *
+ 616:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Control value
+ 617:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 618:CMSIS/Core/CM3/core_cm3.h ****  *
+ 619:CMSIS/Core/CM3/core_cm3.h ****  * Set the control register
+ 620:CMSIS/Core/CM3/core_cm3.h ****  */
+ 621:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __set_CONTROL(uint32_t control)
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 15
+
+
+ 622:CMSIS/Core/CM3/core_cm3.h **** {
+ 623:CMSIS/Core/CM3/core_cm3.h ****   register uint32_t __regControl         __ASM("control");
+ 624:CMSIS/Core/CM3/core_cm3.h ****   __regControl = control;
+ 625:CMSIS/Core/CM3/core_cm3.h **** }
+ 626:CMSIS/Core/CM3/core_cm3.h **** 
+ 627:CMSIS/Core/CM3/core_cm3.h **** #endif /* __ARMCC_VERSION  */ 
+ 628:CMSIS/Core/CM3/core_cm3.h **** 
+ 629:CMSIS/Core/CM3/core_cm3.h **** 
+ 630:CMSIS/Core/CM3/core_cm3.h **** 
+ 631:CMSIS/Core/CM3/core_cm3.h **** #elif (defined (__ICCARM__)) /*------------------ ICC Compiler -------------------*/
+ 632:CMSIS/Core/CM3/core_cm3.h **** /* IAR iccarm specific functions */
+ 633:CMSIS/Core/CM3/core_cm3.h **** 
+ 634:CMSIS/Core/CM3/core_cm3.h **** #define __enable_irq                              __enable_interrupt        /*!< global Interrupt e
+ 635:CMSIS/Core/CM3/core_cm3.h **** #define __disable_irq                             __disable_interrupt       /*!< global Interrupt d
+ 636:CMSIS/Core/CM3/core_cm3.h **** 
+ 637:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __enable_fault_irq()         { __ASM ("cpsie f"); }
+ 638:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __disable_fault_irq()        { __ASM ("cpsid f"); }
+ 639:CMSIS/Core/CM3/core_cm3.h **** 
+ 640:CMSIS/Core/CM3/core_cm3.h **** #define __NOP                                     __no_operation()          /*!< no operation intri
+ 641:CMSIS/Core/CM3/core_cm3.h **** static __INLINE  void __WFI()                     { __ASM ("wfi"); }
+ 642:CMSIS/Core/CM3/core_cm3.h **** static __INLINE  void __WFE()                     { __ASM ("wfe"); }
+ 643:CMSIS/Core/CM3/core_cm3.h **** static __INLINE  void __SEV()                     { __ASM ("sev"); }
+ 644:CMSIS/Core/CM3/core_cm3.h **** static __INLINE  void __CLREX()                   { __ASM ("clrex"); }
+ 645:CMSIS/Core/CM3/core_cm3.h **** 
+ 646:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __ISB(void)                                     */
+ 647:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __DSB(void)                                     */
+ 648:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __DMB(void)                                     */
+ 649:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __set_PRIMASK();                                */
+ 650:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __get_PRIMASK();                                */
+ 651:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __set_FAULTMASK();                              */
+ 652:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic void __get_FAULTMASK();                              */
+ 653:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic uint32_t __REV(uint32_t value);                      */
+ 654:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic uint32_t __REVSH(uint32_t value);                    */
+ 655:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic unsigned long __STREX(unsigned long, unsigned long); */
+ 656:CMSIS/Core/CM3/core_cm3.h **** /* intrinsic unsigned long __LDREX(unsigned long *);              */
+ 657:CMSIS/Core/CM3/core_cm3.h **** 
+ 658:CMSIS/Core/CM3/core_cm3.h **** 
+ 659:CMSIS/Core/CM3/core_cm3.h **** /**
+ 660:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Process Stack Pointer
+ 661:CMSIS/Core/CM3/core_cm3.h ****  *
+ 662:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 663:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t ProcessStackPointer
+ 664:CMSIS/Core/CM3/core_cm3.h ****  *
+ 665:CMSIS/Core/CM3/core_cm3.h ****  * Return the actual process stack pointer
+ 666:CMSIS/Core/CM3/core_cm3.h ****  */
+ 667:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_PSP(void);
+ 668:CMSIS/Core/CM3/core_cm3.h **** 
+ 669:CMSIS/Core/CM3/core_cm3.h **** /**
+ 670:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Process Stack Pointer
+ 671:CMSIS/Core/CM3/core_cm3.h ****  *
+ 672:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Process Stack Pointer
+ 673:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 674:CMSIS/Core/CM3/core_cm3.h ****  *
+ 675:CMSIS/Core/CM3/core_cm3.h ****  * Assign the value ProcessStackPointer to the MSP 
+ 676:CMSIS/Core/CM3/core_cm3.h ****  * (process stack pointer) Cortex processor register
+ 677:CMSIS/Core/CM3/core_cm3.h ****  */
+ 678:CMSIS/Core/CM3/core_cm3.h **** extern void __set_PSP(uint32_t topOfProcStack);
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 16
+
+
+ 679:CMSIS/Core/CM3/core_cm3.h **** 
+ 680:CMSIS/Core/CM3/core_cm3.h **** /**
+ 681:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Main Stack Pointer
+ 682:CMSIS/Core/CM3/core_cm3.h ****  *
+ 683:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 684:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t Main Stack Pointer
+ 685:CMSIS/Core/CM3/core_cm3.h ****  *
+ 686:CMSIS/Core/CM3/core_cm3.h ****  * Return the current value of the MSP (main stack pointer)
+ 687:CMSIS/Core/CM3/core_cm3.h ****  * Cortex processor register
+ 688:CMSIS/Core/CM3/core_cm3.h ****  */
+ 689:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_MSP(void);
+ 690:CMSIS/Core/CM3/core_cm3.h **** 
+ 691:CMSIS/Core/CM3/core_cm3.h **** /**
+ 692:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Main Stack Pointer
+ 693:CMSIS/Core/CM3/core_cm3.h ****  *
+ 694:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Main Stack Pointer
+ 695:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 696:CMSIS/Core/CM3/core_cm3.h ****  *
+ 697:CMSIS/Core/CM3/core_cm3.h ****  * Assign the value mainStackPointer to the MSP 
+ 698:CMSIS/Core/CM3/core_cm3.h ****  * (main stack pointer) Cortex processor register
+ 699:CMSIS/Core/CM3/core_cm3.h ****  */
+ 700:CMSIS/Core/CM3/core_cm3.h **** extern void __set_MSP(uint32_t topOfMainStack);
+ 701:CMSIS/Core/CM3/core_cm3.h **** 
+ 702:CMSIS/Core/CM3/core_cm3.h **** /**
+ 703:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse byte order in unsigned short value
+ 704:CMSIS/Core/CM3/core_cm3.h ****  *
+ 705:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t value to reverse
+ 706:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t reversed value
+ 707:CMSIS/Core/CM3/core_cm3.h ****  *
+ 708:CMSIS/Core/CM3/core_cm3.h ****  * Reverse byte order in unsigned short value
+ 709:CMSIS/Core/CM3/core_cm3.h ****  */
+ 710:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __REV16(uint16_t value);
+ 711:CMSIS/Core/CM3/core_cm3.h **** 
+ 712:CMSIS/Core/CM3/core_cm3.h **** /**
+ 713:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse bit order of value
+ 714:CMSIS/Core/CM3/core_cm3.h ****  *
+ 715:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t value to reverse
+ 716:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t reversed value
+ 717:CMSIS/Core/CM3/core_cm3.h ****  *
+ 718:CMSIS/Core/CM3/core_cm3.h ****  * Reverse bit order of value
+ 719:CMSIS/Core/CM3/core_cm3.h ****  */
+ 720:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __RBIT(uint32_t value);
+ 721:CMSIS/Core/CM3/core_cm3.h **** 
+ 722:CMSIS/Core/CM3/core_cm3.h **** /**
+ 723:CMSIS/Core/CM3/core_cm3.h ****  * @brief  LDR Exclusive
+ 724:CMSIS/Core/CM3/core_cm3.h ****  *
+ 725:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint8_t* address
+ 726:CMSIS/Core/CM3/core_cm3.h ****  * @return uint8_t value of (*address)
+ 727:CMSIS/Core/CM3/core_cm3.h ****  *
+ 728:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive LDR command
+ 729:CMSIS/Core/CM3/core_cm3.h ****  */
+ 730:CMSIS/Core/CM3/core_cm3.h **** extern uint8_t __LDREXB(uint8_t *addr);
+ 731:CMSIS/Core/CM3/core_cm3.h **** 
+ 732:CMSIS/Core/CM3/core_cm3.h **** /**
+ 733:CMSIS/Core/CM3/core_cm3.h ****  * @brief  LDR Exclusive
+ 734:CMSIS/Core/CM3/core_cm3.h ****  *
+ 735:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t* address
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 17
+
+
+ 736:CMSIS/Core/CM3/core_cm3.h ****  * @return uint16_t value of (*address)
+ 737:CMSIS/Core/CM3/core_cm3.h ****  *
+ 738:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive LDR command
+ 739:CMSIS/Core/CM3/core_cm3.h ****  */
+ 740:CMSIS/Core/CM3/core_cm3.h **** extern uint16_t __LDREXH(uint16_t *addr);
+ 741:CMSIS/Core/CM3/core_cm3.h **** 
+ 742:CMSIS/Core/CM3/core_cm3.h **** /**
+ 743:CMSIS/Core/CM3/core_cm3.h ****  * @brief  LDR Exclusive
+ 744:CMSIS/Core/CM3/core_cm3.h ****  *
+ 745:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t* address
+ 746:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t value of (*address)
+ 747:CMSIS/Core/CM3/core_cm3.h ****  *
+ 748:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive LDR command
+ 749:CMSIS/Core/CM3/core_cm3.h ****  */
+ 750:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __LDREXW(uint32_t *addr);
+ 751:CMSIS/Core/CM3/core_cm3.h **** 
+ 752:CMSIS/Core/CM3/core_cm3.h **** /**
+ 753:CMSIS/Core/CM3/core_cm3.h ****  * @brief  STR Exclusive
+ 754:CMSIS/Core/CM3/core_cm3.h ****  *
+ 755:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint8_t *address
+ 756:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint8_t value to store
+ 757:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t successful / failed
+ 758:CMSIS/Core/CM3/core_cm3.h ****  *
+ 759:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive STR command
+ 760:CMSIS/Core/CM3/core_cm3.h ****  */
+ 761:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __STREXB(uint8_t value, uint8_t *addr);
+ 762:CMSIS/Core/CM3/core_cm3.h **** 
+ 763:CMSIS/Core/CM3/core_cm3.h **** /**
+ 764:CMSIS/Core/CM3/core_cm3.h ****  * @brief  STR Exclusive
+ 765:CMSIS/Core/CM3/core_cm3.h ****  *
+ 766:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t *address
+ 767:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t value to store
+ 768:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t successful / failed
+ 769:CMSIS/Core/CM3/core_cm3.h ****  *
+ 770:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive STR command
+ 771:CMSIS/Core/CM3/core_cm3.h ****  */
+ 772:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __STREXH(uint16_t value, uint16_t *addr);
+ 773:CMSIS/Core/CM3/core_cm3.h **** 
+ 774:CMSIS/Core/CM3/core_cm3.h **** /**
+ 775:CMSIS/Core/CM3/core_cm3.h ****  * @brief  STR Exclusive
+ 776:CMSIS/Core/CM3/core_cm3.h ****  *
+ 777:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t *address
+ 778:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t value to store
+ 779:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t successful / failed
+ 780:CMSIS/Core/CM3/core_cm3.h ****  *
+ 781:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive STR command
+ 782:CMSIS/Core/CM3/core_cm3.h ****  */
+ 783:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __STREXW(uint32_t value, uint32_t *addr);
+ 784:CMSIS/Core/CM3/core_cm3.h **** 
+ 785:CMSIS/Core/CM3/core_cm3.h **** 
+ 786:CMSIS/Core/CM3/core_cm3.h **** 
+ 787:CMSIS/Core/CM3/core_cm3.h **** #elif (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+ 788:CMSIS/Core/CM3/core_cm3.h **** /* GNU gcc specific functions */
+ 789:CMSIS/Core/CM3/core_cm3.h **** 
+ 790:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __enable_irq()               { __ASM volatile ("cpsie i"); }
+ 791:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __disable_irq()              { __ASM volatile ("cpsid i"); }
+ 792:CMSIS/Core/CM3/core_cm3.h **** 
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 18
+
+
+ 793:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __enable_fault_irq()         { __ASM volatile ("cpsie f"); }
+ 794:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __disable_fault_irq()        { __ASM volatile ("cpsid f"); }
+ 795:CMSIS/Core/CM3/core_cm3.h **** 
+ 796:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __NOP()                      { __ASM volatile ("nop"); }
+ 797:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __WFI()                      { __ASM volatile ("wfi"); }
+ 798:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __WFE()                      { __ASM volatile ("wfe"); }
+ 799:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __SEV()                      { __ASM volatile ("sev"); }
+ 800:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __ISB()                      { __ASM volatile ("isb"); }
+ 801:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __DSB()                      { __ASM volatile ("dsb"); }
+ 802:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __DMB()                      { __ASM volatile ("dmb"); }
+ 803:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void __CLREX()                    { __ASM volatile ("clrex"); }
+ 804:CMSIS/Core/CM3/core_cm3.h **** 
+ 805:CMSIS/Core/CM3/core_cm3.h **** 
+ 806:CMSIS/Core/CM3/core_cm3.h **** /**
+ 807:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Process Stack Pointer
+ 808:CMSIS/Core/CM3/core_cm3.h ****  *
+ 809:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 810:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t ProcessStackPointer
+ 811:CMSIS/Core/CM3/core_cm3.h ****  *
+ 812:CMSIS/Core/CM3/core_cm3.h ****  * Return the actual process stack pointer
+ 813:CMSIS/Core/CM3/core_cm3.h ****  */
+ 814:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_PSP(void);
+ 815:CMSIS/Core/CM3/core_cm3.h **** 
+ 816:CMSIS/Core/CM3/core_cm3.h **** /**
+ 817:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Process Stack Pointer
+ 818:CMSIS/Core/CM3/core_cm3.h ****  *
+ 819:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Process Stack Pointer
+ 820:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 821:CMSIS/Core/CM3/core_cm3.h ****  *
+ 822:CMSIS/Core/CM3/core_cm3.h ****  * Assign the value ProcessStackPointer to the MSP 
+ 823:CMSIS/Core/CM3/core_cm3.h ****  * (process stack pointer) Cortex processor register
+ 824:CMSIS/Core/CM3/core_cm3.h ****  */
+ 825:CMSIS/Core/CM3/core_cm3.h **** extern void __set_PSP(uint32_t topOfProcStack);
+ 826:CMSIS/Core/CM3/core_cm3.h **** 
+ 827:CMSIS/Core/CM3/core_cm3.h **** /**
+ 828:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Main Stack Pointer
+ 829:CMSIS/Core/CM3/core_cm3.h ****  *
+ 830:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 831:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t Main Stack Pointer
+ 832:CMSIS/Core/CM3/core_cm3.h ****  *
+ 833:CMSIS/Core/CM3/core_cm3.h ****  * Return the current value of the MSP (main stack pointer)
+ 834:CMSIS/Core/CM3/core_cm3.h ****  * Cortex processor register
+ 835:CMSIS/Core/CM3/core_cm3.h ****  */
+ 836:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_MSP(void);
+ 837:CMSIS/Core/CM3/core_cm3.h **** 
+ 838:CMSIS/Core/CM3/core_cm3.h **** /**
+ 839:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Main Stack Pointer
+ 840:CMSIS/Core/CM3/core_cm3.h ****  *
+ 841:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Main Stack Pointer
+ 842:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 843:CMSIS/Core/CM3/core_cm3.h ****  *
+ 844:CMSIS/Core/CM3/core_cm3.h ****  * Assign the value mainStackPointer to the MSP 
+ 845:CMSIS/Core/CM3/core_cm3.h ****  * (main stack pointer) Cortex processor register
+ 846:CMSIS/Core/CM3/core_cm3.h ****  */
+ 847:CMSIS/Core/CM3/core_cm3.h **** extern void __set_MSP(uint32_t topOfMainStack);
+ 848:CMSIS/Core/CM3/core_cm3.h **** 
+ 849:CMSIS/Core/CM3/core_cm3.h **** /**
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 19
+
+
+ 850:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Base Priority value
+ 851:CMSIS/Core/CM3/core_cm3.h ****  *
+ 852:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 853:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t BasePriority
+ 854:CMSIS/Core/CM3/core_cm3.h ****  *
+ 855:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the base priority register
+ 856:CMSIS/Core/CM3/core_cm3.h ****  */
+ 857:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_BASEPRI(void);
+ 858:CMSIS/Core/CM3/core_cm3.h **** 
+ 859:CMSIS/Core/CM3/core_cm3.h **** /**
+ 860:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Base Priority value
+ 861:CMSIS/Core/CM3/core_cm3.h ****  *
+ 862:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t BasePriority
+ 863:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 864:CMSIS/Core/CM3/core_cm3.h ****  *
+ 865:CMSIS/Core/CM3/core_cm3.h ****  * Set the base priority register
+ 866:CMSIS/Core/CM3/core_cm3.h ****  */
+ 867:CMSIS/Core/CM3/core_cm3.h **** extern void __set_BASEPRI(uint32_t basePri);
+ 868:CMSIS/Core/CM3/core_cm3.h **** 
+ 869:CMSIS/Core/CM3/core_cm3.h **** /**
+ 870:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Priority Mask value
+ 871:CMSIS/Core/CM3/core_cm3.h ****  *
+ 872:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 873:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t PriMask
+ 874:CMSIS/Core/CM3/core_cm3.h ****  *
+ 875:CMSIS/Core/CM3/core_cm3.h ****  * Return the state of the priority mask bit from the priority mask
+ 876:CMSIS/Core/CM3/core_cm3.h ****  * register
+ 877:CMSIS/Core/CM3/core_cm3.h ****  */
+ 878:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t  __get_PRIMASK(void);
+ 879:CMSIS/Core/CM3/core_cm3.h **** 
+ 880:CMSIS/Core/CM3/core_cm3.h **** /**
+ 881:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Priority Mask value
+ 882:CMSIS/Core/CM3/core_cm3.h ****  *
+ 883:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t PriMask
+ 884:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 885:CMSIS/Core/CM3/core_cm3.h ****  *
+ 886:CMSIS/Core/CM3/core_cm3.h ****  * Set the priority mask bit in the priority mask register
+ 887:CMSIS/Core/CM3/core_cm3.h ****  */
+ 888:CMSIS/Core/CM3/core_cm3.h **** extern void __set_PRIMASK(uint32_t priMask);
+ 889:CMSIS/Core/CM3/core_cm3.h **** 
+ 890:CMSIS/Core/CM3/core_cm3.h **** /**
+ 891:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Fault Mask value
+ 892:CMSIS/Core/CM3/core_cm3.h ****  *
+ 893:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+ 894:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t FaultMask
+ 895:CMSIS/Core/CM3/core_cm3.h ****  *
+ 896:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the fault mask register
+ 897:CMSIS/Core/CM3/core_cm3.h ****  */
+ 898:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_FAULTMASK(void);
+ 899:CMSIS/Core/CM3/core_cm3.h **** 
+ 900:CMSIS/Core/CM3/core_cm3.h **** /**
+ 901:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Fault Mask value
+ 902:CMSIS/Core/CM3/core_cm3.h ****  *
+ 903:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t faultMask value
+ 904:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 905:CMSIS/Core/CM3/core_cm3.h ****  *
+ 906:CMSIS/Core/CM3/core_cm3.h ****  * Set the fault mask register
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 20
+
+
+ 907:CMSIS/Core/CM3/core_cm3.h ****  */
+ 908:CMSIS/Core/CM3/core_cm3.h **** extern void __set_FAULTMASK(uint32_t faultMask);
+ 909:CMSIS/Core/CM3/core_cm3.h **** 
+ 910:CMSIS/Core/CM3/core_cm3.h **** /**
+ 911:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Return the Control Register value
+ 912:CMSIS/Core/CM3/core_cm3.h **** * 
+ 913:CMSIS/Core/CM3/core_cm3.h **** *  @param  none
+ 914:CMSIS/Core/CM3/core_cm3.h **** *  @return uint32_t Control value
+ 915:CMSIS/Core/CM3/core_cm3.h ****  *
+ 916:CMSIS/Core/CM3/core_cm3.h ****  * Return the content of the control register
+ 917:CMSIS/Core/CM3/core_cm3.h ****  */
+ 918:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __get_CONTROL(void);
+ 919:CMSIS/Core/CM3/core_cm3.h **** 
+ 920:CMSIS/Core/CM3/core_cm3.h **** /**
+ 921:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Control Register value
+ 922:CMSIS/Core/CM3/core_cm3.h ****  *
+ 923:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t Control value
+ 924:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+ 925:CMSIS/Core/CM3/core_cm3.h ****  *
+ 926:CMSIS/Core/CM3/core_cm3.h ****  * Set the control register
+ 927:CMSIS/Core/CM3/core_cm3.h ****  */
+ 928:CMSIS/Core/CM3/core_cm3.h **** extern void __set_CONTROL(uint32_t control);
+ 929:CMSIS/Core/CM3/core_cm3.h **** 
+ 930:CMSIS/Core/CM3/core_cm3.h **** /**
+ 931:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse byte order in integer value
+ 932:CMSIS/Core/CM3/core_cm3.h ****  *
+ 933:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t value to reverse
+ 934:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t reversed value
+ 935:CMSIS/Core/CM3/core_cm3.h ****  *
+ 936:CMSIS/Core/CM3/core_cm3.h ****  * Reverse byte order in integer value
+ 937:CMSIS/Core/CM3/core_cm3.h ****  */
+ 938:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __REV(uint32_t value);
+ 939:CMSIS/Core/CM3/core_cm3.h **** 
+ 940:CMSIS/Core/CM3/core_cm3.h **** /**
+ 941:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse byte order in unsigned short value
+ 942:CMSIS/Core/CM3/core_cm3.h ****  *
+ 943:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t value to reverse
+ 944:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t reversed value
+ 945:CMSIS/Core/CM3/core_cm3.h ****  *
+ 946:CMSIS/Core/CM3/core_cm3.h ****  * Reverse byte order in unsigned short value
+ 947:CMSIS/Core/CM3/core_cm3.h ****  */
+ 948:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __REV16(uint16_t value);
+ 949:CMSIS/Core/CM3/core_cm3.h **** 
+ 950:CMSIS/Core/CM3/core_cm3.h **** /*
+ 951:CMSIS/Core/CM3/core_cm3.h ****  * Reverse byte order in signed short value with sign extension to integer
+ 952:CMSIS/Core/CM3/core_cm3.h ****  *
+ 953:CMSIS/Core/CM3/core_cm3.h ****  * @param  int16_t value to reverse
+ 954:CMSIS/Core/CM3/core_cm3.h ****  * @return int32_t reversed value
+ 955:CMSIS/Core/CM3/core_cm3.h ****  *
+ 956:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse byte order in signed short value with sign extension to integer
+ 957:CMSIS/Core/CM3/core_cm3.h ****  */
+ 958:CMSIS/Core/CM3/core_cm3.h **** extern int32_t __REVSH(int16_t value);
+ 959:CMSIS/Core/CM3/core_cm3.h **** 
+ 960:CMSIS/Core/CM3/core_cm3.h **** /**
+ 961:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Reverse bit order of value
+ 962:CMSIS/Core/CM3/core_cm3.h ****  *
+ 963:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t value to reverse
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 21
+
+
+ 964:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t reversed value
+ 965:CMSIS/Core/CM3/core_cm3.h ****  *
+ 966:CMSIS/Core/CM3/core_cm3.h ****  * Reverse bit order of value
+ 967:CMSIS/Core/CM3/core_cm3.h ****  */
+ 968:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __RBIT(uint32_t value);
+ 969:CMSIS/Core/CM3/core_cm3.h **** 
+ 970:CMSIS/Core/CM3/core_cm3.h **** /**
+ 971:CMSIS/Core/CM3/core_cm3.h ****  * @brief  LDR Exclusive
+ 972:CMSIS/Core/CM3/core_cm3.h ****  *
+ 973:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint8_t* address
+ 974:CMSIS/Core/CM3/core_cm3.h ****  * @return uint8_t value of (*address)
+ 975:CMSIS/Core/CM3/core_cm3.h ****  *
+ 976:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive LDR command
+ 977:CMSIS/Core/CM3/core_cm3.h ****  */
+ 978:CMSIS/Core/CM3/core_cm3.h **** extern uint8_t __LDREXB(uint8_t *addr);
+ 979:CMSIS/Core/CM3/core_cm3.h **** 
+ 980:CMSIS/Core/CM3/core_cm3.h **** /**
+ 981:CMSIS/Core/CM3/core_cm3.h ****  * @brief  LDR Exclusive
+ 982:CMSIS/Core/CM3/core_cm3.h ****  *
+ 983:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t* address
+ 984:CMSIS/Core/CM3/core_cm3.h ****  * @return uint16_t value of (*address)
+ 985:CMSIS/Core/CM3/core_cm3.h ****  *
+ 986:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive LDR command
+ 987:CMSIS/Core/CM3/core_cm3.h ****  */
+ 988:CMSIS/Core/CM3/core_cm3.h **** extern uint16_t __LDREXH(uint16_t *addr);
+ 989:CMSIS/Core/CM3/core_cm3.h **** 
+ 990:CMSIS/Core/CM3/core_cm3.h **** /**
+ 991:CMSIS/Core/CM3/core_cm3.h ****  * @brief  LDR Exclusive
+ 992:CMSIS/Core/CM3/core_cm3.h ****  *
+ 993:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t* address
+ 994:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t value of (*address)
+ 995:CMSIS/Core/CM3/core_cm3.h ****  *
+ 996:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive LDR command
+ 997:CMSIS/Core/CM3/core_cm3.h ****  */
+ 998:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __LDREXW(uint32_t *addr);
+ 999:CMSIS/Core/CM3/core_cm3.h **** 
+1000:CMSIS/Core/CM3/core_cm3.h **** /**
+1001:CMSIS/Core/CM3/core_cm3.h ****  * @brief  STR Exclusive
+1002:CMSIS/Core/CM3/core_cm3.h ****  *
+1003:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint8_t *address
+1004:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint8_t value to store
+1005:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t successful / failed
+1006:CMSIS/Core/CM3/core_cm3.h ****  *
+1007:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive STR command
+1008:CMSIS/Core/CM3/core_cm3.h ****  */
+1009:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __STREXB(uint8_t value, uint8_t *addr);
+1010:CMSIS/Core/CM3/core_cm3.h **** 
+1011:CMSIS/Core/CM3/core_cm3.h **** /**
+1012:CMSIS/Core/CM3/core_cm3.h ****  * @brief  STR Exclusive
+1013:CMSIS/Core/CM3/core_cm3.h ****  *
+1014:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t *address
+1015:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint16_t value to store
+1016:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t successful / failed
+1017:CMSIS/Core/CM3/core_cm3.h ****  *
+1018:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive STR command
+1019:CMSIS/Core/CM3/core_cm3.h ****  */
+1020:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __STREXH(uint16_t value, uint16_t *addr);
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 22
+
+
+1021:CMSIS/Core/CM3/core_cm3.h **** 
+1022:CMSIS/Core/CM3/core_cm3.h **** /**
+1023:CMSIS/Core/CM3/core_cm3.h ****  * @brief  STR Exclusive
+1024:CMSIS/Core/CM3/core_cm3.h ****  *
+1025:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t *address
+1026:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t value to store
+1027:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t successful / failed
+1028:CMSIS/Core/CM3/core_cm3.h ****  *
+1029:CMSIS/Core/CM3/core_cm3.h ****  * Exclusive STR command
+1030:CMSIS/Core/CM3/core_cm3.h ****  */
+1031:CMSIS/Core/CM3/core_cm3.h **** extern uint32_t __STREXW(uint32_t value, uint32_t *addr);
+1032:CMSIS/Core/CM3/core_cm3.h **** 
+1033:CMSIS/Core/CM3/core_cm3.h **** 
+1034:CMSIS/Core/CM3/core_cm3.h **** #elif (defined (__TASKING__)) /*------------------ TASKING Compiler ---------------------*/
+1035:CMSIS/Core/CM3/core_cm3.h **** /* TASKING carm specific functions */
+1036:CMSIS/Core/CM3/core_cm3.h **** 
+1037:CMSIS/Core/CM3/core_cm3.h **** /*
+1038:CMSIS/Core/CM3/core_cm3.h ****  * The CMSIS functions have been implemented as intrinsics in the compiler.
+1039:CMSIS/Core/CM3/core_cm3.h ****  * Please use "carm -?i" to get an up to date list of all instrinsics,
+1040:CMSIS/Core/CM3/core_cm3.h ****  * Including the CMSIS ones.
+1041:CMSIS/Core/CM3/core_cm3.h ****  */
+1042:CMSIS/Core/CM3/core_cm3.h **** 
+1043:CMSIS/Core/CM3/core_cm3.h **** #endif
+1044:CMSIS/Core/CM3/core_cm3.h **** 
+1045:CMSIS/Core/CM3/core_cm3.h **** 
+1046:CMSIS/Core/CM3/core_cm3.h **** 
+1047:CMSIS/Core/CM3/core_cm3.h **** /* ##########################   NVIC functions  #################################### */
+1048:CMSIS/Core/CM3/core_cm3.h **** 
+1049:CMSIS/Core/CM3/core_cm3.h **** 
+1050:CMSIS/Core/CM3/core_cm3.h **** /**
+1051:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the Priority Grouping in NVIC Interrupt Controller
+1052:CMSIS/Core/CM3/core_cm3.h ****  *
+1053:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t priority_grouping is priority grouping field
+1054:CMSIS/Core/CM3/core_cm3.h ****  * @return none 
+1055:CMSIS/Core/CM3/core_cm3.h ****  *
+1056:CMSIS/Core/CM3/core_cm3.h ****  * Set the priority grouping field using the required unlock sequence.
+1057:CMSIS/Core/CM3/core_cm3.h ****  * The parameter priority_grouping is assigned to the field 
+1058:CMSIS/Core/CM3/core_cm3.h ****  * SCB->AIRCR [10:8] PRIGROUP field. Only values from 0..7 are used.
+1059:CMSIS/Core/CM3/core_cm3.h ****  * In case of a conflict between priority grouping and available
+1060:CMSIS/Core/CM3/core_cm3.h ****  * priority bits (__NVIC_PRIO_BITS) the smallest possible priority group is set.
+1061:CMSIS/Core/CM3/core_cm3.h ****  */
+1062:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_SetPriorityGrouping(uint32_t PriorityGroup)
+1063:CMSIS/Core/CM3/core_cm3.h **** {
+1064:CMSIS/Core/CM3/core_cm3.h ****   uint32_t reg_value;
+1065:CMSIS/Core/CM3/core_cm3.h ****   uint32_t PriorityGroupTmp = (PriorityGroup & 0x07);                         /* only values 0..7 a
+1066:CMSIS/Core/CM3/core_cm3.h ****   
+1067:CMSIS/Core/CM3/core_cm3.h ****   reg_value  = SCB->AIRCR;                                                    /* read old register 
+1068:CMSIS/Core/CM3/core_cm3.h ****   reg_value &= ~((0xFFFFU << 16) | (0x0F << 8));                              /* clear bits to chan
+1069:CMSIS/Core/CM3/core_cm3.h ****   reg_value  = ((reg_value | NVIC_AIRCR_VECTKEY | (PriorityGroupTmp << 8)));  /* Insert write key a
+1070:CMSIS/Core/CM3/core_cm3.h ****   SCB->AIRCR = reg_value;
+1071:CMSIS/Core/CM3/core_cm3.h **** }
+1072:CMSIS/Core/CM3/core_cm3.h **** 
+1073:CMSIS/Core/CM3/core_cm3.h **** /**
+1074:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Get the Priority Grouping from NVIC Interrupt Controller
+1075:CMSIS/Core/CM3/core_cm3.h ****  *
+1076:CMSIS/Core/CM3/core_cm3.h ****  * @param  none
+1077:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t   priority grouping field 
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 23
+
+
+1078:CMSIS/Core/CM3/core_cm3.h ****  *
+1079:CMSIS/Core/CM3/core_cm3.h ****  * Get the priority grouping from NVIC Interrupt Controller.
+1080:CMSIS/Core/CM3/core_cm3.h ****  * priority grouping is SCB->AIRCR [10:8] PRIGROUP field.
+1081:CMSIS/Core/CM3/core_cm3.h ****  */
+1082:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t NVIC_GetPriorityGrouping(void)
+1083:CMSIS/Core/CM3/core_cm3.h **** {
+1084:CMSIS/Core/CM3/core_cm3.h ****   return ((SCB->AIRCR >> 8) & 0x07);                                          /* read priority grou
+1085:CMSIS/Core/CM3/core_cm3.h **** }
+1086:CMSIS/Core/CM3/core_cm3.h **** 
+1087:CMSIS/Core/CM3/core_cm3.h **** /**
+1088:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Enable Interrupt in NVIC Interrupt Controller
+1089:CMSIS/Core/CM3/core_cm3.h ****  *
+1090:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn specifies the interrupt number
+1091:CMSIS/Core/CM3/core_cm3.h ****  * @return none 
+1092:CMSIS/Core/CM3/core_cm3.h ****  *
+1093:CMSIS/Core/CM3/core_cm3.h ****  * Enable a device specific interupt in the NVIC interrupt controller.
+1094:CMSIS/Core/CM3/core_cm3.h ****  * The interrupt number cannot be a negative value.
+1095:CMSIS/Core/CM3/core_cm3.h ****  */
+1096:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
+1097:CMSIS/Core/CM3/core_cm3.h **** {
+1098:CMSIS/Core/CM3/core_cm3.h ****   NVIC->ISER[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* enable interrupt */
+1099:CMSIS/Core/CM3/core_cm3.h **** }
+1100:CMSIS/Core/CM3/core_cm3.h **** 
+1101:CMSIS/Core/CM3/core_cm3.h **** /**
+1102:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Disable the interrupt line for external interrupt specified
+1103:CMSIS/Core/CM3/core_cm3.h ****  * 
+1104:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn is the positive number of the external interrupt
+1105:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+1106:CMSIS/Core/CM3/core_cm3.h ****  * 
+1107:CMSIS/Core/CM3/core_cm3.h ****  * Disable a device specific interupt in the NVIC interrupt controller.
+1108:CMSIS/Core/CM3/core_cm3.h ****  * The interrupt number cannot be a negative value.
+1109:CMSIS/Core/CM3/core_cm3.h ****  */
+1110:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_DisableIRQ(IRQn_Type IRQn)
+1111:CMSIS/Core/CM3/core_cm3.h **** {
+1112:CMSIS/Core/CM3/core_cm3.h ****   NVIC->ICER[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* disable interrupt */
+1113:CMSIS/Core/CM3/core_cm3.h **** }
+1114:CMSIS/Core/CM3/core_cm3.h **** 
+1115:CMSIS/Core/CM3/core_cm3.h **** /**
+1116:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Read the interrupt pending bit for a device specific interrupt source
+1117:CMSIS/Core/CM3/core_cm3.h ****  * 
+1118:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn is the number of the device specifc interrupt
+1119:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t 1 if pending interrupt else 0
+1120:CMSIS/Core/CM3/core_cm3.h ****  *
+1121:CMSIS/Core/CM3/core_cm3.h ****  * Read the pending register in NVIC and return 1 if its status is pending, 
+1122:CMSIS/Core/CM3/core_cm3.h ****  * otherwise it returns 0
+1123:CMSIS/Core/CM3/core_cm3.h ****  */
+1124:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t NVIC_GetPendingIRQ(IRQn_Type IRQn)
+1125:CMSIS/Core/CM3/core_cm3.h **** {
+1126:CMSIS/Core/CM3/core_cm3.h ****   return((uint32_t) ((NVIC->ISPR[(uint32_t)(IRQn) >> 5] & (1 << ((uint32_t)(IRQn) & 0x1F)))?1:0)); 
+1127:CMSIS/Core/CM3/core_cm3.h **** }
+1128:CMSIS/Core/CM3/core_cm3.h **** 
+1129:CMSIS/Core/CM3/core_cm3.h **** /**
+1130:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the pending bit for an external interrupt
+1131:CMSIS/Core/CM3/core_cm3.h ****  * 
+1132:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn is the Number of the interrupt
+1133:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+1134:CMSIS/Core/CM3/core_cm3.h ****  *
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 24
+
+
+1135:CMSIS/Core/CM3/core_cm3.h ****  * Set the pending bit for the specified interrupt.
+1136:CMSIS/Core/CM3/core_cm3.h ****  * The interrupt number cannot be a negative value.
+1137:CMSIS/Core/CM3/core_cm3.h ****  */
+1138:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_SetPendingIRQ(IRQn_Type IRQn)
+1139:CMSIS/Core/CM3/core_cm3.h **** {
+1140:CMSIS/Core/CM3/core_cm3.h ****   NVIC->ISPR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* set interrupt pending 
+1141:CMSIS/Core/CM3/core_cm3.h **** }
+1142:CMSIS/Core/CM3/core_cm3.h **** 
+1143:CMSIS/Core/CM3/core_cm3.h **** /**
+1144:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Clear the pending bit for an external interrupt
+1145:CMSIS/Core/CM3/core_cm3.h ****  *
+1146:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn is the Number of the interrupt
+1147:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+1148:CMSIS/Core/CM3/core_cm3.h ****  *
+1149:CMSIS/Core/CM3/core_cm3.h ****  * Clear the pending bit for the specified interrupt. 
+1150:CMSIS/Core/CM3/core_cm3.h ****  * The interrupt number cannot be a negative value.
+1151:CMSIS/Core/CM3/core_cm3.h ****  */
+1152:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+1153:CMSIS/Core/CM3/core_cm3.h **** {
+1154:CMSIS/Core/CM3/core_cm3.h ****   NVIC->ICPR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* Clear pending interrup
+1155:CMSIS/Core/CM3/core_cm3.h **** }
+1156:CMSIS/Core/CM3/core_cm3.h **** 
+1157:CMSIS/Core/CM3/core_cm3.h **** /**
+1158:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Read the active bit for an external interrupt
+1159:CMSIS/Core/CM3/core_cm3.h ****  *
+1160:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type  IRQn is the Number of the interrupt
+1161:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t   1 if active else 0
+1162:CMSIS/Core/CM3/core_cm3.h ****  *
+1163:CMSIS/Core/CM3/core_cm3.h ****  * Read the active register in NVIC and returns 1 if its status is active, 
+1164:CMSIS/Core/CM3/core_cm3.h ****  * otherwise it returns 0.
+1165:CMSIS/Core/CM3/core_cm3.h ****  */
+1166:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t NVIC_GetActive(IRQn_Type IRQn)
+1167:CMSIS/Core/CM3/core_cm3.h **** {
+1168:CMSIS/Core/CM3/core_cm3.h ****   return((uint32_t)((NVIC->IABR[(uint32_t)(IRQn) >> 5] & (1 << ((uint32_t)(IRQn) & 0x1F)))?1:0)); /
+1169:CMSIS/Core/CM3/core_cm3.h **** }
+1170:CMSIS/Core/CM3/core_cm3.h **** 
+1171:CMSIS/Core/CM3/core_cm3.h **** /**
+1172:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Set the priority for an interrupt
+1173:CMSIS/Core/CM3/core_cm3.h ****  *
+1174:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn is the Number of the interrupt
+1175:CMSIS/Core/CM3/core_cm3.h ****  * @param  priority is the priority for the interrupt
+1176:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+1177:CMSIS/Core/CM3/core_cm3.h ****  *
+1178:CMSIS/Core/CM3/core_cm3.h ****  * Set the priority for the specified interrupt. The interrupt 
+1179:CMSIS/Core/CM3/core_cm3.h ****  * number can be positive to specify an external (device specific) 
+1180:CMSIS/Core/CM3/core_cm3.h ****  * interrupt, or negative to specify an internal (core) interrupt. \n
+1181:CMSIS/Core/CM3/core_cm3.h ****  *
+1182:CMSIS/Core/CM3/core_cm3.h ****  * Note: The priority cannot be set for every core interrupt.
+1183:CMSIS/Core/CM3/core_cm3.h ****  */
+1184:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+1185:CMSIS/Core/CM3/core_cm3.h **** {
+1186:CMSIS/Core/CM3/core_cm3.h ****   if(IRQn < 0) {
+1187:CMSIS/Core/CM3/core_cm3.h ****     SCB->SHP[((uint32_t)(IRQn) & 0xF)-4] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set 
+1188:CMSIS/Core/CM3/core_cm3.h ****   else {
+1189:CMSIS/Core/CM3/core_cm3.h ****     NVIC->IP[(uint32_t)(IRQn)] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff);    }        /* set 
+1190:CMSIS/Core/CM3/core_cm3.h **** }
+1191:CMSIS/Core/CM3/core_cm3.h **** 
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 25
+
+
+1192:CMSIS/Core/CM3/core_cm3.h **** /**
+1193:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Read the priority for an interrupt
+1194:CMSIS/Core/CM3/core_cm3.h ****  *
+1195:CMSIS/Core/CM3/core_cm3.h ****  * @param  IRQn_Type IRQn is the Number of the interrupt
+1196:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t  priority is the priority for the interrupt
+1197:CMSIS/Core/CM3/core_cm3.h ****  *
+1198:CMSIS/Core/CM3/core_cm3.h ****  * Read the priority for the specified interrupt. The interrupt 
+1199:CMSIS/Core/CM3/core_cm3.h ****  * number can be positive to specify an external (device specific) 
+1200:CMSIS/Core/CM3/core_cm3.h ****  * interrupt, or negative to specify an internal (core) interrupt.
+1201:CMSIS/Core/CM3/core_cm3.h ****  *
+1202:CMSIS/Core/CM3/core_cm3.h ****  * The returned priority value is automatically aligned to the implemented
+1203:CMSIS/Core/CM3/core_cm3.h ****  * priority bits of the microcontroller.
+1204:CMSIS/Core/CM3/core_cm3.h ****  *
+1205:CMSIS/Core/CM3/core_cm3.h ****  * Note: The priority cannot be set for every core interrupt.
+1206:CMSIS/Core/CM3/core_cm3.h ****  */
+1207:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t NVIC_GetPriority(IRQn_Type IRQn)
+1208:CMSIS/Core/CM3/core_cm3.h **** {
+1209:CMSIS/Core/CM3/core_cm3.h **** 
+1210:CMSIS/Core/CM3/core_cm3.h ****   if(IRQn < 0) {
+1211:CMSIS/Core/CM3/core_cm3.h ****     return((uint32_t)(SCB->SHP[((uint32_t)(IRQn) & 0xF)-4] >> (8 - __NVIC_PRIO_BITS)));  } /* get p
+1212:CMSIS/Core/CM3/core_cm3.h ****   else {
+1213:CMSIS/Core/CM3/core_cm3.h ****     return((uint32_t)(NVIC->IP[(uint32_t)(IRQn)]           >> (8 - __NVIC_PRIO_BITS)));  } /* get p
+1214:CMSIS/Core/CM3/core_cm3.h **** }
+1215:CMSIS/Core/CM3/core_cm3.h **** 
+1216:CMSIS/Core/CM3/core_cm3.h **** 
+1217:CMSIS/Core/CM3/core_cm3.h **** /**
+1218:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Encode the priority for an interrupt
+1219:CMSIS/Core/CM3/core_cm3.h ****  *
+1220:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t PriorityGroup   is the used priority group
+1221:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t PreemptPriority is the preemptive priority value (starting from 0)
+1222:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t SubPriority     is the sub priority value (starting from 0)
+1223:CMSIS/Core/CM3/core_cm3.h ****  * @return uint32_t                    the priority for the interrupt
+1224:CMSIS/Core/CM3/core_cm3.h ****  *
+1225:CMSIS/Core/CM3/core_cm3.h ****  * Encode the priority for an interrupt with the given priority group,
+1226:CMSIS/Core/CM3/core_cm3.h ****  * preemptive priority value and sub priority value.
+1227:CMSIS/Core/CM3/core_cm3.h ****  * In case of a conflict between priority grouping and available
+1228:CMSIS/Core/CM3/core_cm3.h ****  * priority bits (__NVIC_PRIO_BITS) the samllest possible priority group is set.
+1229:CMSIS/Core/CM3/core_cm3.h ****  *
+1230:CMSIS/Core/CM3/core_cm3.h ****  * The returned priority value can be used for NVIC_SetPriority(...) function
+1231:CMSIS/Core/CM3/core_cm3.h ****  */
+1232:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t NVIC_EncodePriority (uint32_t PriorityGroup, uint32_t PreemptPriority, uin
+1233:CMSIS/Core/CM3/core_cm3.h **** {
+1234:CMSIS/Core/CM3/core_cm3.h ****   uint32_t PriorityGroupTmp = (PriorityGroup & 0x07);                         /* only values 0..7 a
+1235:CMSIS/Core/CM3/core_cm3.h ****   uint32_t PreemptPriorityBits;
+1236:CMSIS/Core/CM3/core_cm3.h ****   uint32_t SubPriorityBits;
+1237:CMSIS/Core/CM3/core_cm3.h **** 
+1238:CMSIS/Core/CM3/core_cm3.h ****   PreemptPriorityBits = ((7 - PriorityGroupTmp) > __NVIC_PRIO_BITS) ? __NVIC_PRIO_BITS : 7 - Priori
+1239:CMSIS/Core/CM3/core_cm3.h ****   SubPriorityBits     = ((PriorityGroupTmp + __NVIC_PRIO_BITS) < 7) ? 0 : PriorityGroupTmp - 7 + __
+1240:CMSIS/Core/CM3/core_cm3.h ****  
+1241:CMSIS/Core/CM3/core_cm3.h ****   return (
+1242:CMSIS/Core/CM3/core_cm3.h ****            ((PreemptPriority & ((1 << (PreemptPriorityBits)) - 1)) << SubPriorityBits) |
+1243:CMSIS/Core/CM3/core_cm3.h ****            ((SubPriority     & ((1 << (SubPriorityBits    )) - 1)))
+1244:CMSIS/Core/CM3/core_cm3.h ****          );
+1245:CMSIS/Core/CM3/core_cm3.h **** }
+1246:CMSIS/Core/CM3/core_cm3.h **** 
+1247:CMSIS/Core/CM3/core_cm3.h **** 
+1248:CMSIS/Core/CM3/core_cm3.h **** /**
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 26
+
+
+1249:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Decode the priority of an interrupt
+1250:CMSIS/Core/CM3/core_cm3.h ****  *
+1251:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t   Priority       the priority for the interrupt
+1252:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t   PrioGroup   is the used priority group
+1253:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t* pPreemptPrio is the preemptive priority value (starting from 0)
+1254:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t* pSubPrio     is the sub priority value (starting from 0)
+1255:CMSIS/Core/CM3/core_cm3.h ****  * @return none
+1256:CMSIS/Core/CM3/core_cm3.h ****  *
+1257:CMSIS/Core/CM3/core_cm3.h ****  * Decode an interrupt priority value with the given priority group to 
+1258:CMSIS/Core/CM3/core_cm3.h ****  * preemptive priority value and sub priority value.
+1259:CMSIS/Core/CM3/core_cm3.h ****  * In case of a conflict between priority grouping and available
+1260:CMSIS/Core/CM3/core_cm3.h ****  * priority bits (__NVIC_PRIO_BITS) the samllest possible priority group is set.
+1261:CMSIS/Core/CM3/core_cm3.h ****  *
+1262:CMSIS/Core/CM3/core_cm3.h ****  * The priority value can be retrieved with NVIC_GetPriority(...) function
+1263:CMSIS/Core/CM3/core_cm3.h ****  */
+1264:CMSIS/Core/CM3/core_cm3.h **** static __INLINE void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGroup, uint32_t* pPre
+1265:CMSIS/Core/CM3/core_cm3.h **** {
+1266:CMSIS/Core/CM3/core_cm3.h ****   uint32_t PriorityGroupTmp = (PriorityGroup & 0x07);                         /* only values 0..7 a
+1267:CMSIS/Core/CM3/core_cm3.h ****   uint32_t PreemptPriorityBits;
+1268:CMSIS/Core/CM3/core_cm3.h ****   uint32_t SubPriorityBits;
+1269:CMSIS/Core/CM3/core_cm3.h **** 
+1270:CMSIS/Core/CM3/core_cm3.h ****   PreemptPriorityBits = ((7 - PriorityGroupTmp) > __NVIC_PRIO_BITS) ? __NVIC_PRIO_BITS : 7 - Priori
+1271:CMSIS/Core/CM3/core_cm3.h ****   SubPriorityBits     = ((PriorityGroupTmp + __NVIC_PRIO_BITS) < 7) ? 0 : PriorityGroupTmp - 7 + __
+1272:CMSIS/Core/CM3/core_cm3.h ****   
+1273:CMSIS/Core/CM3/core_cm3.h ****   *pPreemptPriority = (Priority >> SubPriorityBits) & ((1 << (PreemptPriorityBits)) - 1);
+1274:CMSIS/Core/CM3/core_cm3.h ****   *pSubPriority     = (Priority                   ) & ((1 << (SubPriorityBits    )) - 1);
+1275:CMSIS/Core/CM3/core_cm3.h **** }
+1276:CMSIS/Core/CM3/core_cm3.h **** 
+1277:CMSIS/Core/CM3/core_cm3.h **** 
+1278:CMSIS/Core/CM3/core_cm3.h **** 
+1279:CMSIS/Core/CM3/core_cm3.h **** /* ##################################    SysTick function  ########################################
+1280:CMSIS/Core/CM3/core_cm3.h **** 
+1281:CMSIS/Core/CM3/core_cm3.h **** #if (!defined (__Vendor_SysTickConfig)) || (__Vendor_SysTickConfig == 0)
+1282:CMSIS/Core/CM3/core_cm3.h **** 
+1283:CMSIS/Core/CM3/core_cm3.h **** /* SysTick constants */
+1284:CMSIS/Core/CM3/core_cm3.h **** #define SYSTICK_ENABLE              0                                          /* Config-Bit to sta
+1285:CMSIS/Core/CM3/core_cm3.h **** #define SYSTICK_TICKINT             1                                          /* Config-Bit to ena
+1286:CMSIS/Core/CM3/core_cm3.h **** #define SYSTICK_CLKSOURCE           2                                          /* Clocksource has t
+1287:CMSIS/Core/CM3/core_cm3.h **** #define SYSTICK_MAXCOUNT       ((1<<24) -1)                                    /* SysTick MaxCount 
+1288:CMSIS/Core/CM3/core_cm3.h **** 
+1289:CMSIS/Core/CM3/core_cm3.h **** /**
+1290:CMSIS/Core/CM3/core_cm3.h ****  * @brief  Initialize and start the SysTick counter and its interrupt.
+1291:CMSIS/Core/CM3/core_cm3.h ****  *
+1292:CMSIS/Core/CM3/core_cm3.h ****  * @param  uint32_t ticks is the number of ticks between two interrupts
+1293:CMSIS/Core/CM3/core_cm3.h ****  * @return  none
+1294:CMSIS/Core/CM3/core_cm3.h ****  *
+1295:CMSIS/Core/CM3/core_cm3.h ****  * Initialise the system tick timer and its interrupt and start the
+1296:CMSIS/Core/CM3/core_cm3.h ****  * system tick timer / counter in free running mode to generate 
+1297:CMSIS/Core/CM3/core_cm3.h ****  * periodical interrupts.
+1298:CMSIS/Core/CM3/core_cm3.h ****  */
+1299:CMSIS/Core/CM3/core_cm3.h **** static __INLINE uint32_t SysTick_Config(uint32_t ticks)
+1300:CMSIS/Core/CM3/core_cm3.h **** { 
+1301:CMSIS/Core/CM3/core_cm3.h ****   if (ticks > SYSTICK_MAXCOUNT)  return (1);                                             /* Reload 
+1302:CMSIS/Core/CM3/core_cm3.h **** 
+1303:CMSIS/Core/CM3/core_cm3.h ****   SysTick->LOAD  =  (ticks & SYSTICK_MAXCOUNT) - 1;                                      /* set rel
+ 121              		.loc 2 1303 0
+ 122 0026 9B09     		lsrs	r3, r3, #6
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 27
+
+
+ 123              	.LVL12:
+ 124 0028 013B     		subs	r3, r3, #1
+ 125              	.LVL13:
+ 126 002a 314A     		ldr	r2, .L14+8
+ 127 002c 5360     		str	r3, [r2, #4]
+ 128              	.LVL14:
+ 129              	.LBB10:
+ 130              	.LBB11:
+1187:CMSIS/Core/CM3/core_cm3.h ****   else {
+ 131              		.loc 2 1187 0
+ 132 002e F021     		movs	r1, #240
+ 133 0030 304B     		ldr	r3, .L14+12
+ 134              	.LVL15:
+ 135 0032 83F82310 		strb	r1, [r3, #35]
+ 136              	.LVL16:
+ 137              	.LBE11:
+ 138              	.LBE10:
+1304:CMSIS/Core/CM3/core_cm3.h ****   NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);                            /* set Pri
+1305:CMSIS/Core/CM3/core_cm3.h ****   SysTick->VAL   =  (0x00);                                                              /* Load th
+ 139              		.loc 2 1305 0
+ 140 0036 0023     		movs	r3, #0
+ 141 0038 9360     		str	r3, [r2, #8]
+1306:CMSIS/Core/CM3/core_cm3.h ****   SysTick->CTRL = (1 << SYSTICK_CLKSOURCE) | (1<<SYSTICK_ENABLE) | (1<<SYSTICK_TICKINT); /* Enable 
+ 142              		.loc 2 1306 0
+ 143 003a 0723     		movs	r3, #7
+ 144 003c 1360     		str	r3, [r2]
+ 145              	.LBE9:
+ 146              	.LBE8:
+  61:Src/main.c    ****     { 
+  62:Src/main.c    ****         /* Capture error */ 
+  63:Src/main.c    ****         while (1);
+  64:Src/main.c    ****     }
+  65:Src/main.c    **** 
+  66:Src/main.c    ****     Delay(500);
+ 147              		.loc 1 66 0
+ 148 003e 4FF4FA70 		mov	r0, #500
+ 149 0042 FFF7FEFF 		bl	Delay
+ 150              	.LVL17:
+ 151              	.L12:
+  67:Src/main.c    **** 
+  68:Src/main.c    ****     while(1)
+  69:Src/main.c    ****     {
+  70:Src/main.c    ****         printf("\r\n---------------------\r\n");
+ 152              		.loc 1 70 0
+ 153 0046 2C48     		ldr	r0, .L14+16
+ 154 0048 FFF7FEFF 		bl	puts
+ 155              	.LVL18:
+  71:Src/main.c    **** #ifdef BOARD_DEF_MANGO_M32
+  72:Src/main.c    ****         printf("Mango M32 test start...\n");
+ 156              		.loc 1 72 0
+ 157 004c 2B48     		ldr	r0, .L14+20
+ 158 004e FFF7FEFF 		bl	puts
+ 159              	.LVL19:
+  73:Src/main.c    **** #elif  BOARD_DEF_MANGO_Z1
+  74:Src/main.c    ****         printf("Mango Z1 test start...\n");
+  75:Src/main.c    **** #endif
+  76:Src/main.c    ****         printf("Press menu key\r\n");
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 28
+
+
+ 160              		.loc 1 76 0
+ 161 0052 2B48     		ldr	r0, .L14+24
+ 162 0054 FFF7FEFF 		bl	puts
+ 163              	.LVL20:
+  77:Src/main.c    ****         printf("---------------------\r\n");
+ 164              		.loc 1 77 0
+ 165 0058 2A4C     		ldr	r4, .L14+28
+ 166 005a 2046     		mov	r0, r4
+ 167 005c FFF7FEFF 		bl	puts
+ 168              	.LVL21:
+  78:Src/main.c    ****         printf("0> System Information\r\n");
+ 169              		.loc 1 78 0
+ 170 0060 2948     		ldr	r0, .L14+32
+ 171 0062 FFF7FEFF 		bl	puts
+ 172              	.LVL22:
+  79:Src/main.c    ****         printf("---------------------\r\n");
+ 173              		.loc 1 79 0
+ 174 0066 2046     		mov	r0, r4
+ 175 0068 FFF7FEFF 		bl	puts
+ 176              	.LVL23:
+  80:Src/main.c    ****         printf("1> LED Test\r\n");
+ 177              		.loc 1 80 0
+ 178 006c 2748     		ldr	r0, .L14+36
+ 179 006e FFF7FEFF 		bl	puts
+ 180              	.LVL24:
+  81:Src/main.c    ****         printf("2> KEY Test\r\n");
+ 181              		.loc 1 81 0
+ 182 0072 2748     		ldr	r0, .L14+40
+ 183 0074 FFF7FEFF 		bl	puts
+ 184              	.LVL25:
+  82:Src/main.c    **** #ifdef BOARD_DEF_MANGO_M32
+  83:Src/main.c    ****         printf("3> 7-Segment Test\r\n");
+ 185              		.loc 1 83 0
+ 186 0078 2648     		ldr	r0, .L14+44
+ 187 007a FFF7FEFF 		bl	puts
+ 188              	.LVL26:
+  84:Src/main.c    **** #elif  BOARD_DEF_MANGO_Z1
+  85:Src/main.c    ****         printf("3> ZigBee Test\r\n");
+  86:Src/main.c    **** #endif
+  87:Src/main.c    ****         printf("4> USB HID Test\r\n");
+ 189              		.loc 1 87 0
+ 190 007e 2648     		ldr	r0, .L14+48
+ 191 0080 FFF7FEFF 		bl	puts
+ 192              	.LVL27:
+  88:Src/main.c    ****         printf("5> \r\n");
+ 193              		.loc 1 88 0
+ 194 0084 2548     		ldr	r0, .L14+52
+ 195 0086 FFF7FEFF 		bl	puts
+ 196              	.LVL28:
+  89:Src/main.c    ****         printf("---------------------\r\n");
+ 197              		.loc 1 89 0
+ 198 008a 2046     		mov	r0, r4
+ 199 008c FFF7FEFF 		bl	puts
+ 200              	.LVL29:
+  90:Src/main.c    ****         printf("x> quit\r\n\r\n");
+ 201              		.loc 1 90 0
+ 202 0090 2348     		ldr	r0, .L14+56
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 29
+
+
+ 203 0092 FFF7FEFF 		bl	puts
+ 204              	.LVL30:
+  91:Src/main.c    **** 
+  92:Src/main.c    ****         ch = USART_GetCharacter(USART1);
+ 205              		.loc 1 92 0
+ 206 0096 2348     		ldr	r0, .L14+60
+ 207 0098 FFF7FEFF 		bl	USART_GetCharacter
+ 208              	.LVL31:
+ 209 009c 0446     		mov	r4, r0
+ 210              	.LVL32:
+  93:Src/main.c    ****         printf(" is selected\r\n\r\n");
+ 211              		.loc 1 93 0
+ 212 009e 2248     		ldr	r0, .L14+64
+ 213 00a0 FFF7FEFF 		bl	puts
+ 214              	.LVL33:
+  94:Src/main.c    **** 
+  95:Src/main.c    ****         switch((char)ch)
+ 215              		.loc 1 95 0
+ 216 00a4 A4F13003 		sub	r3, r4, #48
+ 217 00a8 032B     		cmp	r3, #3
+ 218 00aa 0ED8     		bhi	.L6
+ 219 00ac DFE803F0 		tbb	[pc, r3]
+ 220              	.L8:
+ 221 00b0 02       		.byte	(.L7-.L8)/2
+ 222 00b1 05       		.byte	(.L9-.L8)/2
+ 223 00b2 08       		.byte	(.L10-.L8)/2
+ 224 00b3 0B       		.byte	(.L11-.L8)/2
+ 225              		.p2align 1
+ 226              	.L7:
+  96:Src/main.c    ****         {
+  97:Src/main.c    ****         case '0':
+  98:Src/main.c    ****             System_Information();
+ 227              		.loc 1 98 0
+ 228 00b4 FFF7FEFF 		bl	System_Information
+ 229              	.LVL34:
+  99:Src/main.c    ****             break;
+ 230              		.loc 1 99 0
+ 231 00b8 07E0     		b	.L6
+ 232              	.L9:
+ 100:Src/main.c    **** 
+ 101:Src/main.c    ****         case '1':
+ 102:Src/main.c    ****             LED_Test();
+ 233              		.loc 1 102 0
+ 234 00ba FFF7FEFF 		bl	LED_Test
+ 235              	.LVL35:
+ 103:Src/main.c    ****             break;
+ 236              		.loc 1 103 0
+ 237 00be 04E0     		b	.L6
+ 238              	.L10:
+ 104:Src/main.c    **** 
+ 105:Src/main.c    ****         case '2':
+ 106:Src/main.c    ****             KEY_Test();
+ 239              		.loc 1 106 0
+ 240 00c0 FFF7FEFF 		bl	KEY_Test
+ 241              	.LVL36:
+ 107:Src/main.c    ****             break;
+ 242              		.loc 1 107 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 30
+
+
+ 243 00c4 01E0     		b	.L6
+ 244              	.L11:
+ 108:Src/main.c    **** 
+ 109:Src/main.c    ****         case '3':
+ 110:Src/main.c    **** #ifdef BOARD_DEF_MANGO_M32
+ 111:Src/main.c    ****             Seven_Segment_Test();
+ 245              		.loc 1 111 0
+ 246 00c6 FFF7FEFF 		bl	Seven_Segment_Test
+ 247              	.LVL37:
+ 248              	.L6:
+ 112:Src/main.c    **** #elif  BOARD_DEF_MANGO_Z1
+ 113:Src/main.c    ****             ZigBee_Test();
+ 114:Src/main.c    **** #endif
+ 115:Src/main.c    ****             break;
+ 116:Src/main.c    **** 
+ 117:Src/main.c    ****         case '4':
+ 118:Src/main.c    **** 
+ 119:Src/main.c    ****             break;
+ 120:Src/main.c    **** 
+ 121:Src/main.c    ****         case '5':
+ 122:Src/main.c    ****             break;
+ 123:Src/main.c    ****         }
+ 124:Src/main.c    **** 
+ 125:Src/main.c    ****         if('x' == (char)ch)
+ 249              		.loc 1 125 0
+ 250 00ca 782C     		cmp	r4, #120
+ 251 00cc BBD1     		bne	.L12
+ 126:Src/main.c    ****         {
+ 127:Src/main.c    ****             break;
+ 128:Src/main.c    ****         }
+ 129:Src/main.c    ****     }
+ 130:Src/main.c    ****     Delay(1000);
+ 252              		.loc 1 130 0
+ 253 00ce 4FF47A70 		mov	r0, #1000
+ 254 00d2 FFF7FEFF 		bl	Delay
+ 255              	.LVL38:
+ 131:Src/main.c    ****     LED_Off_All();
+ 256              		.loc 1 131 0
+ 257 00d6 FFF7FEFF 		bl	LED_Off_All
+ 258              	.LVL39:
+ 132:Src/main.c    ****     Delay(1000);
+ 259              		.loc 1 132 0
+ 260 00da 4FF47A70 		mov	r0, #1000
+ 261 00de FFF7FEFF 		bl	Delay
+ 262              	.LVL40:
+ 133:Src/main.c    **** 
+ 134:Src/main.c    ****     return 0;
+ 135:Src/main.c    **** }
+ 263              		.loc 1 135 0
+ 264 00e2 0020     		movs	r0, #0
+ 265 00e4 10BD     		pop	{r4, pc}
+ 266              	.LVL41:
+ 267              	.L15:
+ 268 00e6 00BF     		.align	2
+ 269              	.L14:
+ 270 00e8 00000000 		.word	rcc_clocks
+ 271 00ec D34D6210 		.word	274877907
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 31
+
+
+ 272 00f0 10E000E0 		.word	-536813552
+ 273 00f4 00ED00E0 		.word	-536810240
+ 274 00f8 78000000 		.word	.LC5
+ 275 00fc 94000000 		.word	.LC6
+ 276 0100 AC000000 		.word	.LC7
+ 277 0104 BC000000 		.word	.LC8
+ 278 0108 D4000000 		.word	.LC9
+ 279 010c EC000000 		.word	.LC10
+ 280 0110 FC000000 		.word	.LC11
+ 281 0114 0C010000 		.word	.LC12
+ 282 0118 20010000 		.word	.LC13
+ 283 011c 34010000 		.word	.LC14
+ 284 0120 3C010000 		.word	.LC15
+ 285 0124 00380140 		.word	1073821696
+ 286 0128 48010000 		.word	.LC16
+ 287              		.cfi_endproc
+ 288              	.LFE29:
+ 290              		.global	g_TestProcessState
+ 291              		.comm	rcc_clocks,20,4
+ 292              		.section	.bss.g_TestProcessState,"aw",%nobits
+ 295              	g_TestProcessState:
+ 296 0000 00       		.space	1
+ 297              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 298              		.align	2
+ 299              	.LC0:
+ 300 0000 53595343 		.ascii	"SYSCLK_Frequency = %d\015\012\000"
+ 300      4C4B5F46 
+ 300      72657175 
+ 300      656E6379 
+ 300      203D2025 
+ 301              	.LC1:
+ 302 0018 48434C4B 		.ascii	"HCLK_Frequency = %d\015\012\000"
+ 302      5F467265 
+ 302      7175656E 
+ 302      6379203D 
+ 302      2025640D 
+ 303 002e 0000     		.space	2
+ 304              	.LC2:
+ 305 0030 50434C4B 		.ascii	"PCLK1_Frequency = %d\015\012\000"
+ 305      315F4672 
+ 305      65717565 
+ 305      6E637920 
+ 305      3D202564 
+ 306 0047 00       		.space	1
+ 307              	.LC3:
+ 308 0048 50434C4B 		.ascii	"PCLK2_Frequency = %d\015\012\000"
+ 308      325F4672 
+ 308      65717565 
+ 308      6E637920 
+ 308      3D202564 
+ 309 005f 00       		.space	1
+ 310              	.LC4:
+ 311 0060 41444343 		.ascii	"ADCCLK_Frequency = %d\015\012\000"
+ 311      4C4B5F46 
+ 311      72657175 
+ 311      656E6379 
+ 311      203D2025 
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 32
+
+
+ 312              	.LC5:
+ 313 0078 0D0A2D2D 		.ascii	"\015\012---------------------\015\000"
+ 313      2D2D2D2D 
+ 313      2D2D2D2D 
+ 313      2D2D2D2D 
+ 313      2D2D2D2D 
+ 314 0091 000000   		.space	3
+ 315              	.LC6:
+ 316 0094 4D616E67 		.ascii	"Mango M32 test start...\000"
+ 316      6F204D33 
+ 316      32207465 
+ 316      73742073 
+ 316      74617274 
+ 317              	.LC7:
+ 318 00ac 50726573 		.ascii	"Press menu key\015\000"
+ 318      73206D65 
+ 318      6E75206B 
+ 318      65790D00 
+ 319              	.LC8:
+ 320 00bc 2D2D2D2D 		.ascii	"---------------------\015\000"
+ 320      2D2D2D2D 
+ 320      2D2D2D2D 
+ 320      2D2D2D2D 
+ 320      2D2D2D2D 
+ 321 00d3 00       		.space	1
+ 322              	.LC9:
+ 323 00d4 303E2053 		.ascii	"0> System Information\015\000"
+ 323      79737465 
+ 323      6D20496E 
+ 323      666F726D 
+ 323      6174696F 
+ 324 00eb 00       		.space	1
+ 325              	.LC10:
+ 326 00ec 313E204C 		.ascii	"1> LED Test\015\000"
+ 326      45442054 
+ 326      6573740D 
+ 326      00
+ 327 00f9 000000   		.space	3
+ 328              	.LC11:
+ 329 00fc 323E204B 		.ascii	"2> KEY Test\015\000"
+ 329      45592054 
+ 329      6573740D 
+ 329      00
+ 330 0109 000000   		.space	3
+ 331              	.LC12:
+ 332 010c 333E2037 		.ascii	"3> 7-Segment Test\015\000"
+ 332      2D536567 
+ 332      6D656E74 
+ 332      20546573 
+ 332      740D00
+ 333 011f 00       		.space	1
+ 334              	.LC13:
+ 335 0120 343E2055 		.ascii	"4> USB HID Test\015\000"
+ 335      53422048 
+ 335      49442054 
+ 335      6573740D 
+ 335      00
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 33
+
+
+ 336 0131 000000   		.space	3
+ 337              	.LC14:
+ 338 0134 353E200D 		.ascii	"5> \015\000"
+ 338      00
+ 339 0139 000000   		.space	3
+ 340              	.LC15:
+ 341 013c 783E2071 		.ascii	"x> quit\015\012\015\000"
+ 341      7569740D 
+ 341      0A0D00
+ 342 0147 00       		.space	1
+ 343              	.LC16:
+ 344 0148 20697320 		.ascii	" is selected\015\012\015\000"
+ 344      73656C65 
+ 344      63746564 
+ 344      0D0A0D00 
+ 345              		.text
+ 346              	.Letext0:
+ 347              		.file 3 "CMSIS/Core/CM3/stm32f10x.h"
+ 348              		.file 4 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/machine/_default_types
+ 349              		.file 5 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/sys/_stdint.h"
+ 350              		.file 6 "STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h"
+ 351              		.file 7 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/stdio.h"
+ 352              		.file 8 "Inc/hw_config.h"
+ 353              		.file 9 "<built-in>"
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s 			page 34
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:20     .text.System_Information:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:25     .text.System_Information:0000000000000000 System_Information
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:67     .text.System_Information:0000000000000030 $d
+                            *COM*:0000000000000014 rcc_clocks
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:77     .text.main:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:82     .text.main:0000000000000000 main
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:221    .text.main:00000000000000b0 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:225    .text.main:00000000000000b4 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:270    .text.main:00000000000000e8 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:295    .bss.g_TestProcessState:0000000000000000 g_TestProcessState
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:296    .bss.g_TestProcessState:0000000000000000 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccB4g7p8.s:298    .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+printf
+RCC_Configuration
+RCC_GetClocksFreq
+NVIC_Configuration
+GPIO_Configuration
+EXTI_Configuration
+USART1_Init
+Delay
+puts
+USART_GetCharacter
+LED_Test
+KEY_Test
+Seven_Segment_Test
+LED_Off_All

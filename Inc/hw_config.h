@@ -102,6 +102,14 @@ extern bool g_TestProcessState;
     #define GPIO_EXTI_Line_RF_GPIO0    EXTI_Line8
 #endif
 
+#define GPIO_SW_I2C              GPIOC
+#define GPIO_SW_I2C_SDA_PIN      GPIO_Pin_0
+#define GPIO_SW_I2C_SCL_PIN      GPIO_Pin_1
+
+#define GPIO_PORTSOURCE_I2C_SCL  GPIO_PortSourceGPIOC
+#define GPIO_PINSOURCE_I2C_SCL   GPIO_PinSource1
+#define GPIO_EXTI_Line_I2C_SCL   EXTI_Line1
+
 /* functions */
 
 void LED_On_Red (void);
