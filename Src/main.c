@@ -23,11 +23,11 @@ bool g_TestProcessState = FALSE;
 
 void System_Information()
 {
-    printf("SYSCLK_Frequency = %d\n",rcc_clocks.SYSCLK_Frequency );
-    printf("HCLK_Frequency = %d\n",rcc_clocks.HCLK_Frequency );
-    printf("PCLK1_Frequency = %d\n",rcc_clocks.PCLK1_Frequency );
-    printf("PCLK2_Frequency = %d\n",rcc_clocks.PCLK2_Frequency );
-    printf("ADCCLK_Frequency = %d\n",rcc_clocks.ADCCLK_Frequency );
+    printf("SYSCLK_Frequency = %d\r\n",rcc_clocks.SYSCLK_Frequency );
+    printf("HCLK_Frequency = %d\r\n",rcc_clocks.HCLK_Frequency );
+    printf("PCLK1_Frequency = %d\r\n",rcc_clocks.PCLK1_Frequency );
+    printf("PCLK2_Frequency = %d\r\n",rcc_clocks.PCLK2_Frequency );
+    printf("ADCCLK_Frequency = %d\r\n",rcc_clocks.ADCCLK_Frequency );
 }
 
 void USB_Test_Start (void)
@@ -77,30 +77,30 @@ int main(void)
 
     while(1)
     {
-        printf("\n---------------------\n");
+        printf("\r\n---------------------\r\n");
 #ifdef BOARD_DEF_MANGO_M32
         printf("Mango M32 test start...\n");
 #elif  BOARD_DEF_MANGO_Z1
         printf("Mango Z1 test start...\n");
 #endif
-        printf("Press menu key\n");
-        printf("---------------------\n");
-        printf("0> System Information\n");
-        printf("---------------------\n");
-        printf("1> LED Test\n");
-        printf("2> KEY Test\n");
+        printf("Press menu key\r\n");
+        printf("---------------------\r\n");
+        printf("0> System Information\r\n");
+        printf("---------------------\r\n");
+        printf("1> LED Test\r\n");
+        printf("2> KEY Test\r\n");
 #ifdef BOARD_DEF_MANGO_M32
-        printf("3> 7-Segment Test\n");
+        printf("3> 7-Segment Test\r\n");
 #elif  BOARD_DEF_MANGO_Z1
-        printf("3> ZigBee Test\n");
+        printf("3> ZigBee Test\r\n");
 #endif
-        printf("4> USB HID Test\n");
-        printf("5> \n");
-        printf("---------------------\n");
-        printf("x> quit\n\n");
+        printf("4> USB HID Test\r\n");
+        printf("5> \r\n");
+        printf("---------------------\r\n");
+        printf("x> quit\r\n\r\n");
 
         ch = USART_GetCharacter(USART1);
-        printf(" is selected\n\n");
+        printf(" is selected\r\n\r\n");
 
         switch((char)ch)
         {

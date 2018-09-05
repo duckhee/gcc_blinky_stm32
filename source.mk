@@ -17,6 +17,7 @@ src/usb_prop.c \
 src/usb_pwr.c \
 src/zigbee_test.c \
 src/syscalls.c \
+#src/support.c \
 
 CMSIS_SOURCES = \
 STM32F10x_StdPeriph_Driver/src/misc.c \

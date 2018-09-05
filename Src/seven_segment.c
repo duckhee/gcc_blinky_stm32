@@ -125,7 +125,7 @@ void Seven_Segment_Test(void)
     GPIO_InitTypeDef GPIO_InitStructure;
     int i;
     
-    printf("Seven_Segment_Test\n");
+    printf("Seven_Segment_Test\r\n");
 
     RCC->APB2ENR |= RCC_APB2Periph_GPIOC;
 

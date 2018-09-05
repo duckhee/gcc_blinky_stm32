@@ -229,7 +229,7 @@ static bool toggle_data_key1 = FALSE;
 void EXTI0_IRQHandler(void)
 {
     if(EXTI_GetITStatus(GPIO_EXTI_Line_KEY1) != RESET) {
-        printf("Left-WKUP Button Press\n");
+        printf("Left-WKUP Button Press\r\n");
 
 #if 0
         /* USB Remote Wakup ... */
@@ -276,7 +276,7 @@ static bool toggle_data_key2 = FALSE;
 void EXTI1_IRQHandler(void)
 {
     if(EXTI_GetITStatus(GPIO_EXTI_Line_KEY2) != RESET) {
-        printf("Right-USER Button Press\n");
+        printf("Right-USER Button Press\r\n");
 
         if(TRUE == g_TestProcessState)
         {

@@ -239,7 +239,7 @@ static void appPrintRfRegs_SREG(void)
         iRegVal = CC2520_MEMRD8(p->iRegNum);
 
         // Print name and contents
-        printf("0x%02X %-20s : 0x%02X\n",
+        printf("0x%02X %-20s : 0x%02X\r\n",
                p->iRegNum, (char*)p->szRegName, iRegVal);
 
         p++;
@@ -258,7 +258,7 @@ static void appPrintRfRegs_FREG(void)
         iRegVal = CC2520_REGRD8(p->iRegNum);
 
         // Print name and contents
-        printf("0x%02X %-20s : 0x%02X\n",
+        printf("0x%02X %-20s : 0x%02X\r\n",
                p->iRegNum, (char*)p->szRegName, iRegVal);
 
         p++;
@@ -296,9 +296,9 @@ static void appLight(void)
         DEBUG_MSG_FUNC_NOTIFY;
 
         if(basicRfReceive(pRxData, APP_PAYLOAD_LENGTH, NULL)>0) {
-            printf("pRxData[0]: %c\n", pRxData[0]);
+            printf("pRxData[0]: %c\r\n", pRxData[0]);
 #ifdef DEBUG_MSG_LEVEL0
-            printf("basicRfGetRssi() val: %d\n", basicRfGetRssi());
+            printf("basicRfGetRssi() val: %d\r\n", basicRfGetRssi());
 #endif
             led_rx_ok();
         }
@@ -355,7 +355,7 @@ static void appSwitch(void)
         {
             pTxData[0] += 1;
         }
-        printf("send data is %c\n", pTxData[0]);
+        printf("send data is %c\r\n", pTxData[0]);
 
         status = basicRfSendPacket(RX_ADDR, pTxData, APP_PAYLOAD_LENGTH);
         if(HAL_RF_SUCCESS != status)
@@ -463,7 +463,7 @@ static void perTest_appReceiver(void)
         if(0 == (iteration & ITERATION_COUNT))
         {
             led_rx_ok();
-            printf("rcvP: %d, lostP: %d, PER:%5.2f %%, RSSI:%5.2f dBm\n",
+            printf("rcvP: %d, lostP: %d, PER:%5.2f %%, RSSI:%5.2f dBm\r\n",
                    rxStats.rcvdPkts, rxStats.lostPkts,
                    (float)(rxStats.lostPkts)
                    /(float)(rxStats.lostPkts+rxStats.rcvdPkts)*100,
@@ -504,17 +504,17 @@ static void perTest_appTransmitter(void)
     // Set TX output power
     CC2520_REGWR8(CC2520_TXPOWER, CC2520_TXPOWER_4_DBM);
 
-    printf("PACKET_SIZE sizeof(perTestPacket_t) is %d\n", PACKET_SIZE);
+    printf("PACKET_SIZE sizeof(perTestPacket_t) is %d\r\n", PACKET_SIZE);
 
     // Set burst size
-    printf("Select Burst Size\n");
-    printf("1> BURST_SIZE 1000\n");
-    printf("2> BURST_SIZE 10000\n");
-    printf("3> BURST_SIZE 100000\n");
-    printf("4> BURST_SIZE 1000000\n");
+    printf("Select Burst Size\r\n");
+    printf("1> BURST_SIZE 1000\r\n");
+    printf("2> BURST_SIZE 10000\r\n");
+    printf("3> BURST_SIZE 100000\r\n");
+    printf("4> BURST_SIZE 1000000\r\n");
 
     ch = USART_GetCharacter(USART1);
-    printf(" is selected\n");
+    printf(" is selected\r\n");
 
     switch((char)ch)
     {
@@ -539,7 +539,7 @@ static void perTest_appTransmitter(void)
         break;
     }
 
-    printf("Selected Burst Size: %d\n", burstSize);
+    printf("Selected Burst Size: %d\r\n", burstSize);
     
     // Basic RF puts on receiver before transmission of packet, and turns off
     // after packet is sent
@@ -554,7 +554,7 @@ static void perTest_appTransmitter(void)
     // Main loop
     while (TRUE)
     {
-        printf("Press Any Key to start sending data ...\n");
+        printf("Press Any Key to start sending data ...\r\n");
         USART_GetCharacter(USART1);
 
         while (TRUE)
@@ -579,7 +579,7 @@ static void perTest_appTransmitter(void)
             if(0 == (iteration & ITERATION_COUNT))
             {
                 led_tx_ok();
-                printf("sntP: %d\n", txPacket.seqNumber);
+                printf("sntP: %d\r\n", txPacket.seqNumber);
             }
         
             pktsSent++;
@@ -599,17 +599,17 @@ void ZigBee_Test(void)
 
     DEBUG_MSG_FUNC_START;
 
-    printf("\n- Select Channel -\n");
-    printf("<a> channel 11, <b> channel 12, <c> channel 13, <d> channel 14\n");
-    printf("<e> channel 15, <f> channel 16, <g> channel 17, <h> channel 18\n");
-    printf("<i> channel 19, <j> channel 20, <k> channel 21, <l> channel 22\n");
-    printf("<m> channel 23, <n> channel 24, <o> channel 25, <p> channel 26\n");
+    printf("\r\n- Select Channel -\r\n");
+    printf("<a> channel 11, <b> channel 12, <c> channel 13, <d> channel 14\r\n");
+    printf("<e> channel 15, <f> channel 16, <g> channel 17, <h> channel 18\r\n");
+    printf("<i> channel 19, <j> channel 20, <k> channel 21, <l> channel 22\r\n");
+    printf("<m> channel 23, <n> channel 24, <o> channel 25, <p> channel 26\r\n");
 
     ch = USART_GetCharacter(USART1);
-    printf(" is selected\n");
+    printf(" is selected\r\n");
 
     channelNum = MIN_CHANNEL + ((int) (ch - 'a'));
-    printf("selected channel is %d\n", channelNum);
+    printf("selected channel is %d\r\n", channelNum);
     
     if((channelNum >= MIN_CHANNEL) && (channelNum <= MAX_CHANNEL))
     {
@@ -617,13 +617,13 @@ void ZigBee_Test(void)
     }
     else
     {
-        printf("default channel is %d\n", RF_CHANNEL);
+        printf("default channel is %d\r\n", RF_CHANNEL);
         basicRfConfig.channel = RF_CHANNEL;
     }
 
-    // F = 2405 + 5 * (k - 11) [MHz] k ¡ô[11,26]
-    printf("frequency range is from %d MHz to %d MHz\n", 2405, 2480);
-    printf("selected frequency is %d MHz\n",
+    // F = 2405 + 5 * (k - 11) [MHz] k ï¿½ï¿½[11,26]
+    printf("frequency range is from %d MHz to %d MHz\r\n", 2405, 2480);
+    printf("selected frequency is %d MHz\r\n",
            2405 + 5 * (basicRfConfig.channel - MIN_CHANNEL));
 
     // Config basicRF
@@ -643,24 +643,24 @@ void ZigBee_Test(void)
 
     halRfInit();
 
-    printf("chipid : 0x%x\n", halRfGetChipId());
-    printf("version : 0x%x\n", halRfGetChipVer());
+    printf("chipid : 0x%x\r\n", halRfGetChipId());
+    printf("version : 0x%x\r\n", halRfGetChipVer());
 
     while(1)
     {
-        printf("\n\n---------------------\n");
-        printf("Press menu key\n");
-        printf("---------------------\n");
-        printf("1> Print Registers: FREG\n");
-        printf("2> Print Registers: SREG\n");
-        printf("---------------------\n");
-        printf("3> appLight\n");
-        printf("4> appSwitch\n");
-        printf("---------------------\n");
-        printf("5> PER Test appReceiver\n");
-        printf("6> PER Test appTransmitter\n");
-        printf("---------------------\n");
-        printf("x> quit\n\n");
+        printf("\r\n\r\n---------------------\r\n");
+        printf("Press menu key\r\n");
+        printf("---------------------\r\n");
+        printf("1> Print Registers: FREG\r\n");
+        printf("2> Print Registers: SREG\r\n");
+        printf("---------------------\r\n");
+        printf("3> appLight\r\n");
+        printf("4> appSwitch\r\n");
+        printf("---------------------\r\n");
+        printf("5> PER Test appReceiver\r\n");
+        printf("6> PER Test appTransmitter\r\n");
+        printf("---------------------\r\n");
+        printf("x> quit\r\n\r\n");
 
 #if 1
         ch = USART_GetCharacter(USART1);
@@ -668,7 +668,7 @@ void ZigBee_Test(void)
         ch = '4';
 #endif
 
-        printf(" is selected\n");
+        printf(" is selected\r\n");
 
         switch((char)ch)
         {
