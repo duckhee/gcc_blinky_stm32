@@ -223,44 +223,9 @@ void RCC_IRQHandler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-
-static bool toggle_data_key1 = FALSE;
-
 void EXTI0_IRQHandler(void)
 {
-    if(EXTI_GetITStatus(GPIO_EXTI_Line_KEY1) != RESET) {
-        printf("Left-WKUP Button Press\r\n");
 
-#if 0
-        /* USB Remote Wakup ... */
-        if (pInformation->Current_Feature & 0x20) //Remote wake-up enabled
-        {
-          Resume(RESUME_INTERNAL);
-        }
-#endif
-
-        if(TRUE == g_TestProcessState)
-        {
-            Send_Buffer[0] = 0x05;
-
-            if(toggle_data_key1)
-            {
-                toggle_data_key1 = FALSE;
-                Send_Buffer[1] = 0x01;
-            }
-            else
-            {
-                toggle_data_key1 = TRUE;
-                Send_Buffer[1] = 0x00;
-            }
-
-            UserToPMABufferCopy(Send_Buffer, ENDP1_TXADDR, 2);
-            SetEPTxCount(ENDP1, 2);
-            SetEPTxValid(ENDP1);
-        }
-
-        EXTI_ClearITPendingBit(GPIO_EXTI_Line_KEY1);
-    }
 }
 
 /*******************************************************************************
@@ -270,36 +235,8 @@ void EXTI0_IRQHandler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-
-static bool toggle_data_key2 = FALSE;
-
 void EXTI1_IRQHandler(void)
 {
-    if(EXTI_GetITStatus(GPIO_EXTI_Line_KEY2) != RESET) {
-        printf("Right-USER Button Press\r\n");
-
-        if(TRUE == g_TestProcessState)
-        {
-            Send_Buffer[0] = 0x06;
-
-            if(toggle_data_key2)
-            {
-                toggle_data_key2 = FALSE;
-                Send_Buffer[1] = 0x01;
-            }
-            else
-            {
-                toggle_data_key2 = TRUE;
-                Send_Buffer[1] = 0x00;
-            }
-
-            UserToPMABufferCopy(Send_Buffer, ENDP1_TXADDR, 2);
-            SetEPTxCount(ENDP1, 2);
-            SetEPTxValid(ENDP1);
-        }
-
-        EXTI_ClearITPendingBit(GPIO_EXTI_Line_KEY2);
-    }
 }
 
 /*******************************************************************************
@@ -344,18 +281,6 @@ void EXTI4_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel1_IRQHandler(void)
 {
-    Send_Buffer[0] = 0x07;
-
-    if((ADC_ConvertedValueX >>4) - (ADC_ConvertedValueX_1 >>4) > 4)
-    {
-        Send_Buffer[1] = (uint8_t)(ADC_ConvertedValueX >>4);
-        UserToPMABufferCopy(Send_Buffer, ENDP1_TXADDR, 2);
-        SetEPTxCount(ENDP1, 2);
-        SetEPTxValid(ENDP1);
-        ADC_ConvertedValueX_1 = ADC_ConvertedValueX;
-    }
-
-    DMA_ClearFlag(DMA1_FLAG_TC1);
 }
 
 /*******************************************************************************
@@ -457,7 +382,6 @@ void USB_HP_CAN1_TX_IRQHandler(void)
 *******************************************************************************/
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
-    USB_Istr();
 }
 
 /*******************************************************************************
@@ -491,6 +415,7 @@ void CAN1_SCE_IRQHandler(void)
 *******************************************************************************/
 void EXTI9_5_IRQHandler(void)
 {
+    /*
 #ifdef  BOARD_DEF_MANGO_Z1
     if(EXTI_GetITStatus(GPIO_EXTI_Line_RF_GPIO0) != RESET)
     {
@@ -498,6 +423,7 @@ void EXTI9_5_IRQHandler(void)
         EXTI_ClearITPendingBit(GPIO_EXTI_Line_RF_GPIO0);
     }
 #endif
+    */
 }
 
 /*******************************************************************************
@@ -709,9 +635,6 @@ void RTCAlarm_IRQHandler(void)
 *******************************************************************************/
 void USBWakeUp_IRQHandler(void)
 {
-#if 1
-    EXTI_ClearITPendingBit(EXTI_Line18);
-#endif
 }
 
 /******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/

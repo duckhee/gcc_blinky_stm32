@@ -29,14 +29,6 @@ void System_Information()
     printf("PCLK2_Frequency = %d\r\n",rcc_clocks.PCLK2_Frequency );
     printf("ADCCLK_Frequency = %d\r\n",rcc_clocks.ADCCLK_Frequency );
 }
-
-void USB_Test_Start (void)
-{
-    USB_Interrupts_Config();
-    Set_USBClock();
-    USB_Init();
-}
-
 /*
  * Name   : main
  * Input  : None
@@ -70,8 +62,6 @@ int main(void)
         /* Capture error */ 
         while (1);
     }
-
-    USB_Cable_Config(DISABLE);
 
     Delay(500);
 
@@ -125,12 +115,7 @@ int main(void)
             break;
 
         case '4':
-            g_TestProcessState = TRUE;
 
-            /* USB initialization */
-            USB_Test_Start();
-            Delay(500);
-            USB_Cable_Config(ENABLE);
             break;
 
         case '5':

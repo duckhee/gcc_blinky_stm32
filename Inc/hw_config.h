@@ -40,6 +40,7 @@ extern bool g_TestProcessState;
 
 #define GPIO_USB_DISCONNECT        GPIOA
 
+
 #ifdef BOARD_DEF_MANGO_M32
     #define GPIO_7_SEG              GPIOC
 #elif  BOARD_DEF_MANGO_Z1
