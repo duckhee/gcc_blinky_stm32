@@ -17,6 +17,9 @@ Src/usb_prop.c \
 Src/usb_pwr.c \
 Src/zigbee_test.c \
 Src/syscalls.c \
+Src/Sensor/i2c_driver.c \
+Src/Sensor/I2CRoutines.c \
+Src/Sensor/BMA280.c \
 #src/support.c \
 
 CMSIS_SOURCES = \

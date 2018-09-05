@@ -1,0 +1,601 @@
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"i2c_driver.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.i2c1_driver_Initialize,"ax",%progbits
+  20              		.align	2
+  21              		.global	i2c1_driver_Initialize
+  22              		.thumb
+  23              		.thumb_func
+  25              	i2c1_driver_Initialize:
+  26              	.LFB28:
+  27              		.file 1 "Src/Sensor/i2c_driver.c"
+   1:Src/Sensor/i2c_driver.c **** /*
+   2:Src/Sensor/i2c_driver.c ****  * (C) COPYRIGHT 2009 CRZ
+   3:Src/Sensor/i2c_driver.c ****  *
+   4:Src/Sensor/i2c_driver.c ****  * File Name : i2c_driver.c
+   5:Src/Sensor/i2c_driver.c ****  * 
+   6:Src/Sensor/i2c_driver.c ****  * History 
+   7:Src/Sensor/i2c_driver.c ****  *
+   8:Src/Sensor/i2c_driver.c ****  * when         who       what, where, why
+   9:Src/Sensor/i2c_driver.c ****  *--------------------------------------------------------------
+  10:Src/Sensor/i2c_driver.c ****  * 09/29/2011   sikim     Initial release
+  11:Src/Sensor/i2c_driver.c ****  */
+  12:Src/Sensor/i2c_driver.c **** 
+  13:Src/Sensor/i2c_driver.c **** /* Includes */
+  14:Src/Sensor/i2c_driver.c **** 
+  15:Src/Sensor/i2c_driver.c **** #include "hw_config.h"
+  16:Src/Sensor/i2c_driver.c **** 
+  17:Src/Sensor/i2c_driver.c **** /*
+  18:Src/Sensor/i2c_driver.c ****  * Description : none.
+  19:Src/Sensor/i2c_driver.c ****  * Argument(s) : none.
+  20:Src/Sensor/i2c_driver.c ****  * Return(s)   : none.
+  21:Src/Sensor/i2c_driver.c ****  * Note(s)     : none.
+  22:Src/Sensor/i2c_driver.c ****  */
+  23:Src/Sensor/i2c_driver.c **** void i2c1_driver_Initialize (void)
+  24:Src/Sensor/i2c_driver.c **** {
+  28              		.loc 1 24 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 30B5     		push	{r4, r5, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 12
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 2
+
+
+  35              		.cfi_offset 4, -12
+  36              		.cfi_offset 5, -8
+  37              		.cfi_offset 14, -4
+  38 0002 87B0     		sub	sp, sp, #28
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 40
+  25:Src/Sensor/i2c_driver.c ****     GPIO_InitTypeDef GPIO_InitStructure;  
+  26:Src/Sensor/i2c_driver.c ****     I2C_InitTypeDef  I2C_InitStructure;    
+  27:Src/Sensor/i2c_driver.c ****     /******************** Clock Enable ********************/
+  28:Src/Sensor/i2c_driver.c ****     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);  
+  41              		.loc 1 28 0
+  42 0004 0121     		movs	r1, #1
+  43 0006 0820     		movs	r0, #8
+  44 0008 FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+  45              	.LVL0:
+  29:Src/Sensor/i2c_driver.c ****     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);    
+  46              		.loc 1 29 0
+  47 000c 0121     		movs	r1, #1
+  48 000e 0846     		mov	r0, r1
+  49 0010 FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+  50              	.LVL1:
+  30:Src/Sensor/i2c_driver.c ****     RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
+  51              		.loc 1 30 0
+  52 0014 0121     		movs	r1, #1
+  53 0016 4FF40010 		mov	r0, #2097152
+  54 001a FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+  55              	.LVL2:
+  31:Src/Sensor/i2c_driver.c ****         
+  32:Src/Sensor/i2c_driver.c ****     /******************** GPIO configure ********************/
+  33:Src/Sensor/i2c_driver.c ****     GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6 | GPIO_Pin_7;
+  56              		.loc 1 33 0
+  57 001e C023     		movs	r3, #192
+  58 0020 ADF81430 		strh	r3, [sp, #20]	@ movhi
+  34:Src/Sensor/i2c_driver.c ****     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  59              		.loc 1 34 0
+  60 0024 0323     		movs	r3, #3
+  61 0026 8DF81630 		strb	r3, [sp, #22]
+  35:Src/Sensor/i2c_driver.c ****     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_OD;
+  62              		.loc 1 35 0
+  63 002a 1C23     		movs	r3, #28
+  64 002c 8DF81730 		strb	r3, [sp, #23]
+  36:Src/Sensor/i2c_driver.c ****     GPIO_Init(GPIOB, &GPIO_InitStructure);          
+  65              		.loc 1 36 0
+  66 0030 05A9     		add	r1, sp, #20
+  67 0032 1348     		ldr	r0, .L3
+  68 0034 FFF7FEFF 		bl	GPIO_Init
+  69              	.LVL3:
+  37:Src/Sensor/i2c_driver.c **** 
+  38:Src/Sensor/i2c_driver.c ****     /******************** Fuction configure ********************/
+  39:Src/Sensor/i2c_driver.c ****     I2C_DeInit(I2C1);
+  70              		.loc 1 39 0
+  71 0038 124C     		ldr	r4, .L3+4
+  72 003a 2046     		mov	r0, r4
+  73 003c FFF7FEFF 		bl	I2C_DeInit
+  74              	.LVL4:
+  40:Src/Sensor/i2c_driver.c ****     /* I2C1 Init */
+  41:Src/Sensor/i2c_driver.c ****     I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 3
+
+
+  75              		.loc 1 41 0
+  76 0040 0023     		movs	r3, #0
+  77 0042 ADF80830 		strh	r3, [sp, #8]	@ movhi
+  42:Src/Sensor/i2c_driver.c ****     I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+  78              		.loc 1 42 0
+  79 0046 4BF6FF73 		movw	r3, #49151
+  80 004a ADF80A30 		strh	r3, [sp, #10]	@ movhi
+  43:Src/Sensor/i2c_driver.c ****     I2C_InitStructure.I2C_OwnAddress1 = 0x70;
+  81              		.loc 1 43 0
+  82 004e 7023     		movs	r3, #112
+  83 0050 ADF80C30 		strh	r3, [sp, #12]	@ movhi
+  44:Src/Sensor/i2c_driver.c ****     I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+  84              		.loc 1 44 0
+  85 0054 4FF48063 		mov	r3, #1024
+  86 0058 ADF80E30 		strh	r3, [sp, #14]	@ movhi
+  45:Src/Sensor/i2c_driver.c ****     I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+  87              		.loc 1 45 0
+  88 005c 4FF48043 		mov	r3, #16384
+  89 0060 ADF81030 		strh	r3, [sp, #16]	@ movhi
+  46:Src/Sensor/i2c_driver.c ****     I2C_InitStructure.I2C_ClockSpeed = 400000;
+  90              		.loc 1 46 0
+  91 0064 06AD     		add	r5, sp, #24
+  92 0066 084B     		ldr	r3, .L3+8
+  93 0068 45F8143D 		str	r3, [r5, #-20]!
+  47:Src/Sensor/i2c_driver.c ****     I2C_Cmd(I2C1, ENABLE);    
+  94              		.loc 1 47 0
+  95 006c 0121     		movs	r1, #1
+  96 006e 2046     		mov	r0, r4
+  97 0070 FFF7FEFF 		bl	I2C_Cmd
+  98              	.LVL5:
+  48:Src/Sensor/i2c_driver.c ****     I2C_Init(I2C1, &I2C_InitStructure);
+  99              		.loc 1 48 0
+ 100 0074 2946     		mov	r1, r5
+ 101 0076 2046     		mov	r0, r4
+ 102 0078 FFF7FEFF 		bl	I2C_Init
+ 103              	.LVL6:
+  49:Src/Sensor/i2c_driver.c **** }
+ 104              		.loc 1 49 0
+ 105 007c 07B0     		add	sp, sp, #28
+ 106              	.LCFI2:
+ 107              		.cfi_def_cfa_offset 12
+ 108              		@ sp needed
+ 109 007e 30BD     		pop	{r4, r5, pc}
+ 110              	.L4:
+ 111              		.align	2
+ 112              	.L3:
+ 113 0080 000C0140 		.word	1073810432
+ 114 0084 00540040 		.word	1073763328
+ 115 0088 801A0600 		.word	400000
+ 116              		.cfi_endproc
+ 117              	.LFE28:
+ 119              		.section	.text.i2c1_1byte_addr7_write,"ax",%progbits
+ 120              		.align	2
+ 121              		.global	i2c1_1byte_addr7_write
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	i2c1_1byte_addr7_write:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 4
+
+
+ 126              	.LFB29:
+  50:Src/Sensor/i2c_driver.c **** 
+  51:Src/Sensor/i2c_driver.c **** /*
+  52:Src/Sensor/i2c_driver.c ****  * Description : none.
+  53:Src/Sensor/i2c_driver.c ****  * Argument(s) : none.
+  54:Src/Sensor/i2c_driver.c ****  * Return(s)   : none.
+  55:Src/Sensor/i2c_driver.c ****  * Note(s)     : none.
+  56:Src/Sensor/i2c_driver.c ****  */
+  57:Src/Sensor/i2c_driver.c **** void i2c1_1byte_addr7_write(uint8_t Device_Addr, uint16_t WriteAddr, uint8_t* pBuffer)
+  58:Src/Sensor/i2c_driver.c **** {
+ 127              		.loc 1 58 0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131              	.LVL7:
+ 132 0000 70B5     		push	{r4, r5, r6, lr}
+ 133              	.LCFI3:
+ 134              		.cfi_def_cfa_offset 16
+ 135              		.cfi_offset 4, -16
+ 136              		.cfi_offset 5, -12
+ 137              		.cfi_offset 6, -8
+ 138              		.cfi_offset 14, -4
+ 139 0002 0646     		mov	r6, r0
+ 140 0004 0D46     		mov	r5, r1
+ 141 0006 1446     		mov	r4, r2
+  59:Src/Sensor/i2c_driver.c ****   /* Send STRAT condition */
+  60:Src/Sensor/i2c_driver.c ****   I2C_GenerateSTART(I2C1, ENABLE);
+ 142              		.loc 1 60 0
+ 143 0008 0121     		movs	r1, #1
+ 144              	.LVL8:
+ 145 000a 1648     		ldr	r0, .L11
+ 146              	.LVL9:
+ 147 000c FFF7FEFF 		bl	I2C_GenerateSTART
+ 148              	.LVL10:
+ 149              	.L6:
+  61:Src/Sensor/i2c_driver.c **** 
+  62:Src/Sensor/i2c_driver.c ****   /* Test on EV5 and clear it */
+  63:Src/Sensor/i2c_driver.c ****   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));  
+ 150              		.loc 1 63 0 discriminator 1
+ 151 0010 1549     		ldr	r1, .L11+4
+ 152 0012 1448     		ldr	r0, .L11
+ 153 0014 FFF7FEFF 		bl	I2C_CheckEvent
+ 154              	.LVL11:
+ 155 0018 0028     		cmp	r0, #0
+ 156 001a F9D0     		beq	.L6
+  64:Src/Sensor/i2c_driver.c **** 
+  65:Src/Sensor/i2c_driver.c ****   /* Send slave address for write */
+  66:Src/Sensor/i2c_driver.c ****   I2C_Send7bitAddress(I2C1, Device_Addr, I2C_Direction_Transmitter);
+ 157              		.loc 1 66 0
+ 158 001c 0022     		movs	r2, #0
+ 159 001e 3146     		mov	r1, r6
+ 160 0020 1048     		ldr	r0, .L11
+ 161 0022 FFF7FEFF 		bl	I2C_Send7bitAddress
+ 162              	.LVL12:
+ 163              	.L7:
+  67:Src/Sensor/i2c_driver.c ****   
+  68:Src/Sensor/i2c_driver.c ****   /* Test on EV6 and clear it */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 5
+
+
+  69:Src/Sensor/i2c_driver.c ****   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+ 164              		.loc 1 69 0 discriminator 1
+ 165 0026 1149     		ldr	r1, .L11+8
+ 166 0028 0E48     		ldr	r0, .L11
+ 167 002a FFF7FEFF 		bl	I2C_CheckEvent
+ 168              	.LVL13:
+ 169 002e 0028     		cmp	r0, #0
+ 170 0030 F9D0     		beq	.L7
+  70:Src/Sensor/i2c_driver.c **** 
+  71:Src/Sensor/i2c_driver.c ****   /* Send the device internal address to write to : only one byte Address */
+  72:Src/Sensor/i2c_driver.c ****   I2C_SendData(I2C1, WriteAddr);
+ 171              		.loc 1 72 0
+ 172 0032 E9B2     		uxtb	r1, r5
+ 173 0034 0B48     		ldr	r0, .L11
+ 174 0036 FFF7FEFF 		bl	I2C_SendData
+ 175              	.LVL14:
+ 176              	.L8:
+  73:Src/Sensor/i2c_driver.c ****   
+  74:Src/Sensor/i2c_driver.c ****   /* Test on EV8 and clear it */
+  75:Src/Sensor/i2c_driver.c ****   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+ 177              		.loc 1 75 0 discriminator 1
+ 178 003a 0D49     		ldr	r1, .L11+12
+ 179 003c 0948     		ldr	r0, .L11
+ 180 003e FFF7FEFF 		bl	I2C_CheckEvent
+ 181              	.LVL15:
+ 182 0042 0028     		cmp	r0, #0
+ 183 0044 F9D0     		beq	.L8
+  76:Src/Sensor/i2c_driver.c **** 
+  77:Src/Sensor/i2c_driver.c ****   /* Send the byte to be written */
+  78:Src/Sensor/i2c_driver.c ****   I2C_SendData(I2C1, *pBuffer); 
+ 184              		.loc 1 78 0
+ 185 0046 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 186 0048 0648     		ldr	r0, .L11
+ 187 004a FFF7FEFF 		bl	I2C_SendData
+ 188              	.LVL16:
+ 189              	.L9:
+  79:Src/Sensor/i2c_driver.c ****    
+  80:Src/Sensor/i2c_driver.c ****   /* Test on EV8 and clear it */
+  81:Src/Sensor/i2c_driver.c ****   while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+ 190              		.loc 1 81 0 discriminator 1
+ 191 004e 0849     		ldr	r1, .L11+12
+ 192 0050 0448     		ldr	r0, .L11
+ 193 0052 FFF7FEFF 		bl	I2C_CheckEvent
+ 194              	.LVL17:
+ 195 0056 0028     		cmp	r0, #0
+ 196 0058 F9D0     		beq	.L9
+  82:Src/Sensor/i2c_driver.c **** 
+  83:Src/Sensor/i2c_driver.c ****   /* Send STOP condition */
+  84:Src/Sensor/i2c_driver.c ****   I2C_GenerateSTOP(I2C1, ENABLE);
+ 197              		.loc 1 84 0
+ 198 005a 0121     		movs	r1, #1
+ 199 005c 0148     		ldr	r0, .L11
+ 200 005e FFF7FEFF 		bl	I2C_GenerateSTOP
+ 201              	.LVL18:
+ 202 0062 70BD     		pop	{r4, r5, r6, pc}
+ 203              	.LVL19:
+ 204              	.L12:
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 6
+
+
+ 205              		.align	2
+ 206              	.L11:
+ 207 0064 00540040 		.word	1073763328
+ 208 0068 01000300 		.word	196609
+ 209 006c 82000700 		.word	458882
+ 210 0070 84000700 		.word	458884
+ 211              		.cfi_endproc
+ 212              	.LFE29:
+ 214              		.section	.text.i2c1_addr7_read,"ax",%progbits
+ 215              		.align	2
+ 216              		.global	i2c1_addr7_read
+ 217              		.thumb
+ 218              		.thumb_func
+ 220              	i2c1_addr7_read:
+ 221              	.LFB30:
+  85:Src/Sensor/i2c_driver.c **** }
+  86:Src/Sensor/i2c_driver.c **** 
+  87:Src/Sensor/i2c_driver.c **** /*
+  88:Src/Sensor/i2c_driver.c ****  * Description : none.
+  89:Src/Sensor/i2c_driver.c ****  * Argument(s) : none.
+  90:Src/Sensor/i2c_driver.c ****  * Return(s)   : none.
+  91:Src/Sensor/i2c_driver.c ****  * Note(s)     : none.
+  92:Src/Sensor/i2c_driver.c ****  */
+  93:Src/Sensor/i2c_driver.c **** void i2c1_addr7_read(uint8_t Device_Addr, uint16_t ReadAddr, uint8_t* pBuffer, uint16_t NumByteToRe
+  94:Src/Sensor/i2c_driver.c **** {
+ 222              		.loc 1 94 0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226              	.LVL20:
+ 227 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 228              	.LCFI4:
+ 229              		.cfi_def_cfa_offset 24
+ 230              		.cfi_offset 3, -24
+ 231              		.cfi_offset 4, -20
+ 232              		.cfi_offset 5, -16
+ 233              		.cfi_offset 6, -12
+ 234              		.cfi_offset 7, -8
+ 235              		.cfi_offset 14, -4
+ 236 0002 0646     		mov	r6, r0
+ 237 0004 0F46     		mov	r7, r1
+ 238 0006 1546     		mov	r5, r2
+ 239 0008 1C46     		mov	r4, r3
+ 240              	.LVL21:
+ 241              	.L14:
+  95:Src/Sensor/i2c_driver.c ****     /* While the bus is busy */
+  96:Src/Sensor/i2c_driver.c ****     while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY));
+ 242              		.loc 1 96 0 discriminator 1
+ 243 000a 4FF40031 		mov	r1, #131072
+ 244 000e 2F48     		ldr	r0, .L25
+ 245 0010 FFF7FEFF 		bl	I2C_GetFlagStatus
+ 246              	.LVL22:
+ 247 0014 0028     		cmp	r0, #0
+ 248 0016 F8D1     		bne	.L14
+  97:Src/Sensor/i2c_driver.c **** 
+  98:Src/Sensor/i2c_driver.c ****     /* Send START condition */
+  99:Src/Sensor/i2c_driver.c ****     I2C_GenerateSTART(I2C1, ENABLE);
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 7
+
+
+ 249              		.loc 1 99 0
+ 250 0018 0121     		movs	r1, #1
+ 251 001a 2C48     		ldr	r0, .L25
+ 252 001c FFF7FEFF 		bl	I2C_GenerateSTART
+ 253              	.LVL23:
+ 254              	.L15:
+ 100:Src/Sensor/i2c_driver.c **** 
+ 101:Src/Sensor/i2c_driver.c ****     /* Test on EV5 and clear it */
+ 102:Src/Sensor/i2c_driver.c ****     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+ 255              		.loc 1 102 0 discriminator 1
+ 256 0020 2B49     		ldr	r1, .L25+4
+ 257 0022 2A48     		ldr	r0, .L25
+ 258 0024 FFF7FEFF 		bl	I2C_CheckEvent
+ 259              	.LVL24:
+ 260 0028 0028     		cmp	r0, #0
+ 261 002a F9D0     		beq	.L15
+ 103:Src/Sensor/i2c_driver.c **** 
+ 104:Src/Sensor/i2c_driver.c ****     /* Send slave address for write */
+ 105:Src/Sensor/i2c_driver.c ****     I2C_Send7bitAddress(I2C1, Device_Addr, I2C_Direction_Transmitter);
+ 262              		.loc 1 105 0
+ 263 002c 0022     		movs	r2, #0
+ 264 002e 3146     		mov	r1, r6
+ 265 0030 2648     		ldr	r0, .L25
+ 266 0032 FFF7FEFF 		bl	I2C_Send7bitAddress
+ 267              	.LVL25:
+ 268              	.L16:
+ 106:Src/Sensor/i2c_driver.c **** 
+ 107:Src/Sensor/i2c_driver.c ****     /* Test on EV6 and clear it */
+ 108:Src/Sensor/i2c_driver.c ****     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+ 269              		.loc 1 108 0 discriminator 1
+ 270 0036 2749     		ldr	r1, .L25+8
+ 271 0038 2448     		ldr	r0, .L25
+ 272 003a FFF7FEFF 		bl	I2C_CheckEvent
+ 273              	.LVL26:
+ 274 003e 0028     		cmp	r0, #0
+ 275 0040 F9D0     		beq	.L16
+ 109:Src/Sensor/i2c_driver.c **** 
+ 110:Src/Sensor/i2c_driver.c ****     /* Send the device internal address to read from: Only one byte address */
+ 111:Src/Sensor/i2c_driver.c ****     I2C_SendData(I2C1, ReadAddr);  
+ 276              		.loc 1 111 0
+ 277 0042 F9B2     		uxtb	r1, r7
+ 278 0044 2148     		ldr	r0, .L25
+ 279 0046 FFF7FEFF 		bl	I2C_SendData
+ 280              	.LVL27:
+ 281              	.L17:
+ 112:Src/Sensor/i2c_driver.c **** 
+ 113:Src/Sensor/i2c_driver.c ****     /* Test on EV8 and clear it */
+ 114:Src/Sensor/i2c_driver.c ****     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+ 282              		.loc 1 114 0 discriminator 1
+ 283 004a 2349     		ldr	r1, .L25+12
+ 284 004c 1F48     		ldr	r0, .L25
+ 285 004e FFF7FEFF 		bl	I2C_CheckEvent
+ 286              	.LVL28:
+ 287 0052 0028     		cmp	r0, #0
+ 288 0054 F9D0     		beq	.L17
+ 115:Src/Sensor/i2c_driver.c **** 
+ 116:Src/Sensor/i2c_driver.c ****     /* Send STOP condition */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 8
+
+
+ 117:Src/Sensor/i2c_driver.c ****     I2C_GenerateSTOP(I2C1, ENABLE);  
+ 289              		.loc 1 117 0
+ 290 0056 1D4F     		ldr	r7, .L25
+ 291 0058 0121     		movs	r1, #1
+ 292 005a 3846     		mov	r0, r7
+ 293 005c FFF7FEFF 		bl	I2C_GenerateSTOP
+ 294              	.LVL29:
+ 118:Src/Sensor/i2c_driver.c **** 
+ 119:Src/Sensor/i2c_driver.c ****     /********************************/
+ 120:Src/Sensor/i2c_driver.c ****   
+ 121:Src/Sensor/i2c_driver.c ****     /* Send STRAT condition a second time */  
+ 122:Src/Sensor/i2c_driver.c ****     I2C_GenerateSTART(I2C1, ENABLE);
+ 295              		.loc 1 122 0
+ 296 0060 0121     		movs	r1, #1
+ 297 0062 3846     		mov	r0, r7
+ 298 0064 FFF7FEFF 		bl	I2C_GenerateSTART
+ 299              	.LVL30:
+ 300              	.L18:
+ 123:Src/Sensor/i2c_driver.c **** 
+ 124:Src/Sensor/i2c_driver.c ****     /* Test on EV5 and clear it */
+ 125:Src/Sensor/i2c_driver.c ****     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+ 301              		.loc 1 125 0 discriminator 1
+ 302 0068 1949     		ldr	r1, .L25+4
+ 303 006a 1848     		ldr	r0, .L25
+ 304 006c FFF7FEFF 		bl	I2C_CheckEvent
+ 305              	.LVL31:
+ 306 0070 0028     		cmp	r0, #0
+ 307 0072 F9D0     		beq	.L18
+ 126:Src/Sensor/i2c_driver.c **** 
+ 127:Src/Sensor/i2c_driver.c ****     /* Send device address for read */
+ 128:Src/Sensor/i2c_driver.c ****     I2C_Send7bitAddress(I2C1, Device_Addr, I2C_Direction_Receiver);
+ 308              		.loc 1 128 0
+ 309 0074 0122     		movs	r2, #1
+ 310 0076 3146     		mov	r1, r6
+ 311 0078 1448     		ldr	r0, .L25
+ 312 007a FFF7FEFF 		bl	I2C_Send7bitAddress
+ 313              	.LVL32:
+ 314              	.L19:
+ 129:Src/Sensor/i2c_driver.c ****   
+ 130:Src/Sensor/i2c_driver.c ****     /* Test on EV6 and clear it */
+ 131:Src/Sensor/i2c_driver.c ****     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+ 315              		.loc 1 131 0 discriminator 1
+ 316 007e 1749     		ldr	r1, .L25+16
+ 317 0080 1248     		ldr	r0, .L25
+ 318 0082 FFF7FEFF 		bl	I2C_CheckEvent
+ 319              	.LVL33:
+ 320 0086 0028     		cmp	r0, #0
+ 321 0088 F9D0     		beq	.L19
+ 322 008a 17E0     		b	.L20
+ 323              	.LVL34:
+ 324              	.L23:
+ 132:Src/Sensor/i2c_driver.c ****   
+ 133:Src/Sensor/i2c_driver.c ****     /* While there is data to be read */
+ 134:Src/Sensor/i2c_driver.c ****     while(NumByteToRead)  
+ 135:Src/Sensor/i2c_driver.c ****     {
+ 136:Src/Sensor/i2c_driver.c ****         if(NumByteToRead == 1)
+ 325              		.loc 1 136 0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 9
+
+
+ 326 008c 012C     		cmp	r4, #1
+ 327 008e 08D1     		bne	.L22
+ 137:Src/Sensor/i2c_driver.c ****         {
+ 138:Src/Sensor/i2c_driver.c ****             /* Disable Acknowledgement */
+ 139:Src/Sensor/i2c_driver.c ****             I2C_AcknowledgeConfig(I2C1, DISABLE);
+ 328              		.loc 1 139 0
+ 329 0090 0E4E     		ldr	r6, .L25
+ 330 0092 0021     		movs	r1, #0
+ 331 0094 3046     		mov	r0, r6
+ 332 0096 FFF7FEFF 		bl	I2C_AcknowledgeConfig
+ 333              	.LVL35:
+ 140:Src/Sensor/i2c_driver.c **** 
+ 141:Src/Sensor/i2c_driver.c ****             /* Send STOP Condition */
+ 142:Src/Sensor/i2c_driver.c ****             I2C_GenerateSTOP(I2C1, ENABLE);
+ 334              		.loc 1 142 0
+ 335 009a 0121     		movs	r1, #1
+ 336 009c 3046     		mov	r0, r6
+ 337 009e FFF7FEFF 		bl	I2C_GenerateSTOP
+ 338              	.LVL36:
+ 339              	.L22:
+ 143:Src/Sensor/i2c_driver.c ****         }
+ 144:Src/Sensor/i2c_driver.c ****         while ((I2C_GetLastEvent(I2C1) & 0x0040) != 0x000040); /* Poll on RxNE */            
+ 340              		.loc 1 144 0 discriminator 1
+ 341 00a2 0A48     		ldr	r0, .L25
+ 342 00a4 FFF7FEFF 		bl	I2C_GetLastEvent
+ 343              	.LVL37:
+ 344 00a8 10F0400F 		tst	r0, #64
+ 345 00ac F9D0     		beq	.L22
+ 145:Src/Sensor/i2c_driver.c **** 
+ 146:Src/Sensor/i2c_driver.c ****         /* Read a byte from the EEPROM */
+ 147:Src/Sensor/i2c_driver.c ****         *pBuffer = I2C_ReceiveData(I2C1);
+ 346              		.loc 1 147 0
+ 347 00ae 0748     		ldr	r0, .L25
+ 348 00b0 FFF7FEFF 		bl	I2C_ReceiveData
+ 349              	.LVL38:
+ 350 00b4 05F8010B 		strb	r0, [r5], #1
+ 351              	.LVL39:
+ 148:Src/Sensor/i2c_driver.c **** 
+ 149:Src/Sensor/i2c_driver.c ****         /* Point to the next location where the byte read will be saved */
+ 150:Src/Sensor/i2c_driver.c ****         pBuffer++; 
+ 151:Src/Sensor/i2c_driver.c **** 
+ 152:Src/Sensor/i2c_driver.c ****         /* Decrement the read bytes counter */
+ 153:Src/Sensor/i2c_driver.c ****         NumByteToRead--;        
+ 352              		.loc 1 153 0
+ 353 00b8 013C     		subs	r4, r4, #1
+ 354              	.LVL40:
+ 355 00ba A4B2     		uxth	r4, r4
+ 356              	.LVL41:
+ 357              	.L20:
+ 134:Src/Sensor/i2c_driver.c ****     {
+ 358              		.loc 1 134 0
+ 359 00bc 002C     		cmp	r4, #0
+ 360 00be E5D1     		bne	.L23
+ 154:Src/Sensor/i2c_driver.c ****         
+ 155:Src/Sensor/i2c_driver.c ****     }
+ 156:Src/Sensor/i2c_driver.c **** 
+ 157:Src/Sensor/i2c_driver.c ****     /* Enable Acknowledgement to be ready for another reception */
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 10
+
+
+ 158:Src/Sensor/i2c_driver.c ****     I2C_AcknowledgeConfig(I2C1, ENABLE);
+ 361              		.loc 1 158 0
+ 362 00c0 0121     		movs	r1, #1
+ 363 00c2 0248     		ldr	r0, .L25
+ 364 00c4 FFF7FEFF 		bl	I2C_AcknowledgeConfig
+ 365              	.LVL42:
+ 366 00c8 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 367              	.LVL43:
+ 368              	.L26:
+ 369 00ca 00BF     		.align	2
+ 370              	.L25:
+ 371 00cc 00540040 		.word	1073763328
+ 372 00d0 01000300 		.word	196609
+ 373 00d4 82000700 		.word	458882
+ 374 00d8 84000700 		.word	458884
+ 375 00dc 02000300 		.word	196610
+ 376              		.cfi_endproc
+ 377              	.LFE30:
+ 379              		.text
+ 380              	.Letext0:
+ 381              		.file 2 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/machine/_default_types
+ 382              		.file 3 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/sys/_stdint.h"
+ 383              		.file 4 "CMSIS/Core/CM3/stm32f10x.h"
+ 384              		.file 5 "STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h"
+ 385              		.file 6 "STM32F10x_StdPeriph_Driver/inc/stm32f10x_i2c.h"
+ 386              		.file 7 "STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h"
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 i2c_driver.c
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:20     .text.i2c1_driver_Initialize:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:25     .text.i2c1_driver_Initialize:0000000000000000 i2c1_driver_Initialize
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:113    .text.i2c1_driver_Initialize:0000000000000080 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:120    .text.i2c1_1byte_addr7_write:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:125    .text.i2c1_1byte_addr7_write:0000000000000000 i2c1_1byte_addr7_write
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:207    .text.i2c1_1byte_addr7_write:0000000000000064 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:215    .text.i2c1_addr7_read:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:220    .text.i2c1_addr7_read:0000000000000000 i2c1_addr7_read
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccw2JwZL.s:371    .text.i2c1_addr7_read:00000000000000cc $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+RCC_APB2PeriphClockCmd
+RCC_APB1PeriphClockCmd
+GPIO_Init
+I2C_DeInit
+I2C_Cmd
+I2C_Init
+I2C_GenerateSTART
+I2C_CheckEvent
+I2C_Send7bitAddress
+I2C_SendData
+I2C_GenerateSTOP
+I2C_GetFlagStatus
+I2C_AcknowledgeConfig
+I2C_GetLastEvent
+I2C_ReceiveData

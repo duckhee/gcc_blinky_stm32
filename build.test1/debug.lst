@@ -1,0 +1,357 @@
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"debug.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.DebugMsg_FunctionStart,"ax",%progbits
+  20              		.align	2
+  21              		.global	DebugMsg_FunctionStart
+  22              		.thumb
+  23              		.thumb_func
+  25              	DebugMsg_FunctionStart:
+  26              	.LFB28:
+  27              		.file 1 "Src/debug.c"
+   1:Src/debug.c   **** /*
+   2:Src/debug.c   ****  * (C) COPYRIGHT 2009 CRZ
+   3:Src/debug.c   ****  *
+   4:Src/debug.c   ****  * File Name : main.c
+   5:Src/debug.c   ****  * Author    : POOH
+   6:Src/debug.c   ****  * Version   : V1.0
+   7:Src/debug.c   ****  * Date      : 08/12/2009
+   8:Src/debug.c   ****  */
+   9:Src/debug.c   **** 
+  10:Src/debug.c   **** /* includes */
+  11:Src/debug.c   **** 
+  12:Src/debug.c   **** #include "hw_config.h"
+  13:Src/debug.c   **** 
+  14:Src/debug.c   **** /* functions */
+  15:Src/debug.c   **** 
+  16:Src/debug.c   **** void DebugMsg_FunctionStart(char const * fName_p)
+  17:Src/debug.c   **** {
+  28              		.loc 1 17 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  18:Src/debug.c   **** #ifdef  DEBUG_MSG_LEVEL0
+  19:Src/debug.c   ****     printf("%s() S\n", fName_p);
+  38              		.loc 1 19 0
+  39 0002 0146     		mov	r1, r0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 2
+
+
+  40 0004 0148     		ldr	r0, .L3
+  41              	.LVL1:
+  42 0006 FFF7FEFF 		bl	printf
+  43              	.LVL2:
+  44 000a 08BD     		pop	{r3, pc}
+  45              	.L4:
+  46              		.align	2
+  47              	.L3:
+  48 000c 00000000 		.word	.LC0
+  49              		.cfi_endproc
+  50              	.LFE28:
+  52              		.section	.text.DebugMsg_FunctionEnd,"ax",%progbits
+  53              		.align	2
+  54              		.global	DebugMsg_FunctionEnd
+  55              		.thumb
+  56              		.thumb_func
+  58              	DebugMsg_FunctionEnd:
+  59              	.LFB29:
+  20:Src/debug.c   **** #endif
+  21:Src/debug.c   **** }
+  22:Src/debug.c   **** 
+  23:Src/debug.c   **** void DebugMsg_FunctionEnd(char const * fName_p)
+  24:Src/debug.c   **** {
+  60              		.loc 1 24 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64              	.LVL3:
+  65 0000 08B5     		push	{r3, lr}
+  66              	.LCFI1:
+  67              		.cfi_def_cfa_offset 8
+  68              		.cfi_offset 3, -8
+  69              		.cfi_offset 14, -4
+  25:Src/debug.c   **** #ifdef  DEBUG_MSG_LEVEL0
+  26:Src/debug.c   ****     printf("%s() E\n", fName_p);
+  70              		.loc 1 26 0
+  71 0002 0146     		mov	r1, r0
+  72 0004 0148     		ldr	r0, .L7
+  73              	.LVL4:
+  74 0006 FFF7FEFF 		bl	printf
+  75              	.LVL5:
+  76 000a 08BD     		pop	{r3, pc}
+  77              	.L8:
+  78              		.align	2
+  79              	.L7:
+  80 000c 08000000 		.word	.LC1
+  81              		.cfi_endproc
+  82              	.LFE29:
+  84              		.section	.text.DebugMsg_FunctionNotify,"ax",%progbits
+  85              		.align	2
+  86              		.global	DebugMsg_FunctionNotify
+  87              		.thumb
+  88              		.thumb_func
+  90              	DebugMsg_FunctionNotify:
+  91              	.LFB30:
+  27:Src/debug.c   **** #endif
+  28:Src/debug.c   **** }
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 3
+
+
+  29:Src/debug.c   **** 
+  30:Src/debug.c   **** void DebugMsg_FunctionNotify(char const * fName_p, int lineNum)
+  31:Src/debug.c   **** {
+  92              		.loc 1 31 0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96              	.LVL6:
+  97 0000 08B5     		push	{r3, lr}
+  98              	.LCFI2:
+  99              		.cfi_def_cfa_offset 8
+ 100              		.cfi_offset 3, -8
+ 101              		.cfi_offset 14, -4
+  32:Src/debug.c   **** #ifdef  DEBUG_MSG_LEVEL0
+  33:Src/debug.c   ****     printf("%s() %d\n", fName_p, lineNum);
+ 102              		.loc 1 33 0
+ 103 0002 0A46     		mov	r2, r1
+ 104 0004 0146     		mov	r1, r0
+ 105              	.LVL7:
+ 106 0006 0248     		ldr	r0, .L11
+ 107              	.LVL8:
+ 108 0008 FFF7FEFF 		bl	printf
+ 109              	.LVL9:
+ 110 000c 08BD     		pop	{r3, pc}
+ 111              	.L12:
+ 112 000e 00BF     		.align	2
+ 113              	.L11:
+ 114 0010 10000000 		.word	.LC2
+ 115              		.cfi_endproc
+ 116              	.LFE30:
+ 118              		.section	.text.DebugMsg_FunctionError,"ax",%progbits
+ 119              		.align	2
+ 120              		.global	DebugMsg_FunctionError
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	DebugMsg_FunctionError:
+ 125              	.LFB31:
+  34:Src/debug.c   **** #endif
+  35:Src/debug.c   **** }
+  36:Src/debug.c   **** 
+  37:Src/debug.c   **** void DebugMsg_FunctionError(char const * fName_p, int lineNum)
+  38:Src/debug.c   **** {
+ 126              		.loc 1 38 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              	.LVL10:
+ 131 0000 08B5     		push	{r3, lr}
+ 132              	.LCFI3:
+ 133              		.cfi_def_cfa_offset 8
+ 134              		.cfi_offset 3, -8
+ 135              		.cfi_offset 14, -4
+  39:Src/debug.c   **** #ifdef  DEBUG_MSG_LEVEL0
+  40:Src/debug.c   ****     printf("[ERROR] %s() %d\n", fName_p, lineNum);
+ 136              		.loc 1 40 0
+ 137 0002 0A46     		mov	r2, r1
+ 138 0004 0146     		mov	r1, r0
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 4
+
+
+ 139              	.LVL11:
+ 140 0006 0248     		ldr	r0, .L15
+ 141              	.LVL12:
+ 142 0008 FFF7FEFF 		bl	printf
+ 143              	.LVL13:
+ 144 000c 08BD     		pop	{r3, pc}
+ 145              	.L16:
+ 146 000e 00BF     		.align	2
+ 147              	.L15:
+ 148 0010 1C000000 		.word	.LC3
+ 149              		.cfi_endproc
+ 150              	.LFE31:
+ 152              		.section	.text.DebugMsg_Assert,"ax",%progbits
+ 153              		.align	2
+ 154              		.global	DebugMsg_Assert
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	DebugMsg_Assert:
+ 159              	.LFB32:
+  41:Src/debug.c   **** #endif
+  42:Src/debug.c   **** }
+  43:Src/debug.c   **** 
+  44:Src/debug.c   **** #ifdef  USE_FULL_ASSERT
+  45:Src/debug.c   **** 
+  46:Src/debug.c   **** void DebugMsg_Assert(char const * fName_p, int lineNum)
+  47:Src/debug.c   **** {
+ 160              		.loc 1 47 0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164              	.LVL14:
+ 165 0000 08B5     		push	{r3, lr}
+ 166              	.LCFI4:
+ 167              		.cfi_def_cfa_offset 8
+ 168              		.cfi_offset 3, -8
+ 169              		.cfi_offset 14, -4
+  48:Src/debug.c   ****     printf("!!! ASSERT FAILED !!! %s() %d\n", fName_p, lineNum);
+ 170              		.loc 1 48 0
+ 171 0002 0A46     		mov	r2, r1
+ 172 0004 0146     		mov	r1, r0
+ 173              	.LVL15:
+ 174 0006 0248     		ldr	r0, .L19
+ 175              	.LVL16:
+ 176 0008 FFF7FEFF 		bl	printf
+ 177              	.LVL17:
+ 178 000c 08BD     		pop	{r3, pc}
+ 179              	.L20:
+ 180 000e 00BF     		.align	2
+ 181              	.L19:
+ 182 0010 30000000 		.word	.LC4
+ 183              		.cfi_endproc
+ 184              	.LFE32:
+ 186              		.section	.text.assert_failed,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	assert_failed
+ 189              		.thumb
+ 190              		.thumb_func
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 5
+
+
+ 192              	assert_failed:
+ 193              	.LFB33:
+  49:Src/debug.c   **** }
+  50:Src/debug.c   **** 
+  51:Src/debug.c   **** /*******************************************************************************
+  52:Src/debug.c   **** * Function Name  : assert_failed
+  53:Src/debug.c   **** * Description    : Reports the name of the source file and the source line number
+  54:Src/debug.c   ****   *   where the assert_param error has occurred.
+  55:Src/debug.c   **** * Input          : - file: pointer to the source file name
+  56:Src/debug.c   **** *                  - line: assert_param error line source number
+  57:Src/debug.c   **** * Output         : None
+  58:Src/debug.c   **** * Return         : None
+  59:Src/debug.c   **** *******************************************************************************/
+  60:Src/debug.c   **** void assert_failed(uint8_t* file, uint32_t line)
+  61:Src/debug.c   **** { 
+ 194              		.loc 1 61 0
+ 195              		.cfi_startproc
+ 196              		@ Volatile: function does not return.
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199              	.LVL18:
+ 200 0000 08B5     		push	{r3, lr}
+ 201              	.LCFI5:
+ 202              		.cfi_def_cfa_offset 8
+ 203              		.cfi_offset 3, -8
+ 204              		.cfi_offset 14, -4
+  62:Src/debug.c   ****   /* User can add his own implementation to report the file name and line number,
+  63:Src/debug.c   ****      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  64:Src/debug.c   ****     printf("Wrong parameters value: file %s on line %d\r\n", file, line);
+ 205              		.loc 1 64 0
+ 206 0002 0A46     		mov	r2, r1
+ 207 0004 0146     		mov	r1, r0
+ 208              	.LVL19:
+ 209 0006 0248     		ldr	r0, .L24
+ 210              	.LVL20:
+ 211 0008 FFF7FEFF 		bl	printf
+ 212              	.LVL21:
+ 213              	.L22:
+ 214 000c FEE7     		b	.L22
+ 215              	.L25:
+ 216 000e 00BF     		.align	2
+ 217              	.L24:
+ 218 0010 50000000 		.word	.LC5
+ 219              		.cfi_endproc
+ 220              	.LFE33:
+ 222              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 223              		.align	2
+ 224              	.LC0:
+ 225 0000 25732829 		.ascii	"%s() S\012\000"
+ 225      20530A00 
+ 226              	.LC1:
+ 227 0008 25732829 		.ascii	"%s() E\012\000"
+ 227      20450A00 
+ 228              	.LC2:
+ 229 0010 25732829 		.ascii	"%s() %d\012\000"
+ 229      2025640A 
+ 229      00
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 6
+
+
+ 230 0019 000000   		.space	3
+ 231              	.LC3:
+ 232 001c 5B455252 		.ascii	"[ERROR] %s() %d\012\000"
+ 232      4F525D20 
+ 232      25732829 
+ 232      2025640A 
+ 232      00
+ 233 002d 000000   		.space	3
+ 234              	.LC4:
+ 235 0030 21212120 		.ascii	"!!! ASSERT FAILED !!! %s() %d\012\000"
+ 235      41535345 
+ 235      52542046 
+ 235      41494C45 
+ 235      44202121 
+ 236 004f 00       		.space	1
+ 237              	.LC5:
+ 238 0050 57726F6E 		.ascii	"Wrong parameters value: file %s on line %d\015\012\000"
+ 238      67207061 
+ 238      72616D65 
+ 238      74657273 
+ 238      2076616C 
+ 239              		.text
+ 240              	.Letext0:
+ 241              		.file 2 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/machine/_default_types
+ 242              		.file 3 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/sys/_stdint.h"
+ 243              		.file 4 "/usr/local/Cellar/gcc-arm-none-eabi/20160926/arm-none-eabi/include/stdio.h"
+ARM GAS  /var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 debug.c
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:20     .text.DebugMsg_FunctionStart:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:25     .text.DebugMsg_FunctionStart:0000000000000000 DebugMsg_FunctionStart
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:48     .text.DebugMsg_FunctionStart:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:53     .text.DebugMsg_FunctionEnd:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:58     .text.DebugMsg_FunctionEnd:0000000000000000 DebugMsg_FunctionEnd
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:80     .text.DebugMsg_FunctionEnd:000000000000000c $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:85     .text.DebugMsg_FunctionNotify:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:90     .text.DebugMsg_FunctionNotify:0000000000000000 DebugMsg_FunctionNotify
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:114    .text.DebugMsg_FunctionNotify:0000000000000010 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:119    .text.DebugMsg_FunctionError:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:124    .text.DebugMsg_FunctionError:0000000000000000 DebugMsg_FunctionError
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:148    .text.DebugMsg_FunctionError:0000000000000010 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:153    .text.DebugMsg_Assert:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:158    .text.DebugMsg_Assert:0000000000000000 DebugMsg_Assert
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:182    .text.DebugMsg_Assert:0000000000000010 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:187    .text.assert_failed:0000000000000000 $t
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:192    .text.assert_failed:0000000000000000 assert_failed
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:218    .text.assert_failed:0000000000000010 $d
+/var/folders/g9/bbpj86ld7fx45vd1b3pqxmp00000gn/T//ccfYsnQD.s:223    .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+printf

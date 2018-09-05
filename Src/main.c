@@ -7,6 +7,8 @@
  * Date      : 08/12/2009
  */
 
+
+
 /* includes */
 
 #include "hw_config.h"
@@ -55,6 +57,8 @@ int main(void)
 
     /* UART initialization */
     USART1_Init();
+    //i2c1 setting
+    i2c1_driver_Initialize();    
 
     /* Setup SysTick Timer for 1 msec interrupts  */
     if (SysTick_Config(rcc_clocks.SYSCLK_Frequency / 1000))
@@ -64,7 +68,7 @@ int main(void)
     }
 
     Delay(500);
-
+    LED_Off_All();
     while(1)
     {
         printf("\r\n---------------------\r\n");
@@ -85,7 +89,7 @@ int main(void)
         printf("3> ZigBee Test\r\n");
 #endif
         printf("4> USB HID Test\r\n");
-        printf("5> \r\n");
+        printf("5> BMA280 Sensor Test\r\n");
         printf("---------------------\r\n");
         printf("x> quit\r\n\r\n");
 
@@ -119,6 +123,7 @@ int main(void)
             break;
 
         case '5':
+            Test_3AXIS_BMA280();
             break;
         }
 

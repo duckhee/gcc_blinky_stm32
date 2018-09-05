@@ -26,6 +26,9 @@
     #include "zigbee_test.h"
 #endif
 
+#include "I2CRoutines.h"
+
+
 
 
 /* global variables */
@@ -151,6 +154,11 @@ void delay_100_milli_second(void);
 #elif  BOARD_DEF_MANGO_Z1
     void SPIx_Init(void);
 #endif
+
+void i2c1_driver_Initialize (void);
+void i2c1_1byte_addr7_write(uint8_t Device_Addr, uint16_t WriteAddr, uint8_t* pBuffer);
+void i2c1_addr7_read(uint8_t Device_Addr, uint16_t ReadAddr, uint8_t* pBuffer, uint16_t NumByteToRead);
+
 
 #endif  /*__HW_CONFIG_H */
 
