@@ -143,7 +143,7 @@ void Read_3_Axis_BMA280_Data(int16_t * xData_p, int16_t * yData_p, int16_t * zDa
     uint8_t Buffer_Tx;
     uint8_t Buffer_Rx[6];
 
-    Buffer_Tx = BMA280_RA_X_AXIS_LSB;
+    Buffer_Tx = BMA280_RA_X_AXIS_LSB; //0x2
 
     I2C_Master_BufferWrite(I2C1, &Buffer_Tx, 1, Polling, BMA280_I2C_ADDR);
     I2C_Master_BufferRead(I2C1, Buffer_Rx, 6, Polling, BMA280_I2C_ADDR);
@@ -151,6 +151,11 @@ void Read_3_Axis_BMA280_Data(int16_t * xData_p, int16_t * yData_p, int16_t * zDa
     * xData_p = ((((int16_t)(int8_t)Buffer_Rx[1]) << 8) | Buffer_Rx[0]) >> 6;
     * yData_p = ((((int16_t)(int8_t)Buffer_Rx[3]) << 8) | Buffer_Rx[2]) >> 6;
     * zData_p = ((((int16_t)(int8_t)Buffer_Rx[5]) << 8) | Buffer_Rx[4]) >> 6;
+    
+    for(int i = 0; i < sizeof(Buffer_Rx); i++)
+    {
+        printf("Buffer_Rx[%d] : %x\r\n", i, Buffer_Rx[i]);
+    }
 }
 
 void Test_3AXIS_BMA280(void)
@@ -160,11 +165,13 @@ void Test_3AXIS_BMA280(void)
 
     printf("Get_ChipID: %X\r\n", Get_ChipID());
 
-    Buffer_Tx[0] = BMA280_RA_RANGE_BWIDTH;
-    Buffer_Tx[1] = BMA280_RANGE_8G << 3;
+    Buffer_Tx[0] = BMA280_RA_RANGE_BWIDTH; //0xf
+    Buffer_Tx[1] = BMA280_RANGE_8G << 3; //0x40 0x8 << 3
+    printf("Buffer_Tx : %x\r\n", Buffer_Tx);
     I2C_Master_BufferWrite(I2C1, Buffer_Tx, 2, Polling, BMA280_I2C_ADDR);
-    Buffer_Tx[0] = BMA280_RA_BANDWIDTH;
-    Buffer_Tx[1] = BMA280_BW_500HZ;
+    Buffer_Tx[0] = BMA280_RA_BANDWIDTH; //0x10
+    Buffer_Tx[1] = BMA280_BW_500HZ; //14
+    printf("Buffer_Tx : %x\r\n", Buffer_Tx);
     I2C_Master_BufferWrite(I2C1, Buffer_Tx, 2, Polling, BMA280_I2C_ADDR);	
     printf("Set Param BMA280_RANGE_8G, BMA280_BW_500HZ\r\n");
 

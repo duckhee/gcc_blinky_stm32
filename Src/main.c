@@ -58,7 +58,7 @@ int main(void)
     /* UART initialization */
     USART1_Init();
     //i2c1 setting
-    //i2c1_driver_Initialize();    
+    i2c1_driver_Initialize();    
 
     /* Setup SysTick Timer for 1 msec interrupts  */
     if (SysTick_Config(rcc_clocks.SYSCLK_Frequency / 1000))
