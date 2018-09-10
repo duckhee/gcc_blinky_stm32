@@ -64,7 +64,7 @@ Status I2C_Master_BufferRead(I2C_TypeDef* I2Cx, uint8_t* pBuffer,
     __IO uint32_t Timeout = 0;
 
     /* Enable I2C errors interrupts (used in all modes: Polling, DMA and Interrupts */
-    I2Cx->CR2 |= I2C_IT_ERR;
+    I2Cx->CR2 |= I2C_IT_ERR; //8번 비트
 
     if (Mode == Polling) /* I2Cx Master Reception using Polling */
     {
@@ -72,7 +72,7 @@ Status I2C_Master_BufferRead(I2C_TypeDef* I2Cx, uint8_t* pBuffer,
         {
             Timeout = 0xFFFF;
             /* Send START condition */
-            I2Cx->CR1 |= CR1_START_Set;
+            I2Cx->CR1 |= CR1_START_Set; //8번 비트
             /* Wait until SB flag is set: EV5  */
             while ((I2Cx->SR1&0x0001) != 0x0001)
             {
@@ -81,7 +81,7 @@ Status I2C_Master_BufferRead(I2C_TypeDef* I2Cx, uint8_t* pBuffer,
             }
             /* Send slave address */
             /* Reset the address bit0 for read */
-            SlaveAddress |= OAR1_ADD0_Set;
+            SlaveAddress |= OAR1_ADD0_Set; //실질적으로 필요한 비트는 7 비트이다.
             Address = SlaveAddress;
             /* Send the slave address */
             I2Cx->DR = Address;

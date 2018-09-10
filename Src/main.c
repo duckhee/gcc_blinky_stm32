@@ -58,7 +58,7 @@ int main(void)
     /* UART initialization */
     USART1_Init();
     //i2c1 setting
-    i2c1_driver_Initialize();    
+    //i2c1_driver_Initialize();    
 
     /* Setup SysTick Timer for 1 msec interrupts  */
     if (SysTick_Config(rcc_clocks.SYSCLK_Frequency / 1000))
@@ -73,9 +73,9 @@ int main(void)
     {
         printf("\r\n---------------------\r\n");
 #ifdef BOARD_DEF_MANGO_M32
-        printf("Mango M32 test start...\n");
+        printf("Mango M32 test start...\r\n");
 #elif  BOARD_DEF_MANGO_Z1
-        printf("Mango Z1 test start...\n");
+        printf("Mango Z1 test start...\r\n");
 #endif
         printf("Press menu key\r\n");
         printf("---------------------\r\n");

@@ -79,6 +79,7 @@ AS_DEFS =
 C_DEFS =  \
 -D USE_STDPERIPH_DRIVER \
 -D BOARD_DEF_MANGO_M32 \
+#-D BOARD_DEF_MANGO_Z1 \
 
 
 # AS includes
@@ -91,6 +92,7 @@ C_INCLUDES =  \
 -ISTM32F10x_StdPeriph_Driver/inc \
 -ISTM32_USB-FS-Device_Driver/inc \
 -IInc/Sensor \
+-IInc/zigbee \
 
 
 # compile gcc flags

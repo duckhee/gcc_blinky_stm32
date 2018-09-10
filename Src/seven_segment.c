@@ -16,42 +16,55 @@
 
 void PowerOn_7_SEG(void)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     GPIO_7_SEG->BRR |= GPIO_7_SEG_POWER_PIN;
+    #endif
 }
 
 void PowerOff_7_SEG(void)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     GPIO_7_SEG->BSRR |= GPIO_7_SEG_POWER_PIN;
+    #endif
 }
 
 void On_7_SEG_OnePin(uint16_t pinNum)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     GPIO_7_SEG->BRR |= pinNum;
+    #endif
 }
 
 void Off_7_SEG_OnePin(uint16_t pinNum)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     GPIO_7_SEG->BSRR |= pinNum;
+    #endif
 }
 
 void On_7_SEG_AllPin(void)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     On_7_SEG_OnePin
         (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
          | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN
          | GPIO_7_SEG_G_PIN | GPIO_7_SEG_DP_PIN);
+    #endif
 }
 
 void Off_7_SEG_AllPin(void)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     Off_7_SEG_OnePin
         (GPIO_7_SEG_A_PIN | GPIO_7_SEG_B_PIN | GPIO_7_SEG_C_PIN
          | GPIO_7_SEG_D_PIN | GPIO_7_SEG_E_PIN | GPIO_7_SEG_F_PIN
          | GPIO_7_SEG_G_PIN | GPIO_7_SEG_DP_PIN);
+    #endif
 }
 
 void OutPut_7_SEG_Number(unsigned int num)
 {
+    #ifdef BOARD_DEF_MANGO_M32
     Off_7_SEG_AllPin();
 
     switch(num)
@@ -116,9 +129,10 @@ void OutPut_7_SEG_Number(unsigned int num)
             | GPIO_7_SEG_D_PIN | GPIO_7_SEG_F_PIN | GPIO_7_SEG_G_PIN);
         break;
     }
+    #endif
 }
 
-void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
+//void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
 
 void Seven_Segment_Test(void)
 {
@@ -126,7 +140,7 @@ void Seven_Segment_Test(void)
     int i;
     
     printf("Seven_Segment_Test\r\n");
-
+    #ifdef BOARD_DEF_MANGO_M32
     RCC->APB2ENR |= RCC_APB2Periph_GPIOC;
 
     /* Configure gpio as output : LED1, LED2, LED3 */
@@ -165,5 +179,6 @@ void Seven_Segment_Test(void)
         OutPut_7_SEG_Number(i);
         delay_1_second();
     }
+    #endif
 }
 

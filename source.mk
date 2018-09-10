@@ -57,10 +57,21 @@ CORE_SOURCES = \
 CMSIS/Core/CM3/system_stm32f10x.c \
 #CMSIS/Core/CM3/core_cm3.c \
 
+ZIGBEE_SOURCE = \
+Src/zigbee/basic_rf_security.c \
+Src/zigbee/basic_rf.c \
+Src/zigbee/cc2520_mango_porting.c \
+Src/zigbee/hal_cc2520.c \
+Src/zigbee/hal_int.c \
+Src/zigbee/hal_rf_security.c \
+Src/zigbee/hal_rf.c \
+Src/zigbee/util.c \
+Src/zigbee/zigbee.c \
+
 SENSOR_SORUCE = \
 Src/Sensor/I2c_Sw.c \
 
-C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES) $(SENSOR_SORUCE)
+C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES) $(SENSOR_SORUCE) $(ZIGBEE_SOURCE)
 
 # ASM sources
 ASM_SOURCES =  \
