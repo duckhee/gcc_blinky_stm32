@@ -281,6 +281,18 @@ void EXTI4_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel1_IRQHandler(void)
 {
+  Send_Buffer[0] = 0x07;
+  if((ADC_ConvertedValueX >> 4) - (ADC_ConvertedValueX_1 >> 4) > 4)
+  {
+    Send_Buffer[1] = (uint8_t)(ADC_ConvertedValueX >> 4);
+    UserToPMABufferCopy(Send_Buffer, ENDP1_TXADDR, 2);
+    SetEPTxCount(ENDP1, 2);
+    SetEPTxValid(ENDP1);
+    ADC_ConvertedValueX_1 = ADC_ConvertedValueX;
+  }
+
+  DMA_ClearFlag(DMA1_FLAG_TC1);
+
 }
 
 /*******************************************************************************

@@ -108,6 +108,8 @@ void RCC_Configuration(void)
 
     /* Enable DMA1 clock */
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+    /* Enable ADC1, ADC2 clock */
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_ADC2, ENABLE);
 }
 
 /*******************************************************************************
@@ -504,6 +506,57 @@ void SPIx_Init(void)
     GPIO_SetBits(GPIO_RF_VREG_EN, GPIO_RF_VREG_EN_PIN);
 }
 #endif /* BOARD_DEF_MANGO_Z1 */
+
+#define ADC1_DR_Address ((uint32_t)0x4001244C)
+
+__IO uint16_t ADCConvertedValue;
+
+void DMA_Configuration(void)
+{
+    DMA_InitTypeDef DMA_InitStructure;
+    DMA_DeInit(DMA1_Channel1);
+    DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
+    DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADCConvertedValue;
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+    DMA_InitStructure.DMA_BufferSize = 1;
+    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
+    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+    DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+    DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+    DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+
+    DMA_Cmd(DMA1_Channel1, ENABLE);
+}
+
+void ADC_Configuration(void)
+{
+    ADC_InitTypeDef ADC_InitStructure;
+
+    /* ADC Configuration */
+    ADC_InitStructure.ADC_Mode = ADC_Mode_RegSimult;
+    ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+    ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+    ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+    ADC_InitStructure.ADC_NbrOfChannel = 1;
+    ADC_Init(ADC1, &ADC_InitStructure);
+
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_16, 1, ADC_SampleTime_239Cycles5); //inner temp sensor 
+
+    ADC_DMACmd(ADC1, ENABLE);
+
+    ADC_Cmd(ADC1, ENABLE);
+
+    ADC_ResetCalibration(ADC1);
+
+    while(ADC_GetResetCalibrationStatus(ADC1));
+
+    ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+
+}
 
 
 uint8_t USART_GetCharacter(USART_TypeDef *  usart_p)

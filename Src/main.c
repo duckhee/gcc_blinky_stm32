@@ -21,6 +21,8 @@ RCC_ClocksTypeDef  rcc_clocks;
 
 bool g_TestProcessState = FALSE;
 
+__IO uint16_t ADCConvertedValue;
+
 /* functions */
 
 void System_Information()
@@ -68,7 +70,20 @@ int main(void)
     }
 
     Delay(500);
+    
     LED_Off_All();
+
+    ADC_TempSensorVrefintCmd(ENABLE);
+
+    DMA_Configuration();
+    ADC_Configuration();
+
+    float volt = 0.0;
+    float temp = 0.0;
+
+    const float v25 = 1.43;
+    const float avg_slope = 4.3;
+    
     while(1)
     {
         printf("\r\n---------------------\r\n");
@@ -90,6 +105,7 @@ int main(void)
 #endif
         printf("4> USB HID Test\r\n");
         printf("5> BMA280 Sensor Test\r\n");
+        printf("6> ADC inner Sensor Test\r\n");
         printf("---------------------\r\n");
         printf("x> quit\r\n\r\n");
 
@@ -125,7 +141,15 @@ int main(void)
         case '5':
             Test_3AXIS_BMA280();
             break;
-        }
+        case '6':
+            Delay(2000);
+            volt = (float)ADCConvertedValue * 3.3 /(float)4095;
+            temp = (((v25-volt)*1000)/avg_slope) + 25.0;
+            printf("ADC Value : 0x%0x, volt : %f V, Temp : %f `C\r\n", ADCConvertedValue, volt, temp);
+            break;
+
+
+        }//switch end
 
         if('x' == (char)ch)
         {
