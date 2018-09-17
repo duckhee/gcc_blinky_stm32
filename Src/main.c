@@ -41,6 +41,7 @@ void System_Information()
  */
 int main(void)
 {
+    debug();
     uint8_t ch;
 
     /* System Clocks Configuration */
