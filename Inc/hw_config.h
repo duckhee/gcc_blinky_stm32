@@ -28,6 +28,8 @@
 
 #include "I2CRoutines.h"
 
+//lib
+#include "Board_Detect.h"
 
 
 

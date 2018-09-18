@@ -41,7 +41,7 @@ void System_Information()
  */
 int main(void)
 {
-    debug();
+    //debug();
     uint8_t ch;
 
     /* System Clocks Configuration */
@@ -78,7 +78,7 @@ int main(void)
 
     DMA_Configuration();
     ADC_Configuration();
-
+    board_detect_initialize();
     float volt = 0.0;
     float temp = 0.0;
 
@@ -107,6 +107,7 @@ int main(void)
         printf("4> USB HID Test\r\n");
         printf("5> BMA280 Sensor Test\r\n");
         printf("6> ADC inner Sensor Test\r\n");
+        printf("7> Sensor Board Detect\r\n");
         printf("---------------------\r\n");
         printf("x> quit\r\n\r\n");
 
@@ -147,6 +148,9 @@ int main(void)
             volt = (float)ADCConvertedValue * 3.3 /(float)4095;
             temp = (((v25-volt)*1000)/avg_slope) + 25.0;
             printf("ADC Value : 0x%0x, volt : %f V, Temp : %f `C\r\n", ADCConvertedValue, volt, temp);
+            break;
+        case '7':
+            board_detect();
             break;
 
 
