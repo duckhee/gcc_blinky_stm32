@@ -71,6 +71,7 @@ Src/zigbee/zigbee.c \
 SENSOR_SORUCE = \
 Src/Sensor/I2c_Sw.c \
 Src/Sensor/Board_Detect.c \
+Src/Sensor/SHT20.c \
 
 C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES) $(SENSOR_SORUCE) $(ZIGBEE_SOURCE)
 

@@ -31,6 +31,8 @@
 //lib
 #include "i2c_driver.h"
 #include "Board_Detect.h"
+//sensor lib
+#include "SHT20.h"
 
 
 

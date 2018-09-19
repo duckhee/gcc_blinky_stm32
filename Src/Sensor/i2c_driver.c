@@ -52,26 +52,26 @@ I2C_DRIVER_DEF void i2c1_driver_Initialize (void)
 
 I2C_DRIVER_DEF void i2c1_1byte_addr7_write_cmd(uint8_t Device_Addr, uint16_t cmd)
 {
-    /* Send START condition */
-    I2C_GenerateSTART(I2C1, ENABLE);
+  /* Send STRAT condition */
+  I2C_GenerateSTART(I2C1, ENABLE);
 
-    /* test on EV5 and clear it */
-    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+  /* Test on EV5 and clear it */
+  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));  
 
-    /* Send slave address for write */
-    I2C_Send7bitAddress(I2C1, Device_Addr, I2C_Direction_Transmitter);
+  /* Send slave address for write */
+  I2C_Send7bitAddress(I2C1, Device_Addr, I2C_Direction_Transmitter);
+  
+  /* Test on EV6 and clear it */
+  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
 
-    /* Test on Ev6 and clear it */
-    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+  /* Send the device internal address to write to : only one byte Address */
+  I2C_SendData(I2C1, cmd);
+  
+  /* Test on EV8 and clear it */
+  while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
 
-    /* Send the device internal address to write to : only one byte address */
-    I2C_SendData(I2C1, cmd);
-
-    /* Test on EV8 and clear it */
-    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-
-    /* Send STOP condition */
-    I2C_GenerateSTOP(I2C1, ENABLE);
+  /* Send STOP condition */
+  I2C_GenerateSTOP(I2C1, ENABLE);
 }
 
 /*
@@ -110,10 +110,9 @@ I2C_DRIVER_DEF void i2c1_1byte_addr7_write(uint8_t Device_Addr, uint16_t WriteAd
   I2C_GenerateSTOP(I2C1, ENABLE);
 }
 
-I2C_DRIVER_DEF void i2c1_addr_7_cmd_read(uint8_t Device_Addr, uint16_t cmd, uint16_t ReadAddr, uint8_t *pBuffer, uint16_t NumByteToRead)
+I2C_DRIVER_DEF void i2c1_addr7_cmd_read(uint8_t Device_Addr, uint16_t cmd, uint16_t ReadAddr, uint8_t *pBuffer, uint16_t NumByteToRead)
 {
-
-    /* while the bus is busy */
+    /* While the bus is busy */
     while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY));
 
     /* Send START condition */
@@ -128,18 +127,24 @@ I2C_DRIVER_DEF void i2c1_addr_7_cmd_read(uint8_t Device_Addr, uint16_t cmd, uint
     /* Test on EV6 and clear it */
     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
 
-    /* Send the device internal address to read form : Only one byte address */
-    I2C_SendData(I2C1, cmd);
+    /* Send the device internal address to read from: Only one byte address */
+    I2C_SendData(I2C1, cmd);  
 
     /* Test on EV8 and clear it */
     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
 
-    /* Send STOp condition */
-    I2C_GenerateSTOP(I2C1, ENABLE);
+    /* Send the device internal address to read from: Only one byte address */
+    I2C_SendData(I2C1, ReadAddr);  
+
+    /* Test on EV8 and clear it */
+    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));    
+
+    /* Send STOP condition */
+    I2C_GenerateSTOP(I2C1, ENABLE);  
 
     /********************************/
-    
-    /* Send START condition a second time */
+  
+    /* Send STRAT condition a second time */  
     I2C_GenerateSTART(I2C1, ENABLE);
 
     /* Test on EV5 and clear it */
@@ -147,14 +152,14 @@ I2C_DRIVER_DEF void i2c1_addr_7_cmd_read(uint8_t Device_Addr, uint16_t cmd, uint
 
     /* Send device address for read */
     I2C_Send7bitAddress(I2C1, Device_Addr, I2C_Direction_Receiver);
-
+  
     /* Test on EV6 and clear it */
     while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
-
+  
     /* While there is data to be read */
-    while(NumByteToRead)
+    while(NumByteToRead)  
     {
-        if(NumByteToRead)
+        if(NumByteToRead == 1)
         {
             /* Disable Acknowledgement */
             I2C_AcknowledgeConfig(I2C1, DISABLE);
@@ -162,17 +167,17 @@ I2C_DRIVER_DEF void i2c1_addr_7_cmd_read(uint8_t Device_Addr, uint16_t cmd, uint
             /* Send STOP Condition */
             I2C_GenerateSTOP(I2C1, ENABLE);
         }
-        while((I2C_GetLastEvent(I2C1) & 0x0040) != 0x000040); /* Poll on RxNE */
+        while ((I2C_GetLastEvent(I2C1) & 0x0040) != 0x000040); /* Poll on RxNE */            
 
         /* Read a byte from the EEPROM */
         *pBuffer = I2C_ReceiveData(I2C1);
 
         /* Point to the next location where the byte read will be saved */
-        pBuffer++;
+        pBuffer++; 
 
         /* Decrement the read bytes counter */
-        NumByteToRead--;
-
+        NumByteToRead--;        
+        
     }
 
     /* Enable Acknowledgement to be ready for another reception */
