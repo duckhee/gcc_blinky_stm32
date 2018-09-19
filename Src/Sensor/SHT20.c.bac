@@ -1,3 +1,6 @@
+#define SHT20_LOCAL
+
+#include "SHT20.h"
 
 // CRC checksum
 const uint16_t POLYNOMIAL = 0x131; //P(x) = x^8 + x^5 + x^4 + 1 = 100110001
@@ -167,14 +170,14 @@ SHT20_DEF uint8_t SHT2x_GetSerialNumber(uint8_t u8SerialNumber[])
     uint8_t i2c_data[0xf];
 
     //Read from memory location 1
-    i2c1_addr_7_cmd_read(I2C_ADR_W, 0xFA, 0x0F, i2c_data, 4);
+    i2c1_addr7_cmd_read(I2C_ADR_W, 0xFA, 0x0F, i2c_data, 4);
     u8SerialNumber[5] = i2c_data[0]; //Read SNB_3
     u8SerialNumber[4] = i2c_data[2]; //Read SNB_2
     u8SerialNumber[3] = i2c_data[4]; //Read SNB_1
     u8SerialNumber[2] = i2c_data[6]; //Read SNB_0
 
     //Read from memory location 2
-    i2c1_addr_7_cmd_read(I2C_ADR_W, 0xFC, 0xC9, i2c_data, 4);
+    i2c1_addr7_cmd_read(I2C_ADR_W, 0xFC, 0xC9, i2c_data, 4);
     u8SerialNumber[1] = i2c_data[0]; //Read SNC_1
     u8SerialNumber[0] = i2c_data[1]; //Read SNC_0
     u8SerialNumber[7] = i2c_data[3]; //Read SNA_1
@@ -258,7 +261,7 @@ SHT20_DEF float SHT2x_CalcRH(uint8_t *psRH)
     u16_sRH &= ~0x0003; //clear bits [1...0](status bits)
     //-- calculate relative humidity [%RH] --
 
-    humidityRH = -60. + 125.0/65536 * (float)u16_sRH; //RH = -6 + 125 * SRH/2^16
+    humidityRH = -6.0 + 125.0/65536 * (float)u16_sRH; //RH = -6 + 125 * SRH/2^16
     return humidityRH;
 }
 SHT20_DEF float SHT2x_CalcTemperatureC(uint8_t *psT)
