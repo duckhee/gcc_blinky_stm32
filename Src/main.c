@@ -78,6 +78,9 @@ int main(void)
 
     //DMA_Configuration();
     //ADC_Configuration();
+
+    
+
     board_detect_initialize();
     float volt = 0.0;
     float temp = 0.0;
@@ -118,6 +121,7 @@ int main(void)
         printf("6> ADC inner Sensor Test\r\n");
         printf("7> Sensor Board Detect\r\n");
         printf("8> SHT20 Sensor Test\r\n");
+        printf("9> Enter Stop mode\r\n");
         printf("---------------------\r\n");
         printf("x> quit\r\n\r\n");
 
@@ -165,7 +169,9 @@ int main(void)
         case '8':
             SHT2x_test();
             break;
+        case '9':
 
+            break;
 
         }//switch end
 

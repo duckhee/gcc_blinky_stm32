@@ -636,6 +636,28 @@ void EXTI15_10_IRQHandler(void)
 *******************************************************************************/
 void RTCAlarm_IRQHandler(void)
 {
+  /* */
+  if(RTC_GetITStatus(RTC_IT_ALR) != RESET)
+  {
+    LED_On_Blue();
+
+    // Clear EXTI line17 pending bit
+    EXTI_ClearITPendingBit(EXTI_Line17);
+
+    //check if the Wake-Up flag is set
+    if(PWR_GetFlagStatus(PWR_FLAG_WU) != RESET)
+    {
+      // Clear Wake to flag
+      PWR_ClearFlag(PWR_FLAG_WU);
+    }
+
+    // Wait until last write operation on RTC registers has finished
+    RTC_WaitForLastTask();
+    // Clear RTC Alarm interrupt pending bit 
+    RTC_ClearITPendingBit(RTC_IT_ALR);
+    // Wait until last operation on RTC registers has finished 
+    RTC_WaitForLastTask();
+  }
 }
 
 /*******************************************************************************

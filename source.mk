@@ -60,6 +60,9 @@ CMSIS/Core/CM3/core_cm3.c \
 MODE_SOURCES = \
 Src/Mode_Privilege/mode.c \
 
+PWR_SOURCES = \
+
+
 ZIGBEE_SOURCE = \
 Src/zigbee/basic_rf_security.c \
 Src/zigbee/basic_rf.c \

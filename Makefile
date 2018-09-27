@@ -94,6 +94,7 @@ C_INCLUDES =  \
 -IInc/Sensor \
 -IInc/zigbee \
 -IInc/Mode_Privilege \
+-IInc/lib \
 
 
 # compile gcc flags

@@ -147,6 +147,13 @@ void NVIC_Configuration(void)
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
+
+    /* Enable the RTCAlarm Interrupt */
+    NVIC_InitStructure.NVIC_IRQChannel = RTCAlarm_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
 }
 
 /*******************************************************************************
@@ -380,6 +387,13 @@ void EXTI_Configuration(void)
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
     EXTI_Init(&EXTI_InitStructure);
 
+    /* configure EXTI Line17(RTC Alarm) to generate an interrupt on rising edge */
+    EXTI_ClearITPendingBit(EXTI_Line17);
+    EXTI_InitStructure.EXTI_Line = EXTI_Line17;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
     /* USB Wakeup from suspend event */
     EXTI_ClearITPendingBit(EXTI_Line18);
     EXTI_InitStructure.EXTI_Line    = EXTI_Line18; // USB resume from suspend mode
@@ -558,6 +572,29 @@ void ADC_Configuration(void)
 
 }
 
+void RTC_Configuration(void)
+{
+    /* RTC clock source configuration */ /* Allow access to BKP Domain */
+    PWR_BackupAccessCmd(ENABLE);
+
+    BKP_DeInit(); /* Reset Backup Domain */
+
+    RCC_LSICmd(ENABLE);
+    while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
+
+    RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI); /* Select the RTC Clock Source */
+    RCC_RTCCLKCmd(ENABLE); /* Enable the RTC Clock */
+
+    RTC_WaitForSynchro(); /* Wait for RTC APB registers synchronisation */
+    RTC_WaitForLastTask(); /* Wait until last write operation on RTC registers has finished */
+
+    /* Set the RTC time base to 1s */
+    RTC_SetPrescaler(39999); /* RTC period = RTCCLK/RTC_PR = (40kHz)/(39999+1) fTR_CLK = fRTCCLK/(PRE[19:0] + 1) RTC prescaler load register (RTC_PRLH/RTC_PRLL) */
+    RTC_WaitForLastTask(); /* Wajit until last write operation on TRC registers has finished */
+
+    RTC_ITConfig(RTC_IT_ALR, ENABLE); /* Enable the RTC Alarm interrupt */
+    RTC_WaitForLastTask(); /* Wait until last write operation on RTC registers has finished */
+}
 
 uint8_t USART_GetCharacter(USART_TypeDef *  usart_p)
 {

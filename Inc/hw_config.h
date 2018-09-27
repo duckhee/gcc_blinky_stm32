@@ -148,6 +148,10 @@ void USART1_Init(void);
 void Get_SerialNum(void);
 uint8_t USART_GetCharacter(USART_TypeDef *  usart_p);
 
+
+void RTC_Configuration(void);
+
+
 void LED_Test (void);
 void KEY_Test (void);
 
