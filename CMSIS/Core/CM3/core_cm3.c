@@ -729,6 +729,7 @@ uint32_t __LDREXW(uint32_t *addr)
  *
  * Exclusive STR command
  */
+__attribute__( (always_inline, optimize("O0")) ) static __INLINE
 uint32_t __STREXB(uint8_t value, uint8_t *addr)
 {
    uint32_t result=0;
@@ -746,6 +747,7 @@ uint32_t __STREXB(uint8_t value, uint8_t *addr)
  *
  * Exclusive STR command
  */
+__attribute__( (always_inline, optimize("O0")) ) static __INLINE
 uint32_t __STREXH(uint16_t value, uint16_t *addr)
 {
    uint32_t result=0;

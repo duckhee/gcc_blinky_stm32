@@ -55,7 +55,7 @@ STM32_USB-FS-Device_Driver/src/usb_regs.c \
 
 CORE_SOURCES = \
 CMSIS/Core/CM3/system_stm32f10x.c \
-#CMSIS/Core/CM3/core_cm3.c \
+CMSIS/Core/CM3/core_cm3.c \
 
 ZIGBEE_SOURCE = \
 Src/zigbee/basic_rf_security.c \
