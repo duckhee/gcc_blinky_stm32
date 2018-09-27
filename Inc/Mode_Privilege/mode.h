@@ -13,7 +13,7 @@
 #ifdef MODE_PRIVILEGE_LOCAL
 #define MODE_PRIVILEGE_DEF
 #else
-#defien MODE_PRIVILEGE_DEF        extern
+#define MODE_PRIVILEGE_DEF        extern
 #endif
 
 

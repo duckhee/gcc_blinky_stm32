@@ -61,32 +61,32 @@ MODE_PRIVILEGE_DEF void Mode_Privilege_Test(void)
     {
         PSPMemAlloc[Index] = 0x00;
     }
-    printf("PSPMemAlloc address = 0x%0X\n", PSPMemAlloc);
+    printf("PSPMemAlloc address = 0x%0X\r\n", PSPMemAlloc);
 
-    printf("(1) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(1) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 
     /* Set Process stack value */ 
     __set_PSP((uint32_t)PSPMemAlloc + SP_PROCESS_SIZE);
-    printf("(2) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(2) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 
     /* Select Process Stack as Thread mode Stack */
     __set_CONTROL(SP_PROCESS);
-    printf("(3) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(3) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 
     /* Get the Thread mode stack used */
     if(Get_Current_Stack() == SP_MAIN)
     {
-        printf("CurrentStack is Main Stack\n");
+        printf("CurrentStack is Main Stack\r\n");
     }
     else
     {
-        printf("CurrentStack is Process Stack\n");
+        printf("CurrentStack is Process Stack\r\n");
 
         /* Get process stack pointer value */
-        printf("PSPValue = 0x%0X\n", __get_PSP());
+        printf("PSPValue = 0x%0X\r\n", __get_PSP());
     }
   
     /* Switch Thread mode from privileged to unprivileged */
@@ -95,24 +95,25 @@ MODE_PRIVILEGE_DEF void Mode_Privilege_Test(void)
     /* Unprivileged access mainly affect ability to:
     - Use or not use certain instructions such as MSR fields
     - Access System Control Space (SCS) registers such as NVIC and SysTick */
-    printf("(4) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(4) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 
     /* Switch back Thread mode from unprivileged to privileged */
     /* Try to switch back Thread mode to privileged (Not possible, this can be
     done only in Handler mode) */
     __set_CONTROL(THREAD_MODE_PRIVILEGED | SP_PROCESS);
-    printf("(5) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(5) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 
     /* Generate a system call exception, and in the ISR switch back Thread mode
     to privileged */
     __SVC();
-    printf("(6) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(6) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 
     /* Select Main Stack */
     __set_CONTROL(SP_MAIN);
-    printf("(7) CurrentStack = %d, ThreadMode = %d\n",
+    printf("(7) CurrentStack = %d, ThreadMode = %d\r\n",
            Get_Current_Stack(), Get_Current_ThreadMode());
 }
+

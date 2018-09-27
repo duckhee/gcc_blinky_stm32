@@ -28,6 +28,9 @@
 
 #include "I2CRoutines.h"
 
+//mode checking lib
+#include "mode.h"
+
 //lib
 #include "i2c_driver.h"
 #include "Board_Detect.h"

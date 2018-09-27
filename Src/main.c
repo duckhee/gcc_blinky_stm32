@@ -84,7 +84,16 @@ int main(void)
 
     const float v25 = 1.43;
     const float avg_slope = 4.3;
-    
+    //compiler checking code
+    #if defined ( __CC_ARM )
+        printf("__CC_ARM\r\n");
+    #elif defined ( __ICCARM__ )
+        printf("__ICCARM__\r\n");
+    #elif defined ( __GNUC__ )
+        printf("__GNUC__\r\n");
+    #endif
+
+
     while(1)
     {
         printf("\r\n---------------------\r\n");
@@ -104,7 +113,7 @@ int main(void)
 #elif  BOARD_DEF_MANGO_Z1
         printf("3> ZigBee Test\r\n");
 #endif
-        printf("4> USB HID Test\r\n");
+        printf("4> MODE Test\r\n");
         printf("5> BMA280 Sensor Test\r\n");
         printf("6> ADC inner Sensor Test\r\n");
         printf("7> Sensor Board Detect\r\n");
@@ -138,7 +147,7 @@ int main(void)
             break;
 
         case '4':
-
+            Mode_Privilege_Test();
             break;
 
         case '5':

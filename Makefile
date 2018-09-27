@@ -93,6 +93,7 @@ C_INCLUDES =  \
 -ISTM32_USB-FS-Device_Driver/inc \
 -IInc/Sensor \
 -IInc/zigbee \
+-IInc/Mode_Privilege \
 
 
 # compile gcc flags

@@ -57,6 +57,9 @@ CORE_SOURCES = \
 CMSIS/Core/CM3/system_stm32f10x.c \
 CMSIS/Core/CM3/core_cm3.c \
 
+MODE_SOURCES = \
+Src/Mode_Privilege/mode.c \
+
 ZIGBEE_SOURCE = \
 Src/zigbee/basic_rf_security.c \
 Src/zigbee/basic_rf.c \
@@ -73,7 +76,7 @@ Src/Sensor/I2c_Sw.c \
 Src/Sensor/Board_Detect.c \
 Src/Sensor/SHT20.c \
 
-C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES) $(SENSOR_SORUCE) $(ZIGBEE_SOURCE)
+C_SOURCES =  $(SRC_SOURCES) $(CMSIS_SOURCES) $(USB_SOURCES) $(CORE_SOURCES) $(SENSOR_SORUCE) $(ZIGBEE_SOURCE) $(MODE_SOURCES)
 
 # ASM sources
 ASM_SOURCES =  \
