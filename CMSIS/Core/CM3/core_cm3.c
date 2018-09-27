@@ -813,10 +813,10 @@ void __set_CONTROL(uint32_t control)
 
 #endif
 
-
-
-
-
+/*
+__attribute__( (always_inline, optimize("O0")) ) static __INLINE
+// optimize 0로 실행 하기 위한 설정
+*/
 
 
 
