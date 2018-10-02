@@ -83,7 +83,7 @@ C_DEFS =  \
 
 
 # AS includes
-AS_INCLUDES = 
+AS_INCLUDES = \
 
 # C includes
 C_INCLUDES =  \
