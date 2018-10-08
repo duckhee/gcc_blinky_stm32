@@ -15,7 +15,7 @@ __attribute__ ((used)) int _write(int fd, char *ptr, int len)
 }
 
 /*
-retargetting _read
+//retargetting _read
 __attribute__ ((used)) int _read(int __fd, void *__buf, size_t _nbyte)
 {
     return 0;
